@@ -1,5 +1,6 @@
 import Roadmap from "@/components/JsmComp/Roadmap";
 import Services from "@/components/JsmComp/Services";
+import DiscountBanner from "@/components/shared/DiscountBanner";
 import { Faq } from "@/components/shared/Faq";
 import { Footer } from "@/components/shared/Footer";
 import Promo from "@/components/shared/Promotion";
@@ -21,17 +22,7 @@ import Link from "next/link";
 const Home = async () => {
   return (
     <div className="wrapper pb-8 lg:pb-10">
-      <Button className="text-white bg-green-800 hover:bg-[#1c7429] rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-        <Link
-          href={"/credits"}
-          className="flex animate-scroll-left whitespace-nowrap "
-        >
-          Get
-          <span className="text-yellow-500"> &nbsp;250 Free &nbsp;</span>
-          Credits For First 100 premium package purchase &nbsp;
-          <RocketIcon color="yellow" />
-        </Link>
-      </Button>
+      <DiscountBanner />
 
       <div className="flex  flex-col gap-10 items-center m-auto justify-center">
         <section className="bg-[#FCF8F1] bg-opacity-30 pt-4">
@@ -60,7 +51,7 @@ const Home = async () => {
                   src="/assets/MyHero.png"
                   height={869}
                   width={1139}
-                  alt="carousel"
+                  alt="criconai"
                   priority
                 />
               </div>

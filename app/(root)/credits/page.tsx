@@ -8,8 +8,8 @@ import { getUserById } from "@/lib/actions/user.actions";
 import Checkout from "@/components/shared/Checkout";
 import { Faq } from "@/components/shared/Faq";
 import { Footer } from "@/components/shared/Footer";
-import { IndianRupeeIcon, RocketIcon } from "lucide-react";
-import Link from "next/link";
+import { IndianRupeeIcon } from "lucide-react";
+import DiscountBanner from "@/components/shared/DiscountBanner";
 
 const Credits = async () => {
   const { userId } = auth();
@@ -17,20 +17,12 @@ const Credits = async () => {
   if (!userId) redirect("/sign-in");
 
   const user = await getUserById(userId);
-
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + 120); // 120 seconds from now
   return (
     <div className="wrapper">
-      <Button className="text-white bg-green-800 hover:bg-[#1c7429] rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-        <Link
-          href={"/credits"}
-          className="flex animate-scroll-left whitespace-nowrap "
-        >
-          Get
-          <span className="text-yellow-500"> &nbsp;250 Free &nbsp;</span>
-          Credits For First 100 premium package purchase &nbsp;
-          <RocketIcon color="yellow" />
-        </Link>
-      </Button>
+      <DiscountBanner />
+
       <h1 className="text-center font-semibold text-black mt-2">
         Note: For Outside India Use Paypal For Purchase(Buy Credits / Wallet /
         Paypal)
@@ -45,7 +37,7 @@ const Credits = async () => {
                     <div className="flex-1">
                       <Image
                         src={Bestseller}
-                        alt="check"
+                        alt="Criconai"
                         width={100}
                         height={200}
                         priority
@@ -62,11 +54,13 @@ const Credits = async () => {
                   </p>
                   <p className="text-[36px] font-normal sm:text-[44px] leading-[120%] sm:leading-[56px] text-dark-600">
                     <IndianRupeeIcon className="w-6  h-6  inline-block" />
-
-                    {plan.price}
+                    {plan.price}{" "}
+                    <span className="text-[26px] font-small sm:text-[34px] line-through text-orange-700">
+                      {plan.original}
+                    </span>
                   </p>
                   <p className=" p-16-regular">
-                    <span className=" font-semibold text-lg  text-green-600">
+                    <span className=" font-semibold text-lg  text-green-600 text-[20px] font-small sm:text-[30px]">
                       {plan.credits}{" "}
                     </span>
                     Credits
@@ -84,7 +78,7 @@ const Credits = async () => {
                         src={`/assets/icons/${
                           inclusion.isIncluded ? "check.svg" : "cross.svg"
                         }`}
-                        alt="check"
+                        alt="criconai"
                         width={24}
                         height={24}
                       />
