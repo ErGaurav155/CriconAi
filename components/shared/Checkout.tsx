@@ -27,7 +27,7 @@ const Checkout = ({
       title: "For International Users Use Paypal",
       description: "Buy Credits > Wallet > Paypal",
       duration: 3000,
-      className: "success-toast",
+      className: "success-toast z-55",
     });
     const transaction = {
       plan,

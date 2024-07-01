@@ -24,7 +24,7 @@ const AddTransformationTypePage = async ({
       <div className="relative md:flex-auto w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll  flex flex-col gap-5  md:px-7 pt-16">
         <Button className="absolute top-0 right-1 text-black bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
           <h1 className="flex animate-scroll-left whitespace-nowrap ">
-            Recommended - Fill All Inputs For Better Outcomes
+            Recommended - Fill All Inputs For Better Outcomes.
           </h1>
         </Button>
         <Header title={longVid.title} />
