@@ -23,7 +23,7 @@ const Home = async () => {
   return (
     <div className="wrapper pb-8 lg:pb-10">
       <DiscountBanner />
-
+      */ this is timeout /*
       <div className="flex  flex-col gap-10 items-center m-auto justify-center">
         <section className="bg-[#FCF8F1] bg-opacity-30 pt-4">
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
