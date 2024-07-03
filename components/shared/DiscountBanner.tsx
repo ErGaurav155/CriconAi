@@ -13,7 +13,7 @@ const DiscountBanner = () => {
   const [seconds, setSeconds] = useState("00");
   const [isVisible, setIsVisible] = useState(true);
 
-  const countdownDate = new Date("2024-07-03T13:00:00").getTime();
+  const countdownDate = new Date("2024-07-06T13:00:00").getTime();
 
   useEffect(() => {
     const interval = setInterval(() => {
