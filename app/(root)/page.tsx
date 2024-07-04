@@ -51,7 +51,7 @@ const Home = async () => {
                   src="/assets/MyHero.png"
                   height={869}
                   width={1139}
-                  alt="criconai"
+                  alt="Create Shorts Using AI Tools"
                   priority
                 />
               </div>
@@ -63,11 +63,12 @@ const Home = async () => {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="grid items-center grid-cols-1 gap-8 md:gap-12 md:grid-cols-2">
               <div>
-                <h1 className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-5xl">
-                  Using Ai Tools
+                <h1 className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
+                  Top Youtubers Use
                 </h1>
                 <p className="mt-4 text-base text-black lg:mt-8 sm:text-2xl ">
-                  Channels Makes 5k-10k Per video
+                  Criconai For HD Thumbnail,Script And Research,Keywords And
+                  Tags
                 </p>
 
                 <Link

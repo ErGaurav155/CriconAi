@@ -33,12 +33,12 @@ import poster4 from "@/public/assets/Posters/poster4.jpg";
 import poster5 from "@/public/assets/Posters/poster4.png";
 import poster6 from "@/public/assets/Posters/poster7.jpg";
 
-import channel1 from "@/public/assets/channle/channel1.jpg";
-import channel2 from "@/public/assets/channle/channel2.jpg";
-import channel3 from "@/public/assets/channle/channel3.jpg";
-import channel4 from "@/public/assets/channle/channel4.jpg";
-import channel5 from "@/public/assets/channle/channel5.jpg";
-import channel6 from "@/public/assets/channle/channel6.jpg";
+import channel10 from "@/public/assets/channle/channel10.jpg";
+import channel11 from "@/public/assets/channle/channel11.jpg";
+import channel12 from "@/public/assets/channle/channel12.jpg";
+import channel13 from "@/public/assets/channle/channel13.jpg";
+import channel14 from "@/public/assets/channle/channel14.jpg";
+import channel15 from "@/public/assets/channle/channel15.jpg";
 
 import Youtuber1 from "@/public/assets/youtuber/Youtuber.jpg";
 import Youtuber2 from "@/public/assets/youtuber/Youtuber2.jpg";
@@ -166,7 +166,14 @@ export function CarouselPoster() {
     </Carousel>
   );
 }
-const channel = [channel1, channel2, channel3, channel4, channel5, channel6];
+const channel = [
+  channel10,
+  channel11,
+  channel12,
+  channel13,
+  channel14,
+  channel15,
+];
 
 export function CarouselChannel() {
   return (
