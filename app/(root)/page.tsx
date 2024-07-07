@@ -1,5 +1,6 @@
 import Roadmap from "@/components/JsmComp/Roadmap";
 import Services from "@/components/JsmComp/Services";
+import { Congratulation } from "@/components/shared/Congratulation";
 import DiscountBanner from "@/components/shared/DiscountBanner";
 import { Faq } from "@/components/shared/Faq";
 import { Footer } from "@/components/shared/Footer";
@@ -23,7 +24,7 @@ const Home = async () => {
   return (
     <div className="wrapper pb-8 lg:pb-10">
       <DiscountBanner />
-
+      <Congratulation />
       <div className="flex  flex-col gap-10 items-center m-auto justify-center">
         <section className="bg-[#FCF8F1] bg-opacity-30 pt-4">
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">

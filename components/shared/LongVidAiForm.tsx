@@ -289,7 +289,7 @@ export default function LongVidAiForm({ type }: LongAiFormProps) {
                   <FormControl>
                     <Input
                       className="select-field "
-                      placeholder=""
+                      placeholder=" "
                       {...field}
                     />
                   </FormControl>
