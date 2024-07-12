@@ -4,8 +4,18 @@ import { Toaster } from "@/components/ui/toaster";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "AI Tools For Content Creators",
-  description: "AI-powered content creation technology for content creators",
+  title: "AI Thumbnail Generator & Tools",
+  description:
+    "Discover the best free AI tools for generating YouTube thumbnails, downloading in 4K, and more.",
+  keywords: [
+    "ai photo generator free",
+    "text to image ai free",
+    "yt thumbnail size",
+    "yt thumbnail download 4k",
+    "youtube thumbnail ai",
+    "ai thumbnail generator free",
+    "youtube thumbnail ai generator",
+  ],
 };
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

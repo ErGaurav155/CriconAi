@@ -9,11 +9,115 @@ import Aiaudio from "@/components/shared/Aiaudio";
 import { Metadata } from "next";
 import Thumbnail from "@/components/shared/Thumbnail";
 
-export const metadata: Metadata = {
-  title: "Top 15 AI Tools For Reels/Shorts Video Creators in 2024",
-  description:
-    "AI-Tools Like 'Reels/Shorts Video Idea','Clicky-Thumbnail','ToneBased-Video Script','Trending-Hashtags','Audio Translator','Generate Ai Images For Topic Explaination',etc .For REELS/SHORTS Creators(FREE)",
+type TypeKeys =
+  | "idea"
+  | "title"
+  | "description"
+  | "tags"
+  | "script"
+  | "thumbnail"
+  | "aiimages"
+  | "translate"
+  | "slogan"
+  | "facts"
+  | "quote"
+  | "riddle"
+  | "all"
+  | "TexttoAudio"
+  | "backgroundMusicGen"
+  | "prompt"
+  | "audiotoAudio"
+  | "poll";
+
+const metadataMap: Record<TypeKeys, string[]> = {
+  idea: [
+    "Instagram Reel Maker",
+    "reel ideas for instagram",
+    "reel maker ai",
+    "reel maker free",
+    "ai video",
+  ],
+  title: [
+    "instagram title",
+    "youtube video title",
+    "title for youtube video",
+    "title generator",
+    "video title generator",
+    "youtube title generator",
+    "youtube video title generator",
+    "ai title generator for youtube",
+  ],
+  description: [
+    "youtube video description",
+    "youtube description generator",
+    "youtube video description generator",
+  ],
+  tags: [
+    "youtube hashtag generator",
+    "ai tag generator",
+    "hashtag for youtube",
+    "hashtag generator for youtube",
+  ],
+  script: [
+    "youtube video script generator",
+    "ai youtube script generator",
+    "script ai",
+    "youtube video script",
+  ],
+  thumbnail: [
+    "ai youtube thumbnail generator",
+    "youtube thumbnail",
+    "ai youtube thumbnail",
+    "thumbnail maker",
+  ],
+  aiimages: ["image generator", "image to image ai", "ai create image"],
+  translate: ["language translator", "ai tranlator"],
+  slogan: ["AI Slogan Generator"],
+  facts: ["AI Facts Generator"],
+  quote: ["AI Quote Generator"],
+  riddle: ["AI Riddle Generator"],
+  all: ["All-in-one AI tools for media"],
+  TexttoAudio: ["free text to audio", "text to speech ai"],
+  backgroundMusicGen: ["AI-based background music generator"],
+  prompt: ["prompt ai generator", "ai prompt image", "ai image prompt"],
+  audiotoAudio: ["AI-powered audio to audio converter"],
+  poll: ["Create AI-based polls"],
 };
+
+const titleMap: Record<TypeKeys, string> = {
+  idea: "AI Video Idea Generator",
+  title: "AI Video Title Generator",
+  description: "AI Description Generator",
+  tags: "AI Tags Generator",
+  script: "AI Script Generator",
+  thumbnail: "AI Thumbnail Generator",
+  aiimages: "AI Image Generator",
+  translate: "AI Audio Translator",
+  slogan: "AI Slogan Generator",
+  facts: "AI Facts Generator",
+  quote: "AI Quote Generator",
+  riddle: "AI Riddle Generator",
+  all: "All-in-One AI Tools",
+  TexttoAudio: "Text to Audio Converter",
+  backgroundMusicGen: "Background Music Generator",
+  prompt: "AI Prompt Generator",
+  audiotoAudio: "Audio to Audio Converter",
+  poll: "AI Poll Creator",
+};
+
+export async function generateMetadata({
+  params: { type },
+}: LongSearchParamProps): Promise<Metadata> {
+  const typeKey = type as TypeKeys;
+
+  return {
+    title: titleMap[typeKey] || "AI Tools",
+    description: titleMap[typeKey] || "Explore various AI tools",
+    keywords: metadataMap[typeKey]
+      ? `${metadataMap[typeKey]}, AI, tools`
+      : `${titleMap[typeKey]}, AI, tools`,
+  };
+}
 const AddTransformationTypePage = async ({
   params: { type },
 }: ShortSearchParamProps) => {

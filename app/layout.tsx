@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "CriconAi",
   description:
     "AI-powered text,images and audio generators for content creators",
+  keywords: ["ai", "ai thumbnail", "youtube thumbnail"],
 };
 
 export default function RootLayout({

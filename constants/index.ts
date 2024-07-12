@@ -190,6 +190,8 @@ export const voice = ["alloy", "echo", "fable", "onyx", "nova", "shimmer"];
 export const aspectRatio: string[] = ["1024x1024", "1792x1024", "1024x1792"];
 
 export const noOfImage = ["1", "2", "3"];
+export const ImageQuality = ["4K", "HD"];
+
 export const aspectRatioDisplayNames: Record<string, string> = {
   "1024x1024": "1:1 - 1024x1024",
   "1792x1024": "16:9 - 1792x1024",
@@ -354,15 +356,16 @@ Use the provided input to generate trending and relevant keywords that improve s
     topic: "Describe the topic for title",
     subtopic: "Include more info",
     tone: "",
-    aiprompt: `Given the context provided as input, brainstorm creative and unique visual concepts suitable for posts, graphics, or images. Develop ideas that stand out, convey the essence of the context, and engage the audience through innovative visuals.
+    aiprompt: `Generate compelling thumbnail prompts featuring maximum 2 to 3 scenes and realistic human emotions based on the provided context as input**
+
+    **Instructions:**
     
-   Instructions:
-    1. Generate creative image ideas that offer a fresh and unique perspective on the provided context.
-    2. Consider incorporating innovative visual elements, symbolism, or artistic techniques.
-    3. Ensure the visual concepts align with the overall tone and objectives of the context.
-    4. Aim for freshness and originality to captivate the audience visually.
-    5. only provide 5 outputs 
-     generate creative and unique image ideas.Descriptions or concepts that can inspire visual content creation. Adjust the instructions as needed based on your specific image idea generation requirements.
+    1.Design captivating thumbnail image that depict 2 to 3 scenes relevant to the provided context,merge all different scence one image like Photomontage but dont seperate scence merge them  .
+    2.Also provide an suitable typography 3 to 4 words text for the video and add it in to images as headline
+    3.Provide only four thumbnail options with well explations based on above information options must contains all information as given in input  
+    4.must provide output like this "thumbnail1,thumbnail2,thumbnail3,etc"
+    5. provide all information for each thumbnail in single paragraph.
+     Adjust the instructions as needed to suit your specific thumbnail generation requirements
     `,
     model: "gpt-3.5-turbo",
     credits: 1,
@@ -652,15 +655,16 @@ export const shortvidTypes = {
     topic: "Describe the topic for title",
     subtopic: "Include more info",
     tone: "",
-    aiprompt: `Given the context provided as input, brainstorm creative and unique visual concepts suitable for posts, graphics, or images. Develop ideas that stand out, convey the essence of the context, and engage the audience through innovative visuals.
+    aiprompt: `Generate compelling thumbnail prompts featuring maximum 2 to 3 scenes and realistic human emotions based on the provided context as input**
+
+    **Instructions:**
     
-   Instructions:
-    1. Generate creative image ideas that offer a fresh and unique perspective on the provided context.
-    2. Consider incorporating innovative visual elements, symbolism, or artistic techniques.
-    3. Ensure the visual concepts align with the overall tone and objectives of the context.
-    4. Aim for freshness and originality to captivate the audience visually.
-    5. only provide 5 outputs 
-     generate creative and unique image ideas.Descriptions or concepts that can inspire visual content creation. Adjust the instructions as needed based on your specific image idea generation requirements.
+    1.Design captivating thumbnail image that depict 2 to 3 scenes relevant to the provided context,merge all different scence one image like Photomontage but dont seperate scence merge them  .
+    2.Also provide an suitable typography 3 to 4 words text for the video and add it in to images as headline
+    3.Provide only four thumbnail options with well explations based on above information options must contains all information as given in input  
+    4.must provide output like this "Scene1,Scene2,Scene3,etc"
+    5. provide all information for each thumbnail in single paragraph.
+     Adjust the instructions as needed to suit your specific thumbnail generation requirements
     `,
     model: "gpt-3.5-turbo",
     credits: 1,
@@ -1214,7 +1218,7 @@ export const socialmediaTypes = {
   images: {
     type: "images",
     title: "Poster Generator",
-    topic: "Describe your video or scipt",
+    topic: "Describe wnat kind of Poster you want",
     subtopic: "Also inlcude main points ",
     tone: "Choose images style",
     aiprompt: `Generate captivating poster or banner ideas based on the provided context:

@@ -9,11 +9,175 @@ import Aiaudio from "@/components/shared/Aiaudio";
 import { Metadata } from "next";
 import Thumbnail from "@/components/shared/Thumbnail";
 
-export const metadata: Metadata = {
-  title: "Top 15 AI Tools For Youtubers in 2024",
-  description:
-    "AI-Tools For Clicky-Thumbnail,ToneBased-Video Script ,Trending-Hashtags,Audio Translator,Generate Ai Images For Topic Explaination(FREE) ",
+type TypeKeys =
+  | "idea"
+  | "title"
+  | "description"
+  | "tags"
+  | "keyword"
+  | "script"
+  | "thumbnail"
+  | "aiimages"
+  | "translate"
+  | "disclamer"
+  | "email"
+  | "all"
+  | "TexttoAudio"
+  | "prompt"
+  | "backgroundMusicGen"
+  | "audiotoAudio"
+  | "poll";
+
+const metadataMap: Record<TypeKeys, string[]> = {
+  idea: [
+    "youtube content ideas",
+    "content generator ai ",
+    "content idea generator",
+    "content generator",
+    "content creation idea",
+    "content idea for youtube",
+  ],
+  title: [
+    "youtube title",
+    "youtube video title",
+    "title for youtube video",
+    "title generator",
+    "video title generator",
+    "youtube title generator",
+    "youtube video title generator",
+    "ai title generator for youtube",
+  ],
+  description: [
+    "ai video description generator",
+    "video description generator",
+    "ai description generator",
+    "description generator",
+    "youtube video description",
+    "youtube description generator",
+    "youtube video description generator",
+  ],
+  tags: [
+    "youtube video tags",
+    "youtube tags",
+    "tags generator",
+    "inflect hashtag generator",
+    "yt hashtag generator",
+    "youtube hashtag generator",
+    "ai tag generator",
+    "hashtag for youtube",
+    "hashtag generator for youtube",
+  ],
+  keyword: [
+    "ai keyword generator",
+    "keyword generator for youtube",
+    "keyword for youtube",
+    "keyword generator free",
+  ],
+  script: [
+    "tiktok script generator",
+    "capcut",
+    "video script",
+    "video script generator",
+    "youtube video script generator",
+    "ai youtube script generator",
+    "script ai",
+    "youtube video script",
+  ],
+  thumbnail: [
+    "bing ai ",
+    "bing ai image generator",
+    "thumbnail ai generator",
+    "youtube thumbnail ai",
+    "thumbnail ai",
+    "ai thumbnail generator",
+    "thumbnail for youtube",
+    "ai youtube thumbnail generator",
+    "youtube thumbnail",
+    "ai youtube thumbnail",
+    "thumbnail maker",
+    "thumbnail youtube",
+    "thumbnail downloader",
+  ],
+  aiimages: [
+    "ai generator image",
+    "ai generator",
+    "image generator",
+    "image to image ai",
+    "ai create image",
+  ],
+  translate: [
+    "ai for translation",
+    "language translator ai",
+    "language translator",
+    "ai tranlator",
+    "chatgpt language translation",
+  ],
+  disclamer: ["youtube disclaimer", "youtube disclaimer generator"],
+  email: [
+    "email generator",
+    "ai for email",
+    "free email",
+    "ai generator email",
+    "email writer",
+    "email ai writer",
+  ],
+  all: ["All-in-one AI tools for media"],
+  TexttoAudio: [
+    "free text to audio",
+    "text to speech ai",
+    "free text to voice",
+  ],
+  prompt: [
+    "prompt ai generator",
+    "ai prompt image",
+    "ai image prompt",
+    "prompt generator",
+    "image prompt generator",
+  ],
+  backgroundMusicGen: ["AI-based background music generator"],
+  audiotoAudio: [
+    "speech to speech translation",
+    "audio language translator",
+    "audio translator",
+    "language translator",
+  ],
+  poll: ["Create AI-based polls"],
 };
+
+const titleMap: Record<TypeKeys, string> = {
+  title: "AI Video Title Generator ",
+  idea: "AI Video Idea Generator",
+  description: "AI Description Generator",
+  tags: "AI Tags Generator",
+  keyword: "AI Keyword Generator",
+  script: "AI Script Generator",
+  thumbnail: "AI Thumbnail Generator",
+  aiimages: "AI Image Generator",
+  translate: "AI Audio Translator",
+  disclamer: "AI Content Disclaimer",
+  email: "AI Email Tools",
+  all: "All-in-One AI Tools",
+  TexttoAudio: "Text to Audio Converter",
+  prompt: "AI Prompt Generator",
+  backgroundMusicGen: "Background Music Generator",
+  audiotoAudio: "Audio to Audio Converter",
+  poll: "AI Poll Creator",
+};
+
+export async function generateMetadata({
+  params: { type },
+}: LongSearchParamProps): Promise<Metadata> {
+  const typeKey = type as TypeKeys;
+
+  return {
+    title: titleMap[typeKey] || "AI Tools",
+    description: titleMap[typeKey] || "Explore various AI tools",
+    keywords: metadataMap[typeKey]
+      ? `${metadataMap[typeKey]}, AI, tools`
+      : `${titleMap[typeKey]}, AI, tools`,
+  };
+}
+
 const AddTransformationTypePage = async ({
   params: { type },
 }: LongSearchParamProps) => {

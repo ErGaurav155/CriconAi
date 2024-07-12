@@ -6,11 +6,38 @@ import { Button } from "@/components/ui/button";
 import MarketingAiForm from "@/components/shared/MarketingAiForm";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "AI Tools For Video Promotion in 2024 ",
-  description:
-    "AI Tools-'Sponser Founder','Video Promotion Helper','Promotion Fee Calculator',etc. for Social Media Influencer/Youtuber(FREE)",
+type TypeKeys = "all" | "calculator" | "finder" | "email" | "promotion";
+
+const metadataMap: Record<TypeKeys, string[]> = {
+  all: ["All-in-one AI tools for promotion"],
+  calculator: ["promotion calculator"],
+  finder: ["AI Finder"],
+  email: ["AI Email Tools"],
+  promotion: ["youtube promotion", "paid promotion"],
 };
+
+const titleMap: Record<TypeKeys, string> = {
+  all: "All-in-One AI Tools",
+  calculator: "AI Calculator",
+  finder: "AI Finder",
+  email: "AI Email Tools",
+  promotion: "AI Promotion Tools",
+};
+
+export async function generateMetadata({
+  params: { type },
+}: LongSearchParamProps): Promise<Metadata> {
+  const typeKey = type as TypeKeys;
+
+  return {
+    title: titleMap[typeKey] || "AI Tools",
+    description: titleMap[typeKey] || "Explore various AI tools",
+    keywords: metadataMap[typeKey]
+      ? `${metadataMap[typeKey]}, AI, tools`
+      : `${titleMap[typeKey]}, AI, tools`,
+  };
+}
+
 const AddTransformationTypePage = async ({
   params: { type },
 }: MarketingSearchParamProps) => {

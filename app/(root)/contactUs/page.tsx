@@ -18,7 +18,7 @@ const contactUs = () => {
         <h2 className="mb-2 text-black">Business Name-GK Services</h2>
         <p className="mb-2 text-black">Email-support@criconai.com</p>
         <p className="mb-2 text-black">
-          Address- Harsul,post-Dugaon tel-chandwad, Nashik, Maharashtra - 423104
+          Address-Chandwad, Nashik, Maharashtra - 423104
         </p>
 
         <div className="font-black text-3xl text-black mb-5">Our Socials:</div>

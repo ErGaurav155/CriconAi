@@ -89,7 +89,8 @@ declare type ContentWriterTypeKey =
   | "tag"
   | "all"
   | "prompt"
-  | "TexttoAudio";
+  | "TexttoAudio"
+  | "slogan";
 
 declare type SocialMediaTypeKey =
   | "idea"

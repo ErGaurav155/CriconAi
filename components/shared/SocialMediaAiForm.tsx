@@ -29,6 +29,7 @@ import {
   aspectRatio,
   aspectRatioDisplayNames,
   email,
+  ImageQuality,
   noOfImage,
   socialmediaTypes,
 } from "@/constants";
@@ -58,6 +59,7 @@ const formSchema = z.object({
   inputlag: z.string().optional(),
   outputlag: z.string().optional(),
   description: z.string().optional(),
+  imageQuality: z.string().optional(),
 });
 
 interface AiImages {
@@ -80,6 +82,8 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
   const [response, setResponse] = useState<string | null>();
   const [allResponse, setAllResponse] = useState<string[] | null>();
   const [selectedAspectRatio, setSelectedAspectRatio] = useState<string>("1:1");
+  const [selectedImageQuality, setSelectedImageQuality] =
+    useState<string>("HD"); // Default to HD
   const [credits, setCredits] = useState(socialMedia.credits);
   const [arImage, setArImage] = useState("1");
 
@@ -139,12 +143,17 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           : "",
       inputlag: "",
       outputlag: "",
+      imageQuality: "",
     },
   });
   useEffect(() => {
     const fullCredit = totalCredits(selectedAspectRatio, arImage);
-    setCredits(socialMedia.credits + fullCredit);
-  }, [selectedAspectRatio, arImage, socialMedia.credits]);
+    if (selectedImageQuality === "4K") {
+      setCredits(Math.ceil((socialMedia.credits + fullCredit) * 2));
+    } else {
+      setCredits(Math.ceil(socialMedia.credits + fullCredit));
+    }
+  }, [selectedAspectRatio, arImage, socialMedia.credits, selectedImageQuality]);
 
   const [width, height] = selectedAspectRatio.split("x");
 
@@ -189,7 +198,14 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
       setAvailableCredits(true);
       return;
     }
-    const { input, inputlag, outputlag, selectTone, description } = values;
+    const {
+      input,
+      inputlag,
+      outputlag,
+      selectTone,
+      description,
+      imageQuality,
+    } = values;
 
     try {
       if (type !== "all") {
@@ -202,6 +218,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           aiprompt,
           model,
           genType,
+          imageQuality,
         });
         if (res) {
           await updateCredits(userDbId, -credits);
@@ -256,6 +273,81 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
       setIsResponse(false);
     }
   }
+  let placeholderInputText;
+  let placeholderDescText;
+  switch (type) {
+    case "idea":
+      placeholderInputText =
+        "For Eg. -Generate social media post idea for holi celebration";
+      placeholderDescText =
+        "For Eg. -ideas must be unique and attracting audience";
+      break;
+
+    case "bio":
+      placeholderInputText = "For Eg. -create bio for computer student ";
+      placeholderDescText = "";
+      break;
+    case "caption":
+      placeholderInputText = "For Eg. -Generate caption for holi celebration ";
+      placeholderDescText = "";
+      break;
+    case "tag":
+      placeholderInputText =
+        "For Eg. - video or reel related to holi celebration ";
+      placeholderDescText = "";
+      break;
+    case "images":
+      placeholderInputText = "For Eg. -holi celebration post";
+      placeholderDescText = "For Eg. -add colors for typography";
+      break;
+    case "avatar":
+      placeholderInputText = "For Eg. - an computer engineer student avatar";
+      placeholderDescText = "  ";
+      break;
+    case "description":
+      placeholderInputText = "For Eg. - reel/post related to holi celebration";
+      placeholderDescText = "must include trending keywords";
+      break;
+    case "comment":
+      placeholderInputText =
+        "For Eg. -reply to this hi i can you tell me how you create this video ";
+      placeholderDescText = "";
+      break;
+    case "tweet":
+      placeholderInputText =
+        "For Eg. -reply to this hi i can you tell me how you create this video ";
+      placeholderDescText = "";
+      break;
+
+    case "all":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - in video person explaining which people more healthy ";
+      break;
+
+    case "prompt":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -must explaining all details of scene";
+      break;
+    case "backgroundMusicGen":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -music is entertaning and fast";
+      break;
+
+    case "poll":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -questions are relatable";
+      break;
+    // Add more cases as needed
+    default:
+      placeholderInputText = "Enter your input";
+      placeholderDescText = "";
+  }
+
   if (availableCredits) {
     return <InsufficientCreditsModal />;
   }
@@ -285,7 +377,11 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
               <FormItem>
                 <FormLabel className="text-n-8">{topic}</FormLabel>
                 <FormControl>
-                  <Input className="select-field " placeholder="" {...field} />
+                  <Input
+                    className="select-field "
+                    placeholder={placeholderInputText}
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -327,52 +423,94 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
               )}
             />
           )}
+          <div className="flex">
+            {(type === "images" || type === "avatar" || type === "all") && (
+              <FormField
+                control={form.control}
+                name="selectTone"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {aiImages.map((categoryObj: AiImages) => (
+                          <div
+                            key={categoryObj.category}
+                            className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8 text-center "
+                          >
+                            {categoryObj.category}
 
-          {(type === "images" || type === "avatar" || type === "all") && (
-            <FormField
-              control={form.control}
-              name="selectTone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="select-field">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {aiImages.map((categoryObj: AiImages) => (
-                        <div
-                          key={categoryObj.category}
-                          className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8 text-center "
-                        >
-                          {categoryObj.category}
+                            {categoryObj.values.map(
+                              (value: string, index: number) => (
+                                <SelectItem
+                                  key={`${categoryObj.category}-${index}`}
+                                  className="select-item min-w-max "
+                                  value={value}
+                                >
+                                  {value}
+                                </SelectItem>
+                              )
+                            )}
+                          </div>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                          {categoryObj.values.map(
-                            (value: string, index: number) => (
-                              <SelectItem
-                                key={`${categoryObj.category}-${index}`}
-                                className="select-item min-w-max "
-                                value={value}
-                              >
-                                {value}
-                              </SelectItem>
-                            )
-                          )}
-                        </div>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            {(type === "images" || type === "avatar") && (
+              <FormField
+                control={form.control}
+                name="imageQuality"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">
+                      Thumbnail Quality:
+                    </FormLabel>
+                    <Select
+                      onValueChange={(value) => {
+                        field.onChange(value); // Update form field value
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+                        setSelectedImageQuality(value);
+                        // Update aspect ratio in state
+                      }}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field ">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {ImageQuality.map((ImageQuality, index) => (
+                          <SelectItem
+                            key={index}
+                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            value={`${ImageQuality}`}
+                          >
+                            {ImageQuality}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+          </div>
           <div className="flex ">
             {(type === "images" || type === "avatar" || type === "all") && (
               <FormField
@@ -464,8 +602,9 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 <FormLabel className="text-n-8">{subtopic}</FormLabel>
                 <FormControl>
                   <Textarea
+                    placeholder={placeholderDescText}
                     maxLength={500}
-                    className="rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15  disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent resize-none text-black text-xs"
+                    className=" select-field resize-none"
                     {...field}
                   />
                 </FormControl>

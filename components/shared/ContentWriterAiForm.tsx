@@ -30,6 +30,7 @@ import {
   aspectRatioDisplayNames,
   contentwriterTypes,
   email,
+  ImageQuality,
   languages,
   noOfImage,
   voice,
@@ -59,6 +60,7 @@ const formSchema = z.object({
   inputlag: z.string().optional(),
   outputlag: z.string().optional(),
   description: z.string().optional(),
+  imageQuality: z.string().optional(),
 });
 
 interface AiImages {
@@ -81,7 +83,8 @@ export default function ContentWriterAiForm({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const contentWriter = contentwriterTypes[type];
   const [genType, setGenType] = useState(false);
-
+  const [selectedImageQuality, setSelectedImageQuality] =
+    useState<string>("HD"); // Default to HD
   const [selectedAspectRatio, setSelectedAspectRatio] = useState<string>("1:1");
   const [credits, setCredits] = useState(contentWriter.credits);
   const [arImage, setArImage] = useState("1");
@@ -142,12 +145,22 @@ export default function ContentWriterAiForm({
           : "",
       inputlag: "",
       outputlag: "",
+      imageQuality: "",
     },
   });
   useEffect(() => {
     const fullCredit = totalCredits(selectedAspectRatio, arImage);
-    setCredits(contentWriter.credits + fullCredit);
-  }, [selectedAspectRatio, arImage, contentWriter.credits]);
+    if (selectedImageQuality === "4K") {
+      setCredits(Math.ceil((contentWriter.credits + fullCredit) * 2));
+    } else {
+      setCredits(Math.ceil(contentWriter.credits + fullCredit));
+    }
+  }, [
+    selectedAspectRatio,
+    arImage,
+    contentWriter.credits,
+    selectedImageQuality,
+  ]);
 
   const [width, height] = selectedAspectRatio.split("x");
 
@@ -192,7 +205,14 @@ export default function ContentWriterAiForm({
       setAvailableCredits(true);
       return;
     }
-    const { input, inputlag, outputlag, selectTone, description } = values;
+    const {
+      input,
+      inputlag,
+      outputlag,
+      selectTone,
+      description,
+      imageQuality,
+    } = values;
 
     try {
       if (type !== "all") {
@@ -205,6 +225,7 @@ export default function ContentWriterAiForm({
           aiprompt,
           model,
           genType,
+          imageQuality,
         });
         if (res) {
           await updateCredits(userDbId, -credits);
@@ -261,6 +282,104 @@ export default function ContentWriterAiForm({
       setIsResponse(false);
     }
   }
+
+  let placeholderInputText: string | undefined;
+  let placeholderDescText;
+  switch (type) {
+    case "idea":
+      placeholderInputText =
+        "For Eg. -Give some trending  blog ideas for gaming niche,more specificlly battleground mobile india";
+      placeholderDescText =
+        "For Eg. -ideas must be unique and attracting audience";
+      break;
+
+    case "outline":
+      placeholderInputText =
+        "For Eg. -Give Trending outline for blog/article for giving information about indian history in video";
+      placeholderDescText = "For Eg. -Outine must include main topics";
+      break;
+    case "tag":
+      placeholderInputText =
+        "For Eg. -Generate trending hashtags for blog related to indian culture and tradition ";
+      placeholderDescText = "For Eg. -add some hindi trending tags also";
+      break;
+    case "slogan":
+      placeholderInputText =
+        "For Eg. -Generate trending slogan for blog related to indian culture and tradition ";
+      placeholderDescText = "For Eg. -add some hindi trending slogan also";
+      break;
+    case "article":
+      placeholderInputText =
+        "For Eg. -Generate article related to indian culture and tradition";
+      placeholderDescText = "For Eg. -article include trending keywords";
+      break;
+    case "blog":
+      placeholderInputText =
+        "For Eg. -Generate blog related to indian culture and tradition";
+      placeholderDescText = "For Eg. -blog include trending keywords";
+      break;
+    case "coverimage":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. -thumbnail looks ultra real with yellow neon light to border of all things in image";
+      break;
+    case "images":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - images must explain scenarios happened in this situation ";
+      break;
+    case "book":
+      placeholderInputText =
+        "For Eg. -Generate book related to indian culture and tradition";
+      placeholderDescText = "For Eg. -book include trending keywords";
+      break;
+    case "title":
+      placeholderInputText =
+        "For Eg. -blog title for explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -5-6  word title only";
+      break;
+    case "email":
+      placeholderInputText =
+        "For Eg. -taking permision from boss for is this thumbnail ok or not ";
+      placeholderDescText = "";
+      break;
+    case "all":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - in video person explaining which people more healthy ";
+      break;
+    case "TexttoAudio":
+      placeholderInputText = "";
+      placeholderDescText = "";
+      break;
+    case "prompt":
+      placeholderInputText =
+        "For Eg. -blog related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -must explaining all details of scene";
+      break;
+    case "summary":
+      placeholderInputText =
+        "For Eg. -create an summary for explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -summary must include main information ";
+      break;
+    case "expander":
+      "For Eg. -create an expander for explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - expand it such as it contain main information";
+      break;
+    case "translation":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -questions are relatable";
+      break;
+    // Add more cases as needed
+    default:
+      placeholderInputText = "Enter your input";
+      placeholderDescText = "";
+  }
   if (availableCredits) {
     return <InsufficientCreditsModal />;
   }
@@ -296,7 +415,7 @@ export default function ContentWriterAiForm({
                   <FormControl>
                     <Input
                       className="select-field "
-                      placeholder=""
+                      placeholder={placeholderInputText}
                       {...field}
                     />
                   </FormControl>
@@ -411,51 +530,93 @@ export default function ContentWriterAiForm({
               )}
             />
           )}
+          <div className="flex">
+            {(type === "coverimage" || type === "images" || type === "all") && (
+              <FormField
+                control={form.control}
+                name="selectTone"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {aiImages.map((categoryObj: AiImages) => (
+                          <div
+                            key={categoryObj.category}
+                            className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8  text-center "
+                          >
+                            {categoryObj.category}
+                            {categoryObj.values.map(
+                              (value: string, index: number) => (
+                                <SelectItem
+                                  key={`${categoryObj.category}-${index}`}
+                                  className="select-item min-w-max "
+                                  value={value}
+                                >
+                                  {value}
+                                </SelectItem>
+                              )
+                            )}
+                          </div>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-          {(type === "coverimage" || type === "images" || type === "all") && (
-            <FormField
-              control={form.control}
-              name="selectTone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="select-field">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {aiImages.map((categoryObj: AiImages) => (
-                        <div
-                          key={categoryObj.category}
-                          className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8  text-center "
-                        >
-                          {categoryObj.category}
-                          {categoryObj.values.map(
-                            (value: string, index: number) => (
-                              <SelectItem
-                                key={`${categoryObj.category}-${index}`}
-                                className="select-item min-w-max "
-                                value={value}
-                              >
-                                {value}
-                              </SelectItem>
-                            )
-                          )}
-                        </div>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+            {(type === "coverimage" || type === "images") && (
+              <FormField
+                control={form.control}
+                name="imageQuality"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">
+                      Thumbnail Quality:
+                    </FormLabel>
+                    <Select
+                      onValueChange={(value) => {
+                        field.onChange(value); // Update form field value
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+                        setSelectedImageQuality(value);
+                        // Update aspect ratio in state
+                      }}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field ">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {ImageQuality.map((ImageQuality, index) => (
+                          <SelectItem
+                            key={index}
+                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            value={`${ImageQuality}`}
+                          >
+                            {ImageQuality}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+          </div>
           <div className="flex ">
             {(type === "coverimage" || type === "images" || type === "all") && (
               <FormField
@@ -590,8 +751,8 @@ export default function ContentWriterAiForm({
                         ? 3000
                         : 500
                     }
-                    placeholder=""
-                    className="rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15  disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent resize-none text-black text-xs"
+                    placeholder={placeholderDescText}
+                    className="select-field  resize-none"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);

@@ -22,6 +22,7 @@ interface GenerateGptResponseParams {
   aiprompt: string;
   model: string;
   genType?: boolean;
+  imageQuality?: string;
 }
 export const generateGptResponse = async ({
   input,
@@ -32,6 +33,7 @@ export const generateGptResponse = async ({
   aiprompt,
   model,
   genType,
+  imageQuality,
 }: GenerateGptResponseParams) => {
   if (openai instanceof Error) {
     throw openai;
@@ -150,8 +152,14 @@ export const generateGptResponse = async ({
         } else {
           noOfImageG = parseInt(outputlag);
         }
-        const promises: Promise<string>[] = [];
 
+        const promises: Promise<string>[] = [];
+        let Quality: "standard" | "hd" | undefined;
+        if (imageQuality === "HD") {
+          Quality = "standard";
+        } else {
+          Quality = "hd";
+        }
         for (let i = 0; i < noOfImageG; i++) {
           const promise = (async () => {
             try {
@@ -159,7 +167,7 @@ export const generateGptResponse = async ({
                 model: model,
                 prompt: concepts[i],
                 size: inputlag as imageType,
-                quality: "standard",
+                quality: Quality,
                 response_format: "url",
                 n: 1,
               });
@@ -192,14 +200,20 @@ export const generateGptResponse = async ({
         }
         const promises: Promise<string>[] = [];
 
+        let Quality1: "standard" | "hd" | undefined;
+        if (imageQuality === "HD") {
+          Quality1 = "standard";
+        } else {
+          Quality1 = "hd";
+        }
         for (let i = 0; i < noOfImageG; i++) {
           const promise = (async () => {
             try {
               const image = await openai.images.generate({
                 model: model,
                 prompt: input,
-                size: inputlag as imageType,
-                quality: "standard",
+                size: Quality1 as imageType,
+                quality: Quality1,
                 response_format: "url",
                 n: 1,
               });
@@ -298,6 +312,7 @@ export async function fetchLongVidData({
         aiprompt: item.prompt,
         model: item.model,
         genType: false,
+        imageQuality: "HD",
       });
       return promise;
     } catch (error) {
@@ -333,6 +348,7 @@ export async function fetchShortVidData({
         aiprompt: item.prompt,
         model: item.model,
         genType: false,
+        imageQuality: "HD",
       });
       return promise;
     } catch (error) {
@@ -367,6 +383,7 @@ export async function fetchContentWriterData({
         aiprompt: item.prompt,
         model: item.model,
         genType: false,
+        imageQuality: "HD",
       });
       return promise;
     } catch (error) {
@@ -401,6 +418,7 @@ export async function fetchSocialMediaData({
         aiprompt: item.prompt,
         model: item.model,
         genType: false,
+        imageQuality: "HD",
       });
       return promise;
     } catch (error) {
@@ -435,6 +453,7 @@ export async function fetchMarketingData({
         aiprompt: item.prompt,
         model: item.model,
         genType: false,
+        imageQuality: "HD",
       });
       return promise;
     } catch (error) {

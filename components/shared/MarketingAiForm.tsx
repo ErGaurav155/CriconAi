@@ -249,6 +249,40 @@ export default function MarketingAiForm({ type }: MarketingFormProps) {
       setIsResponse(false);
     }
   }
+
+  let placeholderInputText;
+  let placeholderDescText;
+  switch (type) {
+    case "all":
+      placeholderInputText =
+        "For Eg. -suggest me promotion for video of Top 10 workout in indian ";
+      placeholderDescText =
+        "For Eg. -ideas must be unique and attracting audience";
+      break;
+    case "calculator":
+      placeholderInputText =
+        "For Eg. -a person having 5k average views on reels and 50k followers in india i want to promote my video how much he charge for this ";
+      placeholderDescText = "For Eg. -calculate in rupee";
+      break;
+    case "finder":
+      placeholderInputText =
+        "For Eg. - find niches related to dieting video so i can promote my video there ";
+      placeholderDescText = "";
+      break;
+    case "email":
+      placeholderInputText =
+        "For Eg. -Generate email for promoting my video on his channel related to indian culture and tradition ";
+      placeholderDescText = "";
+      break;
+    case "promotion":
+      placeholderInputText =
+        "For Eg. -Generate email for promoting my video on his channel related to indian culture and tradition ";
+      placeholderDescText = "";
+      break;
+    default:
+      placeholderInputText = "Enter your input";
+      placeholderDescText = "";
+  }
   if (availableCredits) {
     return <InsufficientCreditsModal />;
   }
@@ -268,7 +302,11 @@ export default function MarketingAiForm({ type }: MarketingFormProps) {
               <FormItem>
                 <FormLabel className="text-n-8">{topic}</FormLabel>
                 <FormControl>
-                  <Input className="select-field " placeholder="" {...field} />
+                  <Input
+                    className="select-field "
+                    placeholder={placeholderInputText}
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -448,7 +486,8 @@ export default function MarketingAiForm({ type }: MarketingFormProps) {
                 <FormControl>
                   <Textarea
                     maxLength={500}
-                    className="rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15  disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent resize-none text-black text-xs"
+                    placeholder={placeholderDescText}
+                    className="resize-none select-field"
                     {...field}
                   />
                 </FormControl>

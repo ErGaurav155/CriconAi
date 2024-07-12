@@ -29,6 +29,7 @@ import {
   aspectRatio,
   aspectRatioDisplayNames,
   email,
+  ImageQuality,
   languages,
   noOfImage,
   shortvidTypes,
@@ -60,6 +61,7 @@ const formSchema = z.object({
   inputlag: z.string().optional(),
   outputlag: z.string().optional(),
   description: z.string().optional(),
+  imageQuality: z.string().optional(),
 });
 
 interface AiImages {
@@ -84,6 +86,8 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
 
   const [response, setResponse] = useState<string | null>();
   const [selectedAspectRatio, setSelectedAspectRatio] = useState<string>("1:1");
+  const [selectedImageQuality, setSelectedImageQuality] =
+    useState<string>("HD"); // Default to HD
   const [credits, setCredits] = useState(shortVid.credits);
   const [arImage, setArImage] = useState("1");
 
@@ -144,12 +148,17 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
           : "",
       inputlag: "",
       outputlag: "",
+      imageQuality: "",
     },
   });
   useEffect(() => {
     const fullCredit = totalCredits(selectedAspectRatio, arImage);
-    setCredits(shortVid.credits + fullCredit);
-  }, [selectedAspectRatio, arImage, shortVid.credits]);
+    if (selectedImageQuality === "4K") {
+      setCredits(Math.ceil((shortVid.credits + fullCredit) * 2));
+    } else {
+      setCredits(Math.ceil(shortVid.credits + fullCredit));
+    }
+  }, [selectedAspectRatio, arImage, shortVid.credits, selectedImageQuality]);
 
   const [width, height] = selectedAspectRatio.split("x");
 
@@ -194,7 +203,14 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
       return;
     }
 
-    const { input, inputlag, outputlag, selectTone, description } = values;
+    const {
+      input,
+      inputlag,
+      outputlag,
+      selectTone,
+      description,
+      imageQuality,
+    } = values;
 
     try {
       if (type !== "all") {
@@ -207,6 +223,7 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
           aiprompt,
           model,
           genType,
+          imageQuality,
         });
         if (res) {
           await updateCredits(userDbId, -credits);
@@ -263,6 +280,108 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
       setIsResponse(false);
     }
   }
+
+  let placeholderInputText;
+  let placeholderDescText;
+  switch (type) {
+    case "idea":
+      placeholderInputText =
+        "For Eg. -Give some trending long video ideas for gaming niche,more specificlly battleground mobile india";
+      placeholderDescText =
+        "For Eg. -ideas must be unique and attracting audience";
+      break;
+    case "title":
+      placeholderInputText =
+        "For Eg. -give an attractive titile for video of Top 10 Unknown Myths in indian Society";
+      placeholderDescText = "For Eg. -title contain 4-5 words only";
+      break;
+    case "description":
+      placeholderInputText =
+        "For Eg. -Give Trending keywords Contain description for giving information about indian history in video";
+      placeholderDescText = "For Eg. -provide 50 words description only";
+      break;
+    case "tags":
+      placeholderInputText =
+        "For Eg. -Generate trending hashtags for video related to indian culture and tradition ";
+      placeholderDescText = "For Eg. -add some hindi trending tags also";
+      break;
+    case "script":
+      placeholderInputText =
+        "For Eg. -give an narration script for video idea - Why People think Reach people earn money from corruption ";
+      placeholderDescText =
+        "For Eg. -starting in script must with explaining what video about imp points which increase audience excitment";
+      break;
+    case "thumbnail":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. -thumbnail looks ultra real with yellow neon light to border of all things in image";
+      break;
+    case "aiimages":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - images must explain scenarios happened in this situation ";
+      break;
+    case "translate":
+      placeholderInputText = "For Eg. -Enter option for Type 2";
+      placeholderDescText = "";
+      break;
+    case "slogan":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -5-6 slogan only";
+      break;
+    case "facts":
+      placeholderInputText =
+        "For Eg. - generate unknown fact related to science";
+      placeholderDescText = "For Eg. -5-6 facts only";
+      break;
+    case "quote":
+      placeholderInputText =
+        "For Eg. - generate quote for video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "generate some qoute in hindi also";
+      break;
+    case "riddle":
+      placeholderInputText =
+        "For Eg. - generate riddle for video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "generate some riddle in hindi also";
+      break;
+    case "all":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText =
+        "For Eg. - in video person explaining which people more healthy ";
+      break;
+    case "TexttoAudio":
+      placeholderInputText = "";
+      placeholderDescText = "";
+      break;
+    case "prompt":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -must explaining all details of scene";
+      break;
+    case "backgroundMusicGen":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -music is entertaning and fast";
+      break;
+    case "audiotoAudio":
+      placeholderInputText = "Enter option for Type 2";
+      placeholderDescText = "";
+      break;
+    case "poll":
+      placeholderInputText =
+        "For Eg. -video related to explaining which people will be more powerful,strong and healthy veg or non-veg comparision";
+      placeholderDescText = "For Eg. -questions are relatable";
+      break;
+    // Add more cases as needed
+    default:
+      placeholderInputText = "Enter your input";
+      placeholderDescText = "";
+  }
+
   if (availableCredits) {
     return <InsufficientCreditsModal />;
   }
@@ -293,7 +412,11 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
                 <FormItem>
                   <FormLabel className="text-n-8">{topic}</FormLabel>
                   <FormControl>
-                    <Input className="select-field " {...field} />
+                    <Input
+                      className="select-field "
+                      placeholder={placeholderInputText}
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -410,52 +533,96 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
               )}
             />
           )}
+          <div className="flex">
+            {(type === "aiimages" ||
+              type === "thumbnail" ||
+              type === "all") && (
+              <FormField
+                control={form.control}
+                name="selectTone"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {aiImages.map((categoryObj: AiImages) => (
+                          <div
+                            key={categoryObj.category}
+                            className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8 text-center "
+                          >
+                            {categoryObj.category}
 
-          {(type === "aiimages" || type === "thumbnail" || type === "all") && (
-            <FormField
-              control={form.control}
-              name="selectTone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger className="select-field">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {aiImages.map((categoryObj: AiImages) => (
-                        <div
-                          key={categoryObj.category}
-                          className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8 text-center "
-                        >
-                          {categoryObj.category}
+                            {categoryObj.values.map(
+                              (value: string, index: number) => (
+                                <SelectItem
+                                  key={`${categoryObj.category}-${index}`}
+                                  className="select-item min-w-max "
+                                  value={value}
+                                >
+                                  {value}
+                                </SelectItem>
+                              )
+                            )}
+                          </div>
+                        ))}
+                      </SelectContent>
+                    </Select>
 
-                          {categoryObj.values.map(
-                            (value: string, index: number) => (
-                              <SelectItem
-                                key={`${categoryObj.category}-${index}`}
-                                className="select-item min-w-max "
-                                value={value}
-                              >
-                                {value}
-                              </SelectItem>
-                            )
-                          )}
-                        </div>
-                      ))}
-                    </SelectContent>
-                  </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}{" "}
+            {(type === "thumbnail" || type === "aiimages") && (
+              <FormField
+                control={form.control}
+                name="imageQuality"
+                render={({ field }) => (
+                  <FormItem className="w-[50%]">
+                    <FormLabel className="text-n-8">
+                      Thumbnail Quality:
+                    </FormLabel>
+                    <Select
+                      onValueChange={(value) => {
+                        field.onChange(value); // Update form field value
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )}
+                        setSelectedImageQuality(value);
+                        // Update aspect ratio in state
+                      }}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="select-field ">
+                          <SelectValue />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {ImageQuality.map((ImageQuality, index) => (
+                          <SelectItem
+                            key={index}
+                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            value={`${ImageQuality}`}
+                          >
+                            {ImageQuality}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
+          </div>
           <div className="flex ">
             {(type === "aiimages" ||
               type === "thumbnail" ||
@@ -594,8 +761,8 @@ export default function ShortVidAiForm({ type }: ShortAiFormProps) {
                         ? 3000
                         : 500
                     }
-                    placeholder=""
-                    className="rounded-[16px] border-2 border-purple-200/20 shadow-sm shadow-purple-200/15  disabled:opacity-100 p-16-semibold h-[50px] md:h-[54px] focus-visible:ring-offset-0 px-4 py-3 focus-visible:ring-transparent resize-none text-black text-xs"
+                    placeholder={placeholderDescText}
+                    className="select-field resize-none"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
