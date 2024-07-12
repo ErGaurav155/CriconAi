@@ -13,16 +13,19 @@ const DiscountBanner = () => {
   const [seconds, setSeconds] = useState("00");
   const [isVisible, setIsVisible] = useState(true);
 
-  const countdownDate = new Date("2024-07-10T13:00:00").getTime();
+  const initializeCountdownDate = () => {
+    return new Date().getTime() + 24 * 60 * 60 * 1000;
+  };
 
+  const [countdownDate, setCountdownDate] = useState(initializeCountdownDate);
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now;
 
       if (distance < 0) {
-        clearInterval(interval);
-        setIsVisible(false);
+        setCountdownDate(initializeCountdownDate());
+        setIsVisible(true);
       } else {
         setDays(
           Math.floor(distance / (1000 * 60 * 60 * 24))
@@ -67,7 +70,7 @@ const DiscountBanner = () => {
         <XMarkIcon height={30} width={30} stroke="2" />
       </button>
       <div className=" flex gap-1 md:gap-6 justify-center items-center w-full  text-white font-sans ">
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center bg-yellow-900 p-2 rounded-md ">
           <div className=" text-md md:text-lg font-bold">Massive Sale</div>
           <div className="text-md md:text-base ">up to 75% off</div>
         </div>
