@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { RocketIcon } from "lucide-react";
 import Link from "next/link";
@@ -13,18 +13,33 @@ const DiscountBanner = () => {
   const [seconds, setSeconds] = useState("00");
   const [isVisible, setIsVisible] = useState(true);
 
-  const initializeCountdownDate = () => {
-    return new Date().getTime() + 24 * 60 * 60 * 1000;
-  };
+  const initialCountdownDate = new Date("2024-07-13T13:00:00").getTime();
 
-  const [countdownDate, setCountdownDate] = useState(initializeCountdownDate);
+  const getNextCountdownDate = useCallback(() => {
+    const now = new Date().getTime();
+    if (now > initialCountdownDate) {
+      const daysSinceInitial = Math.floor(
+        (now - initialCountdownDate) / (1000 * 60 * 60 * 24)
+      );
+      const nextCountdownDate =
+        initialCountdownDate +
+        (daysSinceInitial + 2 - (daysSinceInitial % 2)) * 24 * 60 * 60 * 1000;
+      return nextCountdownDate;
+    } else {
+      return initialCountdownDate;
+    }
+  }, [initialCountdownDate]);
+
+  const [countdownDate, setCountdownDate] = useState(getNextCountdownDate);
+
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countdownDate - now;
 
       if (distance < 0) {
-        setCountdownDate(initializeCountdownDate());
+        const newCountdownDate = getNextCountdownDate();
+        setCountdownDate(newCountdownDate);
         setIsVisible(true);
       } else {
         setDays(
@@ -51,7 +66,7 @@ const DiscountBanner = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [countdownDate]);
+  }, [countdownDate, getNextCountdownDate]);
 
   const handleClose = () => {
     setIsVisible(false);
@@ -62,17 +77,17 @@ const DiscountBanner = () => {
   }
 
   return (
-    <div className="relative rounded-md mt-5   top-0 left-0  flex flex-col gap-2 justify-center items-center w-full bg-gradient-to-r from-green-800 to-green-500 text-white font-sans py-4 px-4">
+    <div className="relative rounded-md mt-5 top-0 left-0 flex flex-col gap-2 justify-center items-center w-full bg-gradient-to-r from-green-800 to-green-500 text-white font-sans py-4 px-4">
       <button
         onClick={handleClose}
         className="absolute top-1 right-2 p-1 rounded-full bg-white bg-opacity-10 hover:bg-opacity-30 transition-all"
       >
         <XMarkIcon height={30} width={30} stroke="2" />
       </button>
-      <div className=" flex gap-1 md:gap-6 justify-center items-center w-full  text-white font-sans ">
-        <div className="flex flex-col items-center bg-yellow-900 p-2 rounded-md ">
-          <div className=" text-md md:text-lg font-bold">Massive Sale</div>
-          <div className="text-md md:text-base ">up to 75% off</div>
+      <div className="flex gap-1 md:gap-6 justify-center items-center w-full text-white font-sans">
+        <div className="flex flex-col items-center bg-yellow-900 p-2 rounded-md">
+          <div className="text-md md:text-lg font-bold">Massive Sale</div>
+          <div className="text-md md:text-base">up to 75% off</div>
         </div>
         <div className="flex gap-2 md:gap-4">
           <div className="flex flex-col items-center">
@@ -107,10 +122,10 @@ const DiscountBanner = () => {
           Learn More
         </a>
       </div>
-      <Button className="text-black bg-white hover:bg-white rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
+      <Button className="text-black bg-white hover:bg-white rounded-md self-start w-full cursor-default max-h-min mt-2 overflow-hidden">
         <Link
           href={"/credits"}
-          className="flex animate-scroll-left whitespace-nowrap "
+          className="flex animate-scroll-left whitespace-nowrap"
         >
           Get
           <span className="text-green-800 font-extrabold">
