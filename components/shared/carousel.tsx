@@ -79,10 +79,10 @@ export function CarouselAiimages() {
                 <Image
                   src={img}
                   className="overflow-hidden rounded-lg"
-                  alt={`Image ${index}`}
+                  alt="ai thumbnail generator"
                   width={1000}
                   height={1000}
-                  priority
+                  loading="lazy"
                 />
               </CardContent>
             </Card>
@@ -115,10 +115,10 @@ export function CarouselThumbnail() {
                 <Image
                   src={img}
                   className="overflow-hidden rounded-lg"
-                  alt={`Image ${index}`}
+                  alt="thumbnail for youtube"
                   width={1000}
                   height={1000}
-                  priority
+                  loading="lazy"
                 />
               </CardContent>
             </Card>
@@ -151,10 +151,10 @@ export function CarouselPoster() {
                 <Image
                   src={img}
                   className="overflow-hidden rounded-lg"
-                  alt={`Image ${index}`}
+                  alt="ai youtube thumbnail generator"
                   width={1000}
                   height={1000}
-                  priority
+                  loading="lazy"
                 />
               </CardContent>
             </Card>
@@ -193,10 +193,10 @@ export function CarouselChannel() {
                 <Image
                   src={img}
                   className="overflow-hidden rounded-lg"
-                  alt={`Image ${index}`}
+                  alt="youtube thumbnail"
                   width={1000}
                   height={1000}
-                  priority
+                  loading="lazy"
                 />
               </CardContent>
             </Card>
@@ -240,10 +240,10 @@ export function CarouselYoutuber() {
                 <Image
                   src={img}
                   className="overflow-hidden rounded-lg"
-                  alt={`Image ${index}`}
+                  alt="ai youtube thumbnail"
                   width={1000}
                   height={1000}
-                  priority
+                  loading="lazy"
                 />
               </CardContent>
             </Card>

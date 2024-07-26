@@ -14,24 +14,24 @@ const Thumbnail = () => {
         <div className="flex mt-3 gap-4 items-center justify-between">
           <div className=" flex flex-col gap-1 text-n-7 flex-auto  ">
             <Image
-              alt="Ai Thumbnail Generator"
+              alt="ai thumbnail generator"
               className=" "
               src={thumbnail}
               width={330}
               height={350}
-              priority
+              loading="lazy"
             />
             Ai Generated [1:1]
           </div>
           <PlusIcon size={50} />
           <div className=" flex flex-auto flex-col gap-1 text-n-7 ">
             <Image
-              alt="Ai Shorts Video Generator"
+              alt="ai shorts video generator"
               className=" "
               src={thumbnail0}
               width={250}
               height={250}
-              priority
+              loading="lazy"
             />
             Text/Photo
           </div>
@@ -40,12 +40,12 @@ const Thumbnail = () => {
           <Equal size={25} />
           <div className=" flex flex-1 flex-col gap-1 text-n-7">
             <Image
-              alt="Ai Images Generator"
+              alt="ai images generator"
               className=" "
               src={thumbnail2}
               width={8000}
               height={5000}
-              priority
+              loading="lazy"
             />
             Perfect Thumbnail [16:9]
           </div>

@@ -53,7 +53,7 @@ const Home = async () => {
                   height={869}
                   width={1139}
                   alt="Create Shorts Using AI Tools"
-                  priority
+                  loading="lazy"
                 />
               </div>
             </div>
@@ -111,13 +111,13 @@ const Home = async () => {
                   <span>
                     <CheckBadgeIcon color="green" height={50} width={50} />
                   </span>
-                  <h2>Improve Views and clicks using Our Thumbnails</h2>
+                  <h2>Improve Views and clicks using our ai thumbnails</h2>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>
                     <CheckBadgeIcon color="green" height={50} width={50} />
                   </span>
-                  <h2>Makes Script That Engage Audience</h2>
+                  <h2>Generate Script That Engage Audience</h2>
                 </div>
                 <div className="flex items-center gap-2">
                   <span>

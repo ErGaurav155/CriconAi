@@ -43,7 +43,7 @@ export const Congratulation = () => {
                 >
                   <Image
                     src="/assets/icons/cross.svg"
-                    alt="credit coins"
+                    alt="ai thumbnail"
                     width={24}
                     height={24}
                     className="cursor-pointer"
@@ -60,7 +60,7 @@ export const Congratulation = () => {
                 muted
                 className="cursor-pointer rounded-md"
               >
-                Your browser does not support the video tag.
+                youtube thumbnail
               </video>
               <AlertDialogTitle className="p-24-bold text-dark-600">
                 We Build{" "}

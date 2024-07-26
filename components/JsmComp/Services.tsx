@@ -28,7 +28,8 @@ const Services = () => {
                 className="h-full w-full object-cover"
                 width={630}
                 height={750}
-                alt="robot"
+                alt="ai youtube thumbnail"
+                loading="lazy"
               />
             </div>
 
@@ -47,9 +48,9 @@ const Services = () => {
 
           <div className="p-4 bg-n-7 rounded-3xl max-h-[36rem] overflow-hidden min-h-[29rem] h-[30vh] lg:h-[80vh]">
             <div className=" px-4 xl:px-8">
-              <h4 className="h4 text-[#95eb49] ">Video generation</h4>
+              <h4 className="h4 text-[#95eb49] ">Image generation</h4>
               <p className="body-2 mb-[2rem] text-white">
-                The world’s most powerful AI photo and video art generation
+                The world’s most powerful AI images and thumbnail generation
                 engine. What will you create?
               </p>
 
@@ -83,7 +84,7 @@ const Services = () => {
                 className="w-full h-full object-cover"
                 width={520}
                 height={400}
-                alt="Scary robot"
+                alt="ai script generator"
               />
 
               <VideoChatMessage />
