@@ -22,43 +22,18 @@ type TypeKeys =
   | "poll";
 
 const metadataMap: Record<TypeKeys, string[]> = {
-  idea: ["instagram post idea", "instagram post", "post ideas"],
-  images: [
-    "instagram post generator",
-    "ai post generator",
-    "ai instagram post",
-    "instagram post ai",
-  ],
-  bio: [
-    "bio for instagram",
-    "bio instagram",
-    "bio generator instagram",
-    "instagram bio generator",
-  ],
-  caption: [
-    "ai caption generator",
-    "ai caption",
-    "instagram caption",
-    "caption generator free",
-  ],
-  tag: [
-    "seo studio tools tag generator",
-    "tag for instagram",
-    "tag generator for instagram",
-    "youtube tag generator",
-    "hashtag generator",
-  ],
-  description: [
-    "ai video description generator",
-    "video description generator",
-    "ai description generator",
-  ],
-  comment: ["AI Comment Generator"],
-  tweet: ["AI Tweet Generator"],
-  avatar: ["AI Avatar Generator"],
+  idea: ["insta post idea"],
+  images: ["ai art generator"],
+  bio: ["insta bio generator"],
+  caption: ["insta caption"],
+  tag: ["tag for instagram", "tag generator"],
+  description: ["a i description generator"],
+  comment: ["a i comment generator"],
+  tweet: ["a i  tweet generator"],
+  avatar: ["free avatar maker", "avatar maker creator"],
   all: ["All-in-one AI Tools"],
-  prompt: ["prompt ai generator", "ai prompt image", "ai image prompt"],
-  backgroundMusicGen: ["Background Music Generator"],
+  prompt: ["ai prompt"],
+  backgroundMusicGen: ["v log music"],
   poll: ["AI Poll Generator"],
 };
 
@@ -100,9 +75,9 @@ const AddTransformationTypePage = async ({
     <div className="flex items-center justify-center md:items-start md:justify-start flex-col md:flex-row wrapper2 gap-5">
       <div className="md:flex-auto relative w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll flex flex-col gap-5  md:px-7 pt-16">
         <Button className="absolute top-0 right-1 text-black bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-          <h1 className="flex animate-scroll-left whitespace-nowrap ">
+          <p className="flex animate-scroll-left whitespace-nowrap ">
             Recommended - Fill All Inputs For Better Outcomes.
-          </h1>
+          </p>
         </Button>
         <Header title={socialMedia.title} />
 

@@ -30,57 +30,23 @@ type TypeKeys =
   | "poll";
 
 const metadataMap: Record<TypeKeys, string[]> = {
-  idea: [
-    "Instagram Reel Maker",
-    "reel ideas for instagram",
-    "reel maker ai",
-    "reel maker free",
-    "ai video",
-  ],
-  title: [
-    "instagram title",
-    "youtube video title",
-    "title for youtube video",
-    "title generator",
-    "video title generator",
-    "youtube title generator",
-    "youtube video title generator",
-    "ai title generator for youtube",
-  ],
-  description: [
-    "youtube video description",
-    "youtube description generator",
-    "youtube video description generator",
-  ],
-  tags: [
-    "youtube hashtag generator",
-    "ai tag generator",
-    "hashtag for youtube",
-    "hashtag generator for youtube",
-  ],
-  script: [
-    "youtube video script generator",
-    "ai youtube script generator",
-    "script ai",
-    "youtube video script",
-  ],
-  thumbnail: [
-    "ai youtube thumbnail generator",
-    "youtube thumbnail",
-    "ai youtube thumbnail",
-    "thumbnail maker",
-  ],
-  aiimages: ["image generator", "image to image ai", "ai create image"],
-  translate: ["language translator", "ai tranlator"],
-  slogan: ["AI Slogan Generator"],
-  facts: ["AI Facts Generator"],
-  quote: ["AI Quote Generator"],
-  riddle: ["AI Riddle Generator"],
-  all: ["All-in-one AI tools for media"],
-  TexttoAudio: ["free text to audio", "text to speech ai"],
-  backgroundMusicGen: ["AI-based background music generator"],
-  prompt: ["prompt ai generator", "ai prompt image", "ai image prompt"],
-  audiotoAudio: ["AI-powered audio to audio converter"],
+  idea: ["a i story generator", "youtube video idea"],
+  title: ["title generator"],
+  description: ["meta description generator"],
+  tags: ["tag creator for youtube", "tags for youtube generator"],
+  script: ["script generator"],
+  thumbnail: ["a i thumbnail maker"],
+  aiimages: ["a i image generator"],
+  translate: ["a i translation services"],
+  slogan: ["tagline maker online"],
+  facts: ["random facts generator", "funny fact generator"],
+  quote: ["quote creator online"],
+  riddle: ["riddle generator", "riddle a i"],
+  all: ["artificial intelligence text generator"],
+  TexttoAudio: ["text into voice"],
+  backgroundMusicGen: ["free background music", "v log music"],
+  prompt: ["a i prompt"],
+  audiotoAudio: ["voice translate"],
   poll: ["Create AI-based polls"],
 };
 
@@ -127,9 +93,9 @@ const AddTransformationTypePage = async ({
     <div className="flex items-center justify-center md:items-start md:justify-start flex-col md:flex-row wrapper2 gap-5">
       <div className="md:flex-auto relative w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll flex flex-col gap-5  md:px-7 pt-16">
         <Button className="absolute top-0 right-1 text-black bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-          <h1 className="flex animate-scroll-left whitespace-nowrap ">
+          <p className="flex animate-scroll-left whitespace-nowrap ">
             Recommended - Fill All Inputs For Better Outcomes.
-          </h1>
+          </p>
         </Button>
         <Header title={shortVid.title} />
 

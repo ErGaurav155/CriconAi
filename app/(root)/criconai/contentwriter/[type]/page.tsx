@@ -27,85 +27,28 @@ type TypeKeys =
   | "slogan";
 
 const metadataMap: Record<TypeKeys, string[]> = {
-  idea: ["blog ideas", "blog ideas generator", "ai blog"],
-  outline: ["gemini ai", "bing ai "],
-  article: ["ai article"],
-  blog: [
-    "blog generator ai",
-    "ai",
-    "ai blog",
-    "ai generator",
-    "blog generator free",
-  ],
-  book: [
-    "free ai",
-    "free ai writing",
-    "free ai book writing",
-    "ai for writing",
-    "ai writing generator",
-    "ai book generator",
-  ],
-  title: ["Blog title generator", "title generator", "blog name"],
-  images: [
-    "ai generated images",
-    "ai generated",
-    "ai images",
-    "free ai images",
-    "generate ai images",
-  ],
+  idea: ["writing articles topics", "article writing topics"],
+  outline: ["openai blog"],
+  article: ["openai blog", "open ai blog"],
+  blog: ["a i text generator free"],
+  book: ["story writer a i"],
+  title: ["book title generator", "headline generator", "book title creator"],
+  images: ["ai pictures"],
   summary: [
-    "ai for summary",
-    "youtube summary",
-    "youtube ai summary",
     "summary generator",
-    "pdf summary",
+    "summarizer generator",
+    "summarize tool",
+    "summarize",
   ],
-  expander: ["text expander free", "ai image expander", "ai text generator"],
-  translation: [
-    "ai for translation",
-    "language translator ai",
-    "language translator",
-    "ai tranlator",
-    "chatgpt language translation",
-  ],
-  coverimage: [
-    "ai generated images",
-    "ai generated",
-    "ai images",
-    "free ai images",
-    "generate ai images",
-  ],
-  email: [
-    "email generator",
-    "ai for email",
-    "free email",
-    "ai generator email",
-    "email writer",
-    "email ai writer",
-  ],
-  tag: [
-    "ai hashtag generator",
-    "ai for hashtag",
-    "hashtag generator",
-    "hashtag instagram",
-    "hashtag youtube",
-    "youtube hashtag",
-    "hashtag generator instagram",
-  ],
-  all: ["All-in-One AI Tools"],
-  slogan: ["slogan generator"],
-  prompt: [
-    "prompt ai generator",
-    "ai prompt image",
-    "ai image prompt",
-    "prompt generator",
-    "image prompt generator",
-  ],
-  TexttoAudio: [
-    "free text to audio",
-    "text to speech ai",
-    "free text to voice",
-  ],
+  expander: ["a i text generator"],
+  translation: ["a i for translation", "translate gogle"],
+  coverimage: ["novel cover generator", "book covers creator"],
+  email: ["temp email creator", "temp e-mail creator"],
+  tag: ["trending hashtags"],
+  all: ["artificial intelligence text generator"],
+  slogan: ["tag line generator"],
+  prompt: ["a i prompts generator"],
+  TexttoAudio: ["a i voice generator"],
 };
 
 const titleMap: Record<TypeKeys, string> = {
@@ -150,9 +93,9 @@ const AddTransformationTypePage = async ({
     <div className="flex items-center justify-center md:items-start md:justify-start flex-col md:flex-row wrapper2 gap-5">
       <div className="relative md:flex-auto w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll flex flex-col gap-5  md:px-7 pt-16">
         <Button className="absolute top-0 right-1 text-black bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-          <h1 className="flex animate-scroll-left whitespace-nowrap ">
+          <p className="flex animate-scroll-left whitespace-nowrap ">
             Recommended - Fill All Inputs For Better Outcomes.
-          </h1>
+          </p>
         </Button>
         <Header title={contentWriter.title} />
 

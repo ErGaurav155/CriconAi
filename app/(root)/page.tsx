@@ -30,12 +30,12 @@ const Home = async () => {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
               <div>
-                <h1 className="mt-4 text-3xl font-bold text-black lg:mt-8 sm:text-3xl md:text-4xl xl:text-6xl">
+                <p className="mt-4 text-3xl font-bold text-black lg:mt-8 sm:text-3xl md:text-4xl xl:text-6xl">
                   10X Booost Your Youtube Growth
-                </h1>
-                <p className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
-                  Cricon AI Platform for Content Creation
                 </p>
+                <h1 className="mt-4 text-base text-black lg:mt-8 sm:text-xl">
+                  Cricon AI Platform for Content Creation
+                </h1>
 
                 <Link
                   href="/criconai/longvid/idea"
@@ -64,13 +64,13 @@ const Home = async () => {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="grid items-center grid-cols-1 gap-8 md:gap-12 md:grid-cols-2">
               <div>
-                <h1 className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
+                <p className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
                   Top Youtubers Use
-                </h1>
-                <p className="mt-4 text-base text-black lg:mt-8 sm:text-2xl ">
+                </p>
+                <h1 className="mt-4 text-base text-black lg:mt-8 sm:text-2xl ">
                   Criconai For HD Thumbnail,Script And Research,Keywords And
                   Tags
-                </p>
+                </h1>
 
                 <Link
                   href="/credits"
@@ -89,9 +89,9 @@ const Home = async () => {
           <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="grid items-center grid-cols-1 gap-8 md:gap-12 md:grid-cols-2">
               <div>
-                <h1 className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-5xl">
+                <p className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-5xl">
                   Top 5 benefits By Criconai
-                </h1>
+                </p>
                 <p className="mt-4 text-base text-black lg:mt-8 sm:text-2xl ">
                   If You serious for youtube growth Use Our Services for Atleast
                   5-10 videos

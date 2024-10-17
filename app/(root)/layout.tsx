@@ -7,15 +7,7 @@ export const metadata: Metadata = {
   title: "AI Thumbnail Generator & Tools",
   description:
     "Discover the best free AI tools for generating YouTube thumbnails, downloading in 4K, and more.",
-  keywords: [
-    "ai photo generator free",
-    "text to image ai free",
-    "yt thumbnail size",
-    "yt thumbnail download 4k",
-    "youtube thumbnail ai",
-    "ai thumbnail generator free",
-    "youtube thumbnail ai generator",
-  ],
+  keywords: ["free a i image generator"],
 };
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

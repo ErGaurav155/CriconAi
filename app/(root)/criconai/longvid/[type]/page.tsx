@@ -29,118 +29,26 @@ type TypeKeys =
   | "poll";
 
 const metadataMap: Record<TypeKeys, string[]> = {
-  idea: [
-    "youtube content ideas",
-    "content generator ai ",
-    "content idea generator",
-    "content generator",
-    "content creation idea",
-    "content idea for youtube",
+  idea: ["trending youtube topics", "you tube video idea"],
+  title: ["you tube title generator", "youtube title generator"],
+  description: ["youtube description generator"],
+  tags: ["youtube tag generator", "youtube tag creator"],
+  keyword: ["youtube keywords"],
+  script: ["a i script generator"],
+  thumbnail: ["ai thumbnail generator"],
+  aiimages: ["a i image generator"],
+  translate: ["artificial intelligence translator"],
+  disclamer: [
+    "youtube disclaimer",
+    "copyright youtube disclaimer",
+    "copyright disclaimer for youtube",
   ],
-  title: [
-    "youtube title",
-    "youtube video title",
-    "title for youtube video",
-    "title generator",
-    "video title generator",
-    "youtube title generator",
-    "youtube video title generator",
-    "ai title generator for youtube",
-  ],
-  description: [
-    "ai video description generator",
-    "video description generator",
-    "ai description generator",
-    "description generator",
-    "youtube video description",
-    "youtube description generator",
-    "youtube video description generator",
-  ],
-  tags: [
-    "youtube video tags",
-    "youtube tags",
-    "tags generator",
-    "inflect hashtag generator",
-    "yt hashtag generator",
-    "youtube hashtag generator",
-    "ai tag generator",
-    "hashtag for youtube",
-    "hashtag generator for youtube",
-  ],
-  keyword: [
-    "ai keyword generator",
-    "keyword generator for youtube",
-    "keyword for youtube",
-    "keyword generator free",
-  ],
-  script: [
-    "tiktok script generator",
-    "capcut",
-    "video script",
-    "video script generator",
-    "youtube video script generator",
-    "ai youtube script generator",
-    "script ai",
-    "youtube video script",
-  ],
-  thumbnail: [
-    "bing ai ",
-    "bing ai image generator",
-    "thumbnail ai generator",
-    "youtube thumbnail ai",
-    "thumbnail ai",
-    "ai thumbnail generator",
-    "thumbnail for youtube",
-    "ai youtube thumbnail generator",
-    "youtube thumbnail",
-    "ai youtube thumbnail",
-    "thumbnail maker",
-    "thumbnail youtube",
-    "thumbnail downloader",
-  ],
-  aiimages: [
-    "ai generator image",
-    "ai generator",
-    "image generator",
-    "image to image ai",
-    "ai create image",
-  ],
-  translate: [
-    "ai for translation",
-    "language translator ai",
-    "language translator",
-    "ai tranlator",
-    "chatgpt language translation",
-  ],
-  disclamer: ["youtube disclaimer", "youtube disclaimer generator"],
-  email: [
-    "email generator",
-    "ai for email",
-    "free email",
-    "ai generator email",
-    "email writer",
-    "email ai writer",
-  ],
-  all: ["All-in-one AI tools for media"],
-  TexttoAudio: [
-    "free text to audio",
-    "text to speech ai",
-    "free text to voice",
-  ],
-  prompt: [
-    "prompt ai generator",
-    "ai prompt image",
-    "ai image prompt",
-    "prompt generator",
-    "image prompt generator",
-  ],
-  backgroundMusicGen: ["AI-based background music generator"],
-  audiotoAudio: [
-    "speech to speech translation",
-    "audio language translator",
-    "audio translator",
-    "language translator",
-  ],
+  email: ["e mail writer"],
+  all: ["artificial intelligence text generator"],
+  TexttoAudio: ["free tts"],
+  prompt: ["a i prompt"],
+  backgroundMusicGen: ["background music for video"],
+  audiotoAudio: ["audio translator"],
   poll: ["Create AI-based polls"],
 };
 
@@ -187,9 +95,9 @@ const AddTransformationTypePage = async ({
     <div className="flex items-center justify-center md:items-start md:justify-start flex-col md:flex-row wrapper2 gap-5">
       <div className="relative md:flex-auto w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll  flex flex-col gap-5  md:px-7 pt-16">
         <Button className="absolute top-0 right-1 text-black bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min  mt-2 overflow-hidden">
-          <h1 className="flex animate-scroll-left whitespace-nowrap ">
+          <p className="flex animate-scroll-left whitespace-nowrap ">
             Recommended - Fill All Inputs For Better Outcomes.
-          </h1>
+          </p>
         </Button>
         <Header title={longVid.title} />
 

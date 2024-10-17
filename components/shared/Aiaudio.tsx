@@ -48,9 +48,7 @@ const Aiaudio = () => {
 
   return (
     <div className="sticky top-0 md:flex-auto h-[100vh] w-full md:w-2/6 pt-4">
-      <h1 className=" font-semibold text-n-8 text-lg mt-2">
-        Character Voices:
-      </h1>
+      <p className=" font-semibold text-n-8 text-lg mt-2">Character Voices:</p>
       <div className="mt-5 p-5 grid grid-cols-2 gap-2">
         {audioFiles.map((audio) => (
           <div
