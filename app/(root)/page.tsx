@@ -13,10 +13,9 @@ import {
   CarouselThumbnail,
   CarouselYoutuber,
 } from "@/components/shared/carousel";
-import { Button } from "@/components/ui/button";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 
-import { ArrowBigRight, RocketIcon } from "lucide-react";
+import { ArrowBigRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 

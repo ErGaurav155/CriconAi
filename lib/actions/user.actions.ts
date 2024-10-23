@@ -89,13 +89,12 @@ export async function deleteUser(clerkId: string) {
   }
 }
 //RESET CREDITS
-export async function resetCredits(userDbId: string) {
+export async function resetCredits() {
   try {
     await connectToDatabase();
 
     // Reset users with less than 10 credits
-    const result = await User.findOneAndUpdate(
-      { _id: userDbId },
+    const result = await User.updateMany(
       { creditBalance: { $lt: 10 } },
       { $set: { creditBalance: 10 } }
     );
