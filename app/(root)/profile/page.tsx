@@ -32,10 +32,10 @@ const Profile = async () => {
               className="size-9 md:size-12"
             />
             <h2 className="h2-bold text-dark-600">{user.creditBalance}</h2>
-            <div className="flex gap-1">
+            {/* <div className="flex gap-1">
               <InfoIcon />
               <span>Reset in 24 Hr</span>
-            </div>{" "}
+            </div> */}
           </div>
         </div>
 
