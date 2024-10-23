@@ -3,7 +3,7 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import Header from "@/components/shared/Header";
-import { getUserById, resetCredits } from "@/lib/actions/user.actions";
+import { getUserById } from "@/lib/actions/user.actions";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { InfoIcon } from "lucide-react";
@@ -15,34 +15,6 @@ const Profile = async () => {
 
   const user = await getUserById(userId);
   const userID = user._id;
-
-  let LAST_RESET_TIME = 1729684658174; // Initial reset timestamp
-  const RESET_INTERVAL = 30000; // 24 hours in milliseconds
-
-  // Function to check if credits need to be reset
-  function checkAndResetCredits() {
-    const now = new Date().getTime(); // Current timestamp
-    console.log(now);
-    // Calculate the next reset time
-    let nextResetTime = LAST_RESET_TIME;
-
-    // Loop to find the next reset time
-    while (nextResetTime <= now) {
-      nextResetTime += RESET_INTERVAL; // Add 24 hours for next reset
-    }
-
-    // If current time exceeds the next reset time, reset credits
-    if (now >= nextResetTime) {
-      resetCredits(); // Call your function to reset credits
-
-      // Update LAST_RESET_TIME to the current reset time
-      LAST_RESET_TIME = nextResetTime;
-    } else {
-      return;
-    }
-  }
-
-  checkAndResetCredits();
 
   return (
     <div className="wrapper">
