@@ -88,7 +88,23 @@ export async function deleteUser(clerkId: string) {
     handleError(error);
   }
 }
+//RESET CREDITS
+export async function resetCredits(userDbId: string) {
+  try {
+    await connectToDatabase();
 
+    // Reset users with less than 10 credits
+    const result = await User.findOneAndUpdate(
+      { _id: userDbId },
+      { creditBalance: { $lt: 10 } },
+      { $set: { creditBalance: 10 } }
+    );
+    if (!result) throw new Error("User credits reset update failed");
+    return JSON.parse(JSON.stringify(result));
+  } catch (error) {
+    handleError(error);
+  }
+}
 // USE CREDITS
 export async function updateCredits(userDbId: string, creditFee: number) {
   try {
