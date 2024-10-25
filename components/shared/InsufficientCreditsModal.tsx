@@ -13,6 +13,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { InfoIcon } from "lucide-react";
 
 export const InsufficientCreditsModal = () => {
   const router = useRouter();
@@ -23,6 +24,17 @@ export const InsufficientCreditsModal = () => {
         <AlertDialogHeader>
           <div className="flex-between ">
             <p className="p-16-semibold text-dark-400">Insufficient Credits</p>
+            <div className="flex gap-1 p-16-regular py-3">
+              <InfoIcon />
+              Reset &nbsp; 10
+              <Image
+                src="/assets/icons/coins.svg"
+                alt="credit coins"
+                width={20}
+                height={20}
+              />
+              &nbsp; in 24 Hr.
+            </div>
             <AlertDialogCancel
               className="border-0 p-0 hover:bg-transparent"
               onClick={() => router.push("/profile")}
