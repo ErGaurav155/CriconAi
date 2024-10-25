@@ -46,7 +46,7 @@ const metadataMap: Record<TypeKeys, string[]> = {
   email: ["temp email creator", "temp e-mail creator"],
   tag: ["trending hashtags"],
   all: ["artificial intelligence text generator"],
-  slogan: ["tag line generator"],
+  slogan: ["tagline generator"],
   prompt: ["a i prompts generator"],
   TexttoAudio: ["a i voice generator"],
 };
