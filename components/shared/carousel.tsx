@@ -61,111 +61,159 @@ const thumbnail1 = [
   thumbimg5,
   thumbimg6,
 ];
-export function CarouselAiimages() {
+// export function CarouselAiimages() {
+//   return (
+//     <Carousel
+//       plugins={[
+//         Autoplay({
+//           delay: 2500,
+//         }),
+//       ]}
+//       className="w-full  sm:max-w-sm md:max-w-lg "
+//     >
+//       <CarouselContent className="-mt-1 ">
+//         {thumbnail1.map((img, index) => (
+//           <CarouselItem key={index}>
+//             <Card>
+//               <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+//                 <Image
+//                   src={img}
+//                   className="overflow-hidden rounded-lg"
+//                   alt="ai thumbnail generator"
+//                   width={1000}
+//                   height={1000}
+//                   loading="lazy"
+//                 />
+//               </CardContent>
+//             </Card>
+//           </CarouselItem>
+//         ))}
+//       </CarouselContent>
+//       <CarouselPrevious className="-left-8 " />
+//       <CarouselNext className="-right-8" />
+//     </Carousel>
+//   );
+// }
+export function Aiimages() {
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 2500,
-        }),
-      ]}
-      className="w-full  sm:max-w-sm md:max-w-lg "
-    >
-      <CarouselContent className="-mt-1 ">
-        {thumbnail1.map((img, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
-                <Image
-                  src={img}
-                  className="overflow-hidden rounded-lg"
-                  alt="ai thumbnail generator"
-                  width={1000}
-                  height={1000}
-                  loading="lazy"
-                />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="-left-8 " />
-      <CarouselNext className="-right-8" />
-    </Carousel>
+    <div className="grid gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+      {thumbnail1.map((img, index) => (
+        <div className=" overflow-hidden" key={index}>
+          <Image
+            className=" w-full h-full  max-w-full rounded-lg object-cover object-center"
+            src={img}
+            alt="ai thumbnail generator"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
 const thumbnail = [img1, img6, img7, img8, img2, img3, img4, img5];
 
-export function CarouselThumbnail() {
+// export function CarouselThumbnail() {
+
+//   return (
+//     <Carousel
+//       plugins={[
+//         Autoplay({
+//           delay: 2000,
+//         }),
+//       ]}
+//       className="w-full  sm:max-w-sm md:max-w-lg "
+//     >
+//       <CarouselContent className="-mt-1 ">
+//         {thumbnail.map((img, index) => (
+//           <CarouselItem key={index}>
+//             <Card>
+//               <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+//                 <Image
+//                   src={img}
+//                   className="overflow-hidden rounded-lg"
+//                   alt="thumbnail for youtube"
+//                   width={1000}
+//                   height={1000}
+//                   loading="lazy"
+//                 />
+//               </CardContent>
+//             </Card>
+//           </CarouselItem>
+//         ))}
+//       </CarouselContent>
+//       <CarouselPrevious className="-left-8 " />
+//       <CarouselNext className="-right-8" />
+//     </Carousel>
+//   );
+// }
+export function AiThumb() {
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 2000,
-        }),
-      ]}
-      className="w-full  sm:max-w-sm md:max-w-lg "
-    >
-      <CarouselContent className="-mt-1 ">
-        {thumbnail.map((img, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
-                <Image
-                  src={img}
-                  className="overflow-hidden rounded-lg"
-                  alt="thumbnail for youtube"
-                  width={1000}
-                  height={1000}
-                  loading="lazy"
-                />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="-left-8 " />
-      <CarouselNext className="-right-8" />
-    </Carousel>
+    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3  ">
+      {thumbnail.map((img, index) => (
+        <div className="overflow-hidden" key={index}>
+          <Image
+            className="  w-full h-full max-w-full rounded-lg object-cover object-center "
+            src={img}
+            alt="ai thumbnail generator"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
-const Poster = [poster1, poster2, poster3, poster4, poster5, poster6];
-
-export function CarouselPoster() {
+const Poster = [poster3, poster2, poster1, poster5, poster4, poster6];
+export function AiPoster() {
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 1500,
-        }),
-      ]}
-      className="w-full  sm:max-w-sm md:max-w-lg "
-    >
-      <CarouselContent className="-mt-1 ">
-        {Poster.map((img, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
-                <Image
-                  src={img}
-                  className="overflow-hidden rounded-lg"
-                  alt="ai youtube thumbnail generator"
-                  width={1000}
-                  height={1000}
-                  loading="lazy"
-                />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="-left-8 " />
-      <CarouselNext className="-right-8" />
-    </Carousel>
+    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+      {Poster.map((img, index) => (
+        <div className="overflow-hidden" key={index}>
+          <Image
+            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
+            src={img}
+            alt="ai thumbnail generator"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
+// export function CarouselPoster() {
+//   return (
+//     <Carousel
+//       plugins={[
+//         Autoplay({
+//           delay: 1500,
+//         }),
+//       ]}
+//       className="w-full  sm:max-w-sm md:max-w-lg "
+//     >
+//       <CarouselContent className="-mt-1 ">
+//         {Poster.map((img, index) => (
+//           <CarouselItem key={index}>
+//             <Card>
+//               <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+//                 <Image
+//                   src={img}
+//                   className="overflow-hidden rounded-lg"
+//                   alt="ai youtube thumbnail generator"
+//                   width={1000}
+//                   height={1000}
+//                   loading="lazy"
+//                 />
+//               </CardContent>
+//             </Card>
+//           </CarouselItem>
+//         ))}
+//       </CarouselContent>
+//       <CarouselPrevious className="-left-8 " />
+//       <CarouselNext className="-right-8" />
+//     </Carousel>
+//   );
+// }
 const channel = [
   channel10,
   channel11,
@@ -175,7 +223,40 @@ const channel = [
   channel15,
 ];
 
-export function CarouselChannel() {
+// export function CarouselChannel() {
+//   return (
+//     <Carousel
+//       plugins={[
+//         Autoplay({
+//           delay: 2000,
+//         }),
+//       ]}
+//       className="w-full  sm:max-w-sm md:max-w-lg "
+//     >
+//       <CarouselContent className=" rounded-lg">
+//         {channel.map((img, index) => (
+//           <CarouselItem key={index}>
+//             <Card>
+//               <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+//                 <Image
+//                   src={img}
+//                   className="overflow-hidden rounded-lg"
+//                   alt="youtube thumbnail"
+//                   width={1000}
+//                   height={1000}
+//                   loading="lazy"
+//                 />
+//               </CardContent>
+//             </Card>
+//           </CarouselItem>
+//         ))}
+//       </CarouselContent>
+//       <CarouselPrevious className="-left-8 " />
+//       <CarouselNext className="-right-8" />
+//     </Carousel>
+//   );
+// }
+export function OurClient() {
   return (
     <Carousel
       plugins={[
@@ -183,19 +264,20 @@ export function CarouselChannel() {
           delay: 2000,
         }),
       ]}
-      className="w-full  sm:max-w-sm md:max-w-lg "
+      className="w-full "
     >
-      <CarouselContent className=" rounded-lg">
+      <CarouselContent className=" w-full">
         {channel.map((img, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+          <CarouselItem
+            key={index}
+            className="w-full sm:basis-1/3 lg:basis-1/3"
+          >
+            <Card className="w-full p-0">
+              <CardContent className="flex p-0 w-full aspect-video items-center justify-center ">
                 <Image
+                  className=" w-full h-full  rounded-lg object-fill object-center "
                   src={img}
-                  className="overflow-hidden rounded-lg"
-                  alt="youtube thumbnail"
-                  width={1000}
-                  height={1000}
+                  alt="ai thumbnail generator"
                   loading="lazy"
                 />
               </CardContent>
@@ -203,12 +285,25 @@ export function CarouselChannel() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="-left-8 " />
-      <CarouselNext className="-right-8" />
     </Carousel>
   );
 }
-
+export function OurClient1() {
+  return (
+    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+      {channel.map((img, index) => (
+        <div className="overflow-hidden" key={index}>
+          <Image
+            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
+            src={img}
+            alt="ai thumbnail generator"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
 const Youtuber = [
   Youtuber2,
   Youtuber3,
@@ -221,37 +316,52 @@ const Youtuber = [
   Youtuber9,
   Youtuber10,
 ];
-
-export function CarouselYoutuber() {
+export function TopYoutuber() {
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 2000,
-        }),
-      ]}
-      className="w-full  sm:max-w-sm md:max-w-lg "
-    >
-      <CarouselContent className=" rounded-lg">
-        {Youtuber.map((img, index) => (
-          <CarouselItem key={index}>
-            <Card>
-              <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
-                <Image
-                  src={img}
-                  className="overflow-hidden rounded-lg"
-                  alt="ai youtube thumbnail"
-                  width={1000}
-                  height={1000}
-                  loading="lazy"
-                />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="-left-8 " />
-      <CarouselNext className="-right-8" />
-    </Carousel>
+    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+      {Youtuber.map((img, index) => (
+        <div className="overflow-hidden" key={index}>
+          <Image
+            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
+            src={img}
+            alt="ai thumbnail generator"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
+// export function CarouselYoutuber() {
+//   return (
+//     <Carousel
+//       plugins={[
+//         Autoplay({
+//           delay: 2000,
+//         }),
+//       ]}
+//       className="w-full  sm:max-w-sm md:max-w-lg "
+//     >
+//       <CarouselContent className=" rounded-lg">
+//         {Youtuber.map((img, index) => (
+//           <CarouselItem key={index}>
+//             <Card>
+//               <CardContent className="flex p-1 w-[1000] h-[1000]  items-center justify-center ">
+//                 <Image
+//                   src={img}
+//                   className="overflow-hidden rounded-lg"
+//                   alt="ai youtube thumbnail"
+//                   width={1000}
+//                   height={1000}
+//                   loading="lazy"
+//                 />
+//               </CardContent>
+//             </Card>
+//           </CarouselItem>
+//         ))}
+//       </CarouselContent>
+//       <CarouselPrevious className="-left-8 " />
+//       <CarouselNext className="-right-8" />
+//     </Carousel>
+//   );
+// }

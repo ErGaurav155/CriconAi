@@ -57,7 +57,7 @@ export function TabsDemo() {
         </TabsTrigger>
       </TabsList>
       <TabsContent className="mt-15" value="longvidTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
+        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
           {longvidTypes.map((item) => (
             <div
               className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
@@ -79,7 +79,7 @@ export function TabsDemo() {
                   )}
                 </div>
               </div>
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem]  ">
+              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
                 <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
                 <p className="body-2 mb-6  text-white">{item.text}</p>
                 <Link
@@ -105,13 +105,13 @@ export function TabsDemo() {
         </div>
       </TabsContent>
       <TabsContent className="mt-15" value="contentwriterTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
+        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
           {contentwriterTypes.map((item) => (
             <div
               className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
               key={item.id}
             >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem]  ">
+              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
                 <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
                 <p className="body-2 mb-6 text-white">{item.text}</p>
                 <Link
@@ -154,13 +154,13 @@ export function TabsDemo() {
         </div>
       </TabsContent>
       <TabsContent className="mt-15" value="shortvidTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
+        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
           {shortvidTypes.map((item) => (
             <div
               className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
               key={item.id}
             >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem]  ">
+              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
                 <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
                 <p className="body-2 mb-6 text-white">{item.text}</p>
                 <Link
@@ -203,13 +203,13 @@ export function TabsDemo() {
         </div>
       </TabsContent>
       <TabsContent className="mt-15" value="socialmediaTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
+        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
           {socialmediaTypes.map((item) => (
             <div
               className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
               key={item.id}
             >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem]  ">
+              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
                 <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
                 <p className="body-2 mb-6 text-white">{item.text}</p>
 

@@ -37,7 +37,7 @@ export function Sidebar() {
 
   return (
     <div>
-      <Card className="hidden min-h-screen h-screen bg-gray-50  text-gray-600 lg:flex  w-full max-w-[18rem] p-4 shadow-xl font-sans overflow-y-auto no-scrollbar  shadow-blue-100 ">
+      <Card className="hidden min-h-screen h-screen bg-gray-50  text-gray-600 lg:flex  w-full max-w-[19rem] p-4 shadow-xl font-sans overflow-y-auto no-scrollbar  shadow-blue-100 ">
         <div className=" flex items-center">
           <Image
             src="/assets/images/logo.png"

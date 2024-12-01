@@ -212,7 +212,7 @@ export const generateGptResponse = async ({
               const image = await openai.images.generate({
                 model: model,
                 prompt: input,
-                size: Quality1 as imageType,
+                size: inputlag as imageType,
                 quality: Quality1,
                 response_format: "url",
                 n: 1,

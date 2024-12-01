@@ -96,6 +96,10 @@
   .wrapper2 {
     @apply max-w-7xl mx-auto pr-1 sm:pr-3 md:pr-5  w-full text-dark-400;
   }
+  .wrapper3 {
+    @apply max-w-6xl mx-auto px-5 md:px-10 lg:px-5  w-full text-dark-400;
+  }
+
   .gradient-text {
     @apply bg-purple-gradient bg-cover bg-clip-text text-transparent;
   }

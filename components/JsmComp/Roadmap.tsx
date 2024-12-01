@@ -15,7 +15,7 @@ const Roadmap = () => (
       <h2 className="h2 text-[#183052]">]</h2>
     </div>
 
-    <div className="relative grid gap-3 lg:gap-6 sm:grid-cols-2 md:gap-4 sm:pb-[7rem]">
+    <div className="relative grid gap-3 lg:gap-10 sm:grid-cols-2 md:gap-4 sm:pb-[7rem]">
       {roadmap.map((item: any) => {
         const status = item.status === "done" ? "Done" : "In progress";
 
