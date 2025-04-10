@@ -17,8 +17,6 @@ const Checkout = ({
   buyerId: string;
   location: string;
 }) => {
-  const router = useRouter();
-
   return (
     <div>
       {location === "India" ? (

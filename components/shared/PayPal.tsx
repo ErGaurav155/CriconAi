@@ -10,6 +10,15 @@ import {
 import { useRouter } from "next/navigation";
 import { createTransaction } from "@/lib/actions/transaction.action";
 import { Button } from "@material-tailwind/react";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface CreditPurchaseProps {
   amount: number;
@@ -92,14 +101,34 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
           Buy Credit
         </Button>
       ) : (
-        <PayPalScriptProvider options={initialOptions}>
-          <PayPalButtons
-            style={{ layout: "vertical" }}
-            createOrder={createOrder}
-            onApprove={onApprove}
-            onError={onError}
-          />
-        </PayPalScriptProvider>
+        <AlertDialog defaultOpen>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle className="sr-only">
+                Buy Credits
+              </AlertDialogTitle>
+              <div className="flex justify-between items-center">
+                <p className="p-16-semibold text-black">
+                  Proceed To Take Credits
+                </p>
+                <AlertDialogCancel
+                  onClick={() => router.push(`/`)}
+                  className="border-0 p-0 hover:bg-transparent"
+                >
+                  <XMarkIcon className="size-6 cursor-pointer" />
+                </AlertDialogCancel>
+              </div>
+            </AlertDialogHeader>
+            <PayPalScriptProvider options={initialOptions}>
+              <PayPalButtons
+                style={{ layout: "vertical" }}
+                createOrder={createOrder}
+                onApprove={onApprove}
+                onError={onError}
+              />
+            </PayPalScriptProvider>
+          </AlertDialogContent>
+        </AlertDialog>
       )}
     </div>
   );
