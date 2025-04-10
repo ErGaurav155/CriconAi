@@ -21,7 +21,7 @@ export function Faq() {
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
-    <div className="w-full">
+    <div className="w-full p-1">
       <Header title="Frequently Asked Questions" />
       <div className="">
         <Accordion

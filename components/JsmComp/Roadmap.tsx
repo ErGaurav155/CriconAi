@@ -7,7 +7,7 @@ import loading1 from "@/public/assets/loading-01.svg";
 import Image from "next/image";
 
 const Roadmap = () => (
-  <div className="container md:pb-10 ">
+  <div className="container  p-2 sm:p-[20px] md:p-[40px] lg:p-[60px] md:pb-10 ">
     <div className="flex mb-5 items-center justify-center">
       <h2 className="h2 text-[#183052]">[Our main</h2>
 

@@ -26,7 +26,7 @@ const Home = async () => {
       <Congratulation />
       <div className="flex  flex-col gap-10 items-center m-auto justify-center">
         <section className="bg-[#FCF8F1] bg-opacity-30 pt-4">
-          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="px-1 mx-auto max-w-7xl sm:px-4 lg:px-8">
             <div className="grid items-center grid-cols-1 gap-12 lg:grid-cols-2">
               <div>
                 <p className="mt-4 text-3xl font-bold text-black lg:mt-8 sm:text-3xl md:text-4xl xl:text-6xl">
@@ -58,7 +58,7 @@ const Home = async () => {
             </div>
           </div>
         </section>
-        <div className="px-4 mx-auto max-w-7xl ">
+        <div className="px-1 sm:px-4 mx-auto max-w-7xl ">
           <div className="grid items-center grid-cols-1 gap-8 md:gap-12">
             <p className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
               Our Top Clients
@@ -67,7 +67,7 @@ const Home = async () => {
             <OurClient />
           </div>
         </div>
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-8 md:gap-12 ">
             <div className="flex items-center justify-between">
               <div>
@@ -81,7 +81,7 @@ const Home = async () => {
 
               <Link
                 href="/criconai/longvid/thumbnail"
-                className="inline-flex items-center p-3  mt-2 lg:text-xl font-normal md:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  "
+                className="inline-flex items-center p-3  mt-2 lg:text-xl font-normal md:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb] text-nowrap "
                 role="button"
               >
                 Start Now
@@ -91,7 +91,7 @@ const Home = async () => {
           </div>
         </div>
         <div className="flex flex-col gap-5">
-          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="px-1 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
                 <p className="  mt-4 text-base font-bold text-#e61a49 lg:mt-8 sm:text-2xl ">
@@ -99,7 +99,7 @@ const Home = async () => {
                 </p>
                 <Link
                   href="/credits"
-                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-xl lg:mt-3 hover:bg-[#4c8eeb]  "
+                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  text-nowrap"
                   role="button"
                 >
                   Make Thumbnail
@@ -109,7 +109,7 @@ const Home = async () => {
             </div>
           </div>
 
-          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="px-1 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
                 <p className="  mt-4 text-base font-bold text-#812c08 lg:mt-8 sm:text-2xl ">
@@ -117,7 +117,7 @@ const Home = async () => {
                 </p>
                 <Link
                   href="/credits"
-                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-xl lg:mt-3 hover:bg-[#4c8eeb]  "
+                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  px-1"
                   role="button"
                 >
                   Make Aiimages
@@ -126,7 +126,7 @@ const Home = async () => {
               <Aiimages />
             </div>
           </div>
-          <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+          <div className="px-1 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center w-full justify-between ">
                 <p className="  mt-4 text-base font-bold text-#1e0654 lg:mt-8 sm:text-2xl ">
@@ -134,7 +134,7 @@ const Home = async () => {
                 </p>
                 <Link
                   href="/credits"
-                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-xl lg:mt-3 hover:bg-[#4c8eeb]  "
+                  className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  text-nowrap"
                   role="button"
                 >
                   Make Poster
@@ -145,7 +145,7 @@ const Home = async () => {
           </div>
         </div>
         <div>
-          <p className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
+          <p className="mt-4 px-2 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-4xl">
             Our AI Tools
           </p>
           <TabsDemo />
@@ -153,7 +153,7 @@ const Home = async () => {
         <Promo />
         <Services />
         <Roadmap />
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div className="grid items-center grid-cols-1 gap-8 md:gap-12 md:grid-cols-2">
             <p className="mt-4 text-xl font-bold text-black lg:mt-8 sm:text-2xl md:text-3xl xl:text-5xl">
               Top 5 benefits By Criconai

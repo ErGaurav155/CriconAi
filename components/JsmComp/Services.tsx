@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const Services = () => {
   return (
-    <div className="container">
+    <div className="container p-2 sm:p-[20px] md:p-[40px] lg:p-[60px]">
       <Heading
         title="Cricon AI made for creators."
         text="Cricon unlocks the potential of AI-power for content creation"
