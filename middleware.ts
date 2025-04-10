@@ -9,6 +9,7 @@ export default authMiddleware({
     "/api/webhooks/clerk",
     "/criconai/:path*",
     "/HowToUse",
+    "/credits",
   ],
 });
 

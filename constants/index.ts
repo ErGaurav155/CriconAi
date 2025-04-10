@@ -20,6 +20,9 @@ export const plans = [
     icon: "/assets/icons/free-plan.svg",
     original: 499,
     price: 299,
+    usdPrice: 9,
+    usdOriginal: 15,
+
     credits: 350,
     inclusions: [
       {
@@ -46,6 +49,9 @@ export const plans = [
     icon: "/assets/icons/free-plan.svg",
     original: 999,
     price: 599,
+    usdPrice: 14,
+    usdOriginal: 25,
+
     credits: 725,
     inclusions: [
       {
@@ -73,6 +79,9 @@ export const plans = [
     icon: "/assets/icons/free-plan.svg",
     original: 3999,
     price: 2999,
+    usdPrice: 49,
+    usdOriginal: 69,
+
     credits: 3750,
     inclusions: [
       {
