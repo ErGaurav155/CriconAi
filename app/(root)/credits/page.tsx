@@ -10,10 +10,10 @@ import { getUserById } from "@/lib/actions/user.actions";
 import Checkout from "@/components/shared/Checkout";
 import { Faq } from "@/components/shared/Faq";
 import { Footer } from "@/components/shared/Footer";
-import { IndianRupeeIcon } from "lucide-react";
+import { DollarSignIcon, IndianRupeeIcon } from "lucide-react";
 import DiscountBanner from "@/components/shared/DiscountBanner";
 import { useEffect, useState, useRef } from "react";
-import { CurrencyDollarIcon } from "@heroicons/react/24/solid";
+import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 
 const Credits = () => {
   const router = useRouter();
@@ -101,7 +101,7 @@ const Credits = () => {
                     {locationRef.current === "India" ? (
                       <>
                         <IndianRupeeIcon className="w-6 h-6 inline-block" />
-                        {plan.price}
+                        {plan.price}{" "}
                         {plan.original && (
                           <span className="text-[26px] font-small sm:text-[34px] line-through text-orange-700">
                             {plan.original}
@@ -110,8 +110,8 @@ const Credits = () => {
                       </>
                     ) : (
                       <>
-                        <CurrencyDollarIcon className="w-6 h-6 inline-block" />
-                        {plan.usdPrice}
+                        <DollarSignIcon className="w-6 h-6 inline-block" />
+                        {plan.usdPrice}{" "}
                         {plan.usdOriginal && (
                           <span className="text-[26px] font-small sm:text-[34px] line-through text-orange-700">
                             {plan.usdOriginal}
