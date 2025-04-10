@@ -8,7 +8,6 @@ import {
 
 import { Button } from "../ui/button";
 import Script from "next/script";
-import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 const RazorPay = ({
