@@ -20,7 +20,7 @@ export const plans = [
     icon: "/assets/icons/free-plan.svg",
     original: 499,
     price: 299,
-    usdPrice: 6,
+    usdPrice: 1,
     usdOriginal: 10,
 
     credits: 350,
