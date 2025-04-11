@@ -102,32 +102,12 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
         </Button>
       ) : (
         <PayPalScriptProvider options={initialOptions}>
-          <AlertDialog defaultOpen>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle className="sr-only">
-                  Buy Credits
-                </AlertDialogTitle>
-                <div className="flex justify-between items-center">
-                  <p className="p-16-semibold text-black">
-                    Proceed To Take Credits
-                  </p>
-                  <AlertDialogCancel
-                    onClick={() => router.push(`/`)}
-                    className="border-0 p-0 hover:bg-transparent"
-                  >
-                    <XMarkIcon className="size-6 cursor-pointer" />
-                  </AlertDialogCancel>
-                </div>
-              </AlertDialogHeader>
-              <PayPalButtons
-                style={{ layout: "vertical" }}
-                createOrder={createOrder}
-                onApprove={onApprove}
-                onError={onError}
-              />
-            </AlertDialogContent>
-          </AlertDialog>
+          <PayPalButtons
+            style={{ layout: "vertical" }}
+            createOrder={createOrder}
+            onApprove={onApprove}
+            onError={onError}
+          />
         </PayPalScriptProvider>
       )}
     </div>
