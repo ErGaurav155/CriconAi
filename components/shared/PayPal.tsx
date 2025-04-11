@@ -51,7 +51,7 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
             currency_code: "USD", // Changed to INR to match currency option
           },
           custom_id: buyerId,
-          description: `${credits} Credits Purchase`,
+          description: `${credits} Credits Purchase by ${buyerId}`,
         },
       ],
     });
