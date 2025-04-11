@@ -102,7 +102,7 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
         </Button>
       ) : (
         <AlertDialog defaultOpen>
-          <AlertDialogContent className="h-screen overflow-auto no-scrollbar">
+          <AlertDialogContent className="max-h-screen overflow-auto no-scrollbar">
             <AlertDialogHeader>
               <AlertDialogTitle className="sr-only">
                 Buy Credits
