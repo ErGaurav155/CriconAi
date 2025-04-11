@@ -34,7 +34,7 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
   const [showPayPal, setShowPayPal] = useState(false);
   const initialOptions: ReactPayPalScriptOptions = {
     clientId: NEXT_PUBLIC_PAYPAL_CLIENT_ID,
-    currency: "INR",
+    currency: "USD",
     intent: "capture",
   };
 
@@ -48,7 +48,7 @@ const PayPal = ({ amount, credits, buyerId, plan }: CreditPurchaseProps) => {
         {
           amount: {
             value: amount.toString(),
-            currency_code: "INR", // Changed to INR to match currency option
+            currency_code: "USD", // Changed to INR to match currency option
           },
           custom_id: buyerId,
           description: `${credits} Credits Purchase`,

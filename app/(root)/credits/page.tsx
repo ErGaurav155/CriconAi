@@ -154,7 +154,11 @@ const Credits = () => {
                 ) : userId ? (
                   <Checkout
                     plan={plan.name}
-                    amount={plan.price}
+                    amount={
+                      locationRef.current === "India"
+                        ? plan.price
+                        : plan.usdPrice
+                    }
                     credits={plan.credits}
                     buyerId={user?._id}
                     location={locationRef.current}
