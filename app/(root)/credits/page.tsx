@@ -25,7 +25,6 @@ const Credits = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch location
       try {
         const res = await fetch("/api/location");
         const locData = await res.json();
