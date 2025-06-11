@@ -219,7 +219,7 @@ const channel = [
   channel11,
   channel12,
   channel13,
-  channel14,
+  // channel14,
   channel15,
 ];
 
