@@ -44,15 +44,16 @@ import {
 
 export function MobileNav() {
   const [open, setOpen] = useState(0);
-
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [shouldOpenDrawer, setShouldOpenDrawer] = useState(true);
+
   const handleOpen = (value: number) => {
     setOpen(open === value ? 0 : value);
   };
 
   const openDrawer = () => setIsDrawerOpen(true);
   const closeDrawer = () => setIsDrawerOpen(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (shouldOpenDrawer) {
@@ -64,71 +65,82 @@ export function MobileNav() {
 
     return () => clearTimeout(timer);
   });
+
   return (
-    <header className="header absolute z-50 top-0 left-0 bg-gray-50  text-gray-600 font-serif ">
-      <IconButton variant="text" size="lg" onClick={openDrawer}>
-        {isDrawerOpen ? (
-          <XMarkIcon color="#32517D" className="h-8 w-8 stroke-2" />
-        ) : (
-          <MenuSquareIcon color="#32517D" className="h-7 w-7 stroke-2" />
-        )}
-      </IconButton>
-      <Link
-        href="/"
-        className="flex items-center  md:py-5 font-sans text-3xl font-bold text-[#7e3caa]"
-      >
-        <Image
-          src="/assets/images/logo.png"
-          alt="logo"
-          width={200}
-          height={200}
-        />
-      </Link>
-      <SignedIn>
-        <UserButton afterSignOutUrl="/" />
-      </SignedIn>
-      <SignedOut>
-        <Button asChild className="ml-2 font-bold  bg-purple-gradient bg-cover">
-          <Link href="/sign-in">Login</Link>
-        </Button>
-      </SignedOut>
+    <header className="header absolute z-50 top-0 left-0 w-full  overflow-auto border-b border-[#333] bg-[#0a0a0a]">
+      <div className="flex items-center justify-between p-4 w-full">
+        <IconButton
+          variant="text"
+          size="lg"
+          onClick={openDrawer}
+          className="bg-[#0a0a0a]/60 hover:bg-[#1a1a1a] border border-[#333] rounded-lg"
+        >
+          {isDrawerOpen ? (
+            <XMarkIcon className="h-6 w-6 text-[#00F0FF]" />
+          ) : (
+            <MenuSquareIcon className="h-6 w-6 text-[#00F0FF]" />
+          )}
+        </IconButton>
+
+        <Link href={"/"} className="flex items-center">
+          <div className="relative w-10 h-10 mr-3">
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00F0FF] to-[#B026FF] animate-pulse"></div>
+            <div className="absolute inset-1 rounded-full bg-[#0A0A0A] flex items-center justify-center">
+              <i className="fas fa-satellite text-[#00F0FF]"></i>
+            </div>
+          </div>
+          <h1 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+            Cricon<span className="text-[#B026FF]">ai</span>
+          </h1>
+        </Link>
+
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <SignedOut>
+          <Button
+            asChild
+            className="bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-semibold hover:opacity-90 rounded-lg"
+          >
+            <Link href="/sign-in">Login</Link>
+          </Button>
+        </SignedOut>
+      </div>
 
       <Drawer
         open={isDrawerOpen}
         onClose={closeDrawer}
         placement="left"
-        className=""
+        className="bg-[#0a0a0a]/80 backdrop-blur-sm"
       >
-        <Card
-          color="white"
-          shadow={true}
-          className="h-[100vh] min-h-screen max-w-[20rem] shadow-xl overflow-y-auto no-scrollbar  shadow-blue-100  w-full p-4"
-        >
-          <div className="mb-2 flex items-center gap-4 ">
-            <IconButton variant="text" size="lg" onClick={closeDrawer}>
-              {isDrawerOpen ? (
-                <XMarkIcon color="#32517D" className="h-8 w-8 stroke-2" />
-              ) : (
-                <MenuSquareIcon color="#32517D" className="h-7 w-7 stroke-2" />
-              )}
-            </IconButton>
+        <Card className="h-[100vh] min-h-screen max-w-[20rem] shadow-xl shadow-black w-full p-4 bg-[#0a0a0a]/60 backdrop-blur-sm border-r border-[#333] overflow-y-auto no-scrollbar">
+          <div className="mb-4 flex items-center justify-between border-b border-[#333] pb-4">
             <Typography
-              className="font-medium text-sm"
               variant="h5"
-              color="blue-gray"
+              className="font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]"
             >
               Menu
             </Typography>
+            <IconButton
+              variant="text"
+              size="sm"
+              onClick={closeDrawer}
+              className="border border-[#333] hover:bg-[#1a1a1a] rounded-lg"
+            >
+              <XMarkIcon className="h-5 w-5 text-[#00F0FF]" />
+            </IconButton>
           </div>
 
-          <List className="flex flex-col justify-between h-full ">
+          <List className="flex flex-col justify-between h-full">
             <div>
               <Link onClick={closeDrawer} href="/">
-                <ListItem className="font-medium hover:bg-sky-100 focus:bg-sky-100 active:bg-sky-100 text-sm">
+                <ListItem className="group hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg mb-2 transition-all">
                   <ListItemPrefix>
-                    <LucideHome className="h-5 w-5" />
+                    <LucideHome className="h-5 w-5 text-[#00F0FF]" />
                   </ListItemPrefix>
-                  Home
+                  <span className="text-gray-300 group-hover:text-white">
+                    Home
+                  </span>
                 </ListItem>
               </Link>
 
@@ -136,243 +148,222 @@ export function MobileNav() {
                 open={open === 1}
                 icon={
                   <ChevronDownIcon
-                    strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform  ${
+                    className={`h-4 w-4 transition-transform text-[#00F0FF] ${
                       open === 1 ? "rotate-180" : ""
                     }`}
                   />
                 }
               >
-                <ListItem className="p-0 " selected={open === 1}>
+                <ListItem className="p-0 group" selected={open === 1}>
                   <AccordionHeader
                     onClick={() => handleOpen(1)}
-                    className="border-b-0 p-3 focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 "
+                    className="border-b-0 p-3 hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all"
                   >
                     <ListItemPrefix>
-                      <TvIcon className="h-5 w-5" />
+                      <TvIcon className="h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
-                    <Typography
-                      color="blue-gray"
-                      className="mr-auto text-sm font-medium"
-                    >
+                    <span className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white">
                       Long Videos
-                    </Typography>
+                    </span>
                   </AccordionHeader>
                 </ListItem>
-                <AccordionBody className="py-1 ">
-                  <List className="p-0">
+                <AccordionBody className="py-1 pl-4">
+                  <List className="p-0 space-y-1">
                     <Link onClick={closeDrawer} href="/criconai/longvid/idea">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Idea Generator
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Idea Generator
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/all">
-                      <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        All-in-One
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          All-in-One
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/title">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Title
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Title
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/description"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Desc
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Desc
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/tags">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Tags
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Tags
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/keyword"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        keyword
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          keyword
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/script">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Script
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Script
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/poll">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Poll Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Poll Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/thumbnail"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Thumbnail
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Thumbnail
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/aiimages"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        AiImages
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          AiImages
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/prompt">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Prompt Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Prompt Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/translate"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        script translator
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          script translator
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/TexttoAudio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Text-to-Audio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Text-to-Audio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/audiotoAudio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Audio-to-Audio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Audio-to-Audio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/disclamer"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Disclamer
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Disclamer
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/longvid/backgroundMusicGen"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        backgroundMusicGen
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          backgroundMusicGen
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/longvid/email">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Email
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Email
+                        </span>
                       </ListItem>
                     </Link>
                   </List>
@@ -383,7 +374,7 @@ export function MobileNav() {
                 icon={
                   <ChevronDownIcon
                     strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform ${
+                    className={`h-4 w-4 transition-transform text-[#00F0FF]  ${
                       open === 2 ? "rotate-180" : ""
                     }`}
                   />
@@ -392,250 +383,232 @@ export function MobileNav() {
                 <ListItem className="p-0" selected={open === 2}>
                   <AccordionHeader
                     onClick={() => handleOpen(2)}
-                    className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
+                    className="border-b-0 p-3 hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all"
                   >
                     <ListItemPrefix>
-                      <DevicePhoneMobileIcon className="h-5 w-5" />
+                      <DevicePhoneMobileIcon className="h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
                     <Typography
                       color="blue-gray"
-                      className="mr-auto font-medium text-sm"
+                      className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
                       Short Videos
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
+                <AccordionBody className="py-1 pl-4">
+                  <List className="p-0 space-y-1">
                     <Link onClick={closeDrawer} href="/criconai/shortvid/idea">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Video Idea
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Video Idea{" "}
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/all">
-                      <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        All-in-One
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          All-in-One
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/title">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Title
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Title
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/description"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Description
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Description
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/tags">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Tags
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Tags
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/script"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Script
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Script
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/poll">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Poll Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Poll Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/thumbnail"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Thumbnail
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Thumbnail
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/aiimages"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        AiImages
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          AiImages
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/prompt"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Prompt Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Prompt Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/translate"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        script translator
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          script translator
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/TexttoAudio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Text-to-Audio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Text-to-Audio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/audiotoAudio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Audio-to-Audio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Audio-to-Audio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/backgroundMusicGen"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        backgroundMusicGen
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          backgroundMusicGen
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/slogan"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Slogan
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Slogan
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/facts">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Facts
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Facts
+                        </span>
                       </ListItem>
                     </Link>
                     <Link onClick={closeDrawer} href="/criconai/shortvid/quote">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Quote
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Quote
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/shortvid/riddle"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Riddle
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Riddle
+                        </span>
                       </ListItem>
                     </Link>
                   </List>
@@ -646,7 +619,7 @@ export function MobileNav() {
                 icon={
                   <ChevronDownIcon
                     strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform ${
+                    className={`h-4 w-4 transition-transform text-[#00F0FF] ${
                       open === 3 ? "rotate-180" : ""
                     }`}
                   />
@@ -655,257 +628,240 @@ export function MobileNav() {
                 <ListItem className="p-0" selected={open === 3}>
                   <AccordionHeader
                     onClick={() => handleOpen(3)}
-                    className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
+                    className="border-b-0 p-3 hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all"
                   >
                     <ListItemPrefix>
-                      <SquarePenIcon className="h-5 w-5" />
+                      <SquarePenIcon className=" h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
                     <Typography
                       color="blue-gray"
-                      className="mr-auto font-medium text-sm"
+                      className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
                       Content Writer
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
+                <AccordionBody className="py-1 pl-4">
+                  <List className="p-0 space-y-1">
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/idea"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Idea
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Idea
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/all"
                     >
-                      <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        All-in-One
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          All-in-One
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/outline"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Outline
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Outline
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/article"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Article
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Article
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/blog"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Blog
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Blog
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/book"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Book
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Book
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/title"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Title
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Title
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/images"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        AiImages
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          AiImages
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/prompt"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Prompt Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Prompt Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/summary"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Summary
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Summary
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/expander"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Expander
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Expander
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/slogan"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Slogan
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Slogan
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/translation"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Translation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Translation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/TexttoAudio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Text-to-Audio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Text-to-Audio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/coverimage"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Book CoverImage
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Book CoverImage
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/email"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Email
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Email
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/contentwriter/tag"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Tag
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Tag
+                        </span>
                       </ListItem>
                     </Link>
                   </List>
@@ -916,7 +872,7 @@ export function MobileNav() {
                 icon={
                   <ChevronDownIcon
                     strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform ${
+                    className={`h-4 w-4 transition-transform text-[#00F0FF]  ${
                       open === 4 ? "rotate-180" : ""
                     }`}
                   />
@@ -925,201 +881,188 @@ export function MobileNav() {
                 <ListItem className="p-0" selected={open === 4}>
                   <AccordionHeader
                     onClick={() => handleOpen(4)}
-                    className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
+                    className="border-b-0 p-3 hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all"
                   >
                     <ListItemPrefix>
-                      <InstagramIcon className="h-5 w-5" />
+                      <InstagramIcon className=" h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
                     <Typography
                       color="blue-gray"
-                      className="mr-auto font-medium text-sm"
+                      className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
                       Social Media
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
+                <AccordionBody className="py-1 pl-4">
+                  <List className="p-0 space-y-1">
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/idea"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Idea
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Idea
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/all"
                     >
-                      <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        All-in-One
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          All-in-One
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/images"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Images
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Images
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/prompt"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Prompt Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Prompt Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/bio"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Bio
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Bio
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/caption"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Caption
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Caption
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/tag"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Tags
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Tags
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/description"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Description
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Description
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/poll"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Poll Generation
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Poll Generation
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/comment"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Comment
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Comment
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/tweet"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Tweet
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Tweet
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/avatar"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Avatar
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Avatar
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/socialmedia/backgroundMusicGen"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        backgroundMusicGen
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          backgroundMusicGen
+                        </span>
                       </ListItem>
                     </Link>
                   </List>
@@ -1130,7 +1073,7 @@ export function MobileNav() {
                 icon={
                   <ChevronDownIcon
                     strokeWidth={2.5}
-                    className={`mx-auto h-4 w-4 transition-transform ${
+                    className={`h-4 w-4 transition-transform text-[#00F0FF]  ${
                       open === 5 ? "rotate-180" : ""
                     }`}
                   />
@@ -1139,132 +1082,135 @@ export function MobileNav() {
                 <ListItem className="p-0" selected={open === 5}>
                   <AccordionHeader
                     onClick={() => handleOpen(5)}
-                    className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
+                    className="border-b-0 p-3 hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all"
                   >
                     <ListItemPrefix>
-                      <CurrencyDollarIcon className="h-5 w-5" />
+                      <CurrencyDollarIcon className=" h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
                     <Typography
                       color="blue-gray"
-                      className="mr-auto font-medium text-sm"
+                      className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
                       Marketing
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
+                <AccordionBody className="py-1 pl-4">
+                  <List className="p-0 space-y-1">
                     <Link onClick={closeDrawer} href="/criconai/marketing/all">
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        All
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          All
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/marketing/calculator"
                     >
-                      <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Paid Promotion Cal
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Paid Promotion Cal
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/marketing/finder"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Sponcership Finder
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Sponcership Finder
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/marketing/email"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Promotion Email
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Promotion Email
+                        </span>
                       </ListItem>
                     </Link>
                     <Link
                       onClick={closeDrawer}
                       href="/criconai/marketing/promotion"
                     >
-                      <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                      <ListItem className="hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/20 rounded-lg transition-all">
                         <ListItemPrefix>
-                          <ChevronRightIcon
-                            strokeWidth={3}
-                            className="h-3 w-5"
-                          />
+                          <ChevronRightIcon className="h-3 w-5 text-[#00F0FF]" />
                         </ListItemPrefix>
-                        Promotion Helper
+                        <span className="text-gray-300 hover:text-white text-sm">
+                          Promotion Helper
+                        </span>
                       </ListItem>
                     </Link>
                   </List>
                 </AccordionBody>
               </Accordion>
               <Link onClick={closeDrawer} href="/HowToUse">
-                <ListItem className="font-medium hover:bg-sky-100 focus:bg-sky-100 active:bg-sky-100 text-sm">
+                <ListItem className="group hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg mt-2 transition-all">
                   <ListItemPrefix>
-                    <QuestionMarkCircleIcon className="h-5 w-5" />
+                    <QuestionMarkCircleIcon className="h-5 w-5 text-[#00F0FF]" />
                   </ListItemPrefix>
-                  How To Use Criconai?
+                  <span className="text-gray-300 group-hover:text-white">
+                    How To Use Criconai?
+                  </span>
                 </ListItem>
               </Link>
             </div>
-            <SignedIn>
-              <div>
-                <hr className="my-2 border-blue-gray-50" />
 
+            <SignedIn>
+              <div className="mt-4 border-t border-[#333] pt-4">
                 <Link onClick={closeDrawer} href="/profile">
-                  <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                  <ListItem className="group hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all">
                     <ListItemPrefix>
-                      <UserIcon className="h-5 w-5" />
+                      <UserIcon className="h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
-                    Profile
+                    <span className="text-gray-300 group-hover:text-white">
+                      Profile
+                    </span>
                   </ListItem>
                 </Link>
                 <Link onClick={closeDrawer} href="/credits">
-                  <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
+                  <ListItem className="group hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all">
                     <ListItemPrefix>
-                      <CurrencyRupeeIcon className="h-5 w-5" />
+                      <CurrencyRupeeIcon className="h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
-                    Buy Credits
+                    <span className="text-gray-300 group-hover:text-white">
+                      Buy Credits
+                    </span>
                   </ListItem>
                 </Link>
-                <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium ">
+                <ListItem className="group hover:bg-[#1a1a1a] border border-transparent hover:border-[#00F0FF]/30 rounded-lg transition-all">
                   <UserButton afterSignOutUrl="/" showName />
                 </ListItem>
               </div>
             </SignedIn>
+
             <SignedOut>
-              <Button
-                asChild
-                className="mb-10 button bg-purple-gradient bg-cover"
-              >
-                <Link href="/sign-in">Login</Link>
-              </Button>
+              <div className="mt-6">
+                <Button
+                  asChild
+                  className="w-full bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-semibold hover:opacity-90 rounded-lg"
+                >
+                  <Link href="/sign-in">Login</Link>
+                </Button>
+              </div>
             </SignedOut>
           </List>
         </Card>

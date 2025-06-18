@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import "@fortawesome/fontawesome-free/css/all.min.css";
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -75,15 +77,15 @@
 }
 
 .auth {
-  @apply flex-center min-h-screen w-full bg-purple-100;
+  @apply flex-center min-h-screen w-full;
 }
 
 .root {
-  @apply flex min-h-screen w-full flex-col bg-gray-50 lg:flex-row;
+  @apply flex min-h-screen w-full flex-col  lg:flex-row;
 }
 
 .root-container {
-  @apply mt-16 flex-1  overflow-auto  md:static   lg:mt-0 lg:max-h-screen;
+  @apply flex-1  overflow-auto  md:static    lg:max-h-screen;
 }
 
 /* ========================================== TAILWIND STYLES */
@@ -91,13 +93,13 @@
   /* ===== UTILITIES */
 
   .wrapper {
-    @apply max-w-5xl mx-auto px-5 md:px-10 w-full text-dark-400;
+    @apply max-w-7xl mx-auto px-5 md:px-10 w-full text-dark-400;
   }
   .wrapper2 {
     @apply max-w-7xl mx-auto pr-1 sm:pr-3 md:pr-5  w-full text-dark-400;
   }
   .wrapper3 {
-    @apply max-w-6xl mx-auto px-2 md:px-10 lg:px-5  w-full text-dark-400;
+    @apply max-w-7xl mx-auto px-2 md:px-10 lg:px-5  w-full text-dark-400;
   }
 
   .gradient-text {
@@ -388,4 +390,32 @@
   font-size: 16px;
   font-weight: 600;
   color: #384262;
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+.rounded-button {
+  border-radius: 50px;
+}
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 2px;
+  background: linear-gradient(45deg, #00f0ff, #b026ff, #ff2e9f);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.glow-text {
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7), 0 0 20px rgba(176, 38, 255, 0.5);
 }

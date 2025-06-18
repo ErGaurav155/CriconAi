@@ -152,110 +152,115 @@ export default function LongVidAudio({ type }: LongAiFormProps) {
     return <InsufficientCreditsModal />;
   }
   return (
-    <main className="space-y-20 mb-10 mt-10 ">
-      <div>
-        <label className="text-n-8 ">Upload File:</label>
-        <Input
-          className="select-field text-n-8"
-          type="file"
-          accept=".wav, .mp3"
-          onChange={handleFileChange}
-          required
-        />
-      </div>
-      <div className="flex">
-        <div className="w-[50%]">
-          <label className="text-n-8">Select Character</label>
-          <Select required onValueChange={handleValueChange} value={value1}>
-            <SelectTrigger className="select-field ">
-              <SelectValue placeholder="" />
-            </SelectTrigger>
-
-            <SelectContent>
-              {voice.map((voice, index) => (
-                <SelectItem
-                  key={index}
-                  className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
-                  value={voice}
-                >
-                  {voice}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="w-[50%]">
-          <label className="text-n-8">Output Language</label>
-          <Select
+    <div className="min-h-screen  text-white p-6">
+      <div className="  p-6 rounded-xl border border-[#00F0FF]/30 mb-10">
+        <div className="mb-6">
+          <label className="text-gray-300 block mb-2">Upload File:</label>
+          <Input
+            className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg p-4 placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-[#B026FF]"
+            type="file"
+            accept=".wav, .mp3"
+            onChange={handleFileChange}
             required
-            onValueChange={handleLanguageChange}
-            value={language1}
-          >
-            <SelectTrigger className="select-field ">
-              <SelectValue placeholder=" " />
-            </SelectTrigger>
+          />
+        </div>
 
-            <SelectContent>
-              {languages.map((language, index) => (
-                <SelectItem
-                  key={index}
-                  className="bg-white text-gray-700 text-lg font-xs py-2 px-4 mb-4 w-[10vw] m-auto text-center justify-center  flex"
-                  value={language}
-                >
-                  {language}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+        <div className="flex gap-4 mb-10">
+          <div className="w-1/2">
+            <label className="text-gray-300 block mb-2">Select Character</label>
+            <Select required onValueChange={handleValueChange} value={value1}>
+              <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                <SelectValue placeholder="Select character" />
+              </SelectTrigger>
+
+              <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
+                {voice.map((voice, index) => (
+                  <SelectItem
+                    key={index}
+                    className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
+                    value={voice}
+                  >
+                    {voice}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="w-1/2">
+            <label className="text-gray-300 block mb-2">Output Language</label>
+            <Select
+              required
+              onValueChange={handleLanguageChange}
+              value={language1}
+            >
+              <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+
+              <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
+                {languages.map((language, index) => (
+                  <SelectItem
+                    key={index}
+                    className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
+                    value={language}
+                  >
+                    {language}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
+
+        <div className="mb-10">
+          {userId ? (
+            <Button
+              onClick={callGetTranscription}
+              key="submitButton"
+              className="w-full py-6 rounded-xl font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90 transition-opacity"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                "Submitting..."
+              ) : (
+                <div className="flex gap-2 items-center justify-center">
+                  Generate{" "}
+                  <span>
+                    <Image
+                      src="/assets/icons/coins.svg"
+                      alt="coins"
+                      width={24}
+                      height={24}
+                      className="size-6"
+                    />
+                  </span>{" "}
+                  {credits}
+                </div>
+              )}
+            </Button>
+          ) : (
+            <Link
+              href={"/sign-in"}
+              className="w-full py-6 rounded-xl font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90 transition-opacity text-center block"
+            >
+              LOGIN
+            </Link>
+          )}
         </div>
       </div>
-      <div className="">
-        {userId ? (
-          <Button
-            type="submit"
-            onClick={callGetTranscription}
-            key="submitButton"
-            className="submit-button capitalize"
-            disabled={isSubmitting}
-          >
-            {isSubmitting ? (
-              "Submitting..."
-            ) : (
-              <div className="flex text-lg font-semibold gap-2 items-center justify-center">
-                Generate{" "}
-                <span>
-                  <Image
-                    src="/assets/icons/coins.svg"
-                    alt="coins"
-                    width={1}
-                    height={1}
-                    className="size-6 md:size-8"
-                  />
-                </span>{" "}
-                {credits}
-              </div>
-            )}
-          </Button>
-        ) : (
-          <Link
-            href={"/sign-in"}
-            className="text-white flex text-lg font-semibold gap-2 items-center justify-center"
-          >
-            <div className="submit-button capitalize text-center">LOGIN </div>
-          </Link>
-        )}
-      </div>
+
       {audioUrl ? (
-        <div className="min-h-max h-[30vh] md:h-[80vh]   p-5 m-auto flex flex-col w-full gap-2">
-          <audio controls>
+        <div className="min-h-max h-[30vh] md:h-[80vh] p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
+          <audio controls className="w-full">
             <source src={audioUrl} type="audio/mpeg" />
           </audio>
         </div>
       ) : (
-        <div className="bg-white rounded-md overflow-auto text-lg  font-sans  text-black flex  gap-3 items-center justify-center mb-10 mt-10">
-          <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-300" />
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-10">
+          <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-800" />
         </div>
       )}
-    </main>
+    </div>
   );
 }

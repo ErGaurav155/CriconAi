@@ -52,6 +52,14 @@ import Youtuber9 from "@/public/assets/youtuber/Youtuber9.jpg";
 import Youtuber10 from "@/public/assets/youtuber/Youtuber10.jpg";
 
 import Image from "next/image";
+import {
+  EyeIcon,
+  HeartIcon,
+  RocketIcon,
+  ShareIcon,
+  StarIcon,
+  UserIcon,
+} from "lucide-react";
 
 const thumbnail1 = [
   thumbimg1,
@@ -94,23 +102,76 @@ const thumbnail1 = [
 //     </Carousel>
 //   );
 // }
+
 export function Aiimages() {
   return (
-    <div className="grid gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
-      {thumbnail1.map((img, index) => (
-        <div className=" overflow-hidden" key={index}>
-          <Image
-            className=" w-full h-full  max-w-full rounded-lg object-cover object-center"
-            src={img}
-            alt="ai thumbnail generator"
-            loading="lazy"
-          />
-        </div>
-      ))}
+    <div className="relative w-full max-w-4xl mx-auto">
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2500,
+            stopOnInteraction: false, // continue autoplay after user interaction
+            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
+          }),
+        ]}
+        className="w-full h-[850px]"
+        orientation="vertical"
+        opts={{
+          align: "start",
+          loop: true,
+          axis: "y",
+        }}
+      >
+        <CarouselContent className="-mt-1 h-[850px]">
+          {thumbnail1.map((img, index) => (
+            <CarouselItem key={index} className="pt-1 basis-1/4">
+              <div className="p-1 h-full">
+                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                  <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+                    {/* Gradient shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+                    {/* Image */}
+                    <div className="relative w-full h-full">
+                      <Image
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        src={img}
+                        alt="AI-generated image"
+                        width={400}
+                        height={300}
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Info overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                          Style:{" "}
+                          {index % 3 === 0
+                            ? "Abstract"
+                            : index % 3 === 1
+                            ? "Realistic"
+                            : "Digital Art"}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <HeartIcon className="h-4 w-4 text-[#FF2E9F]" />
+                          <span className="text-xs text-gray-300">
+                            {(index + 1) * 24}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 }
-
 const thumbnail = [img1, img6, img7, img8, img2, img3, img4, img5];
 
 // export function CarouselThumbnail() {
@@ -149,38 +210,221 @@ const thumbnail = [img1, img6, img7, img8, img2, img3, img4, img5];
 // }
 export function AiThumb() {
   return (
-    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3  ">
-      {thumbnail.map((img, index) => (
-        <div className="overflow-hidden" key={index}>
-          <Image
-            className="  w-full h-full max-w-full rounded-lg object-cover object-center "
-            src={img}
-            alt="ai thumbnail generator"
-            loading="lazy"
-          />
-        </div>
-      ))}
+    <div className="relative w-full max-w-4xl mx-auto">
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2500, // 3 seconds between scrolls
+            stopOnInteraction: false, // continue autoplay after user interaction
+            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
+          }),
+        ]}
+        className="w-full h-[850px]"
+        orientation="vertical"
+        opts={{
+          align: "start",
+          loop: true,
+          axis: "y",
+        }}
+      >
+        <CarouselContent className="-mt-1 h-[850px]">
+          {thumbnail.map((img, index) => (
+            <CarouselItem key={index} className="pt-1 basis-1/4">
+              <div className="p-1 h-full">
+                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                  <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+                    {/* Gradient shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+                    {/* Image */}
+                    <div className="relative aspect-video">
+                      <Image
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        src={img}
+                        alt="AI-generated image"
+                        width={400}
+                        height={300}
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Info overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                          CTR: +{index * 7 + 25}%
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <EyeIcon className="h-4 w-4 text-[#00F0FF]" />
+                          <span className="text-xs text-gray-300">
+                            {(index + 1) * 1.2}k
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 }
+// export function AiThumb() {
+//   return (
+//     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+//       {thumbnail.map((img, index) => (
+//         <div
+//           key={index}
+//           className="relative group overflow-hidden rounded-xl border border-[#333] bg-[#0a0a0a]/50 backdrop-blur-sm p-2 transition-all duration-300 hover:border-[#00F0FF]/50"
+//         >
+//           {/* Gradient shine effect on hover */}
+//           <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//           {/* Image */}
+//           <div className="relative aspect-video">
+//             <Image
+//               className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+//               src={img}
+//               alt="AI-generated thumbnail"
+//               loading="lazy"
+//             />
+//           </div>
+
+//           {/* Info overlay */}
+//           <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//             <div className="flex items-center justify-between">
+//               <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                 CTR: +{index * 7 + 25}%
+//               </span>
+//               <div className="flex items-center gap-1">
+//                 <EyeIcon className="h-4 w-4 text-[#00F0FF]" />
+//                 <span className="text-xs text-gray-300">
+//                   {(index + 1) * 1.2}k
+//                 </span>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
 const Poster = [poster3, poster2, poster1, poster5, poster4, poster6];
 export function AiPoster() {
   return (
-    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
-      {Poster.map((img, index) => (
-        <div className="overflow-hidden" key={index}>
-          <Image
-            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
-            src={img}
-            alt="ai thumbnail generator"
-            loading="lazy"
-          />
-        </div>
-      ))}
+    <div className="relative w-full max-w-4xl mx-auto">
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2500,
+            stopOnInteraction: false, // continue autoplay after user interaction
+            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
+          }),
+        ]}
+        orientation="vertical"
+        className="w-full h-[850px]"
+        opts={{
+          align: "start",
+          loop: true,
+          axis: "y",
+        }}
+      >
+        <CarouselContent className="-mt-1 h-[850px]">
+          {Poster.map((img, index) => (
+            <CarouselItem key={index} className="pt-1 basis-1/4">
+              <div className="p-1 h-full">
+                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                  <CardContent className="relative group p-0 h-full overflow-hidden rounded-xl">
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+                    {/* Image */}
+                    <div className="relative  w-full h-full">
+                      <Image
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        src={img}
+                        alt="AI-generated image"
+                        width={400}
+                        height={300}
+                        loading="lazy"
+                      />
+                    </div>
+
+                    {/* Info overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                          {index % 3 === 0
+                            ? "Marketing"
+                            : index % 3 === 1
+                            ? "Event"
+                            : "Promotional"}
+                        </span>
+                        <div className="flex items-center gap-1">
+                          <ShareIcon className="h-4 w-4 text-[#00F0FF]" />
+                          <span className="text-xs text-gray-300">
+                            {(index + 1) * 42}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
     </div>
   );
 }
+// export function AiPoster() {
+//   return (
+//     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+//       {Poster.map((img, index) => (
+//         <div
+//           key={index}
+//           className="relative group overflow-hidden rounded-xl border border-[#333] bg-[#0a0a0a]/50 backdrop-blur-sm p-2 transition-all duration-300 hover:border-[#B026FF]/50"
+//         >
+//           {/* Gradient shine effect on hover */}
+//           <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//           {/* Image */}
+//           <div className="relative aspect-[3/4]">
+//             <Image
+//               className="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+//               src={img}
+//               alt="AI-generated poster"
+//               loading="lazy"
+//             />
+//           </div>
+
+//           {/* Info overlay */}
+//           <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//             <div className="flex items-center justify-between">
+//               <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                 {index % 3 === 0
+//                   ? "Marketing"
+//                   : index % 3 === 1
+//                   ? "Event"
+//                   : "Promotional"}
+//               </span>
+//               <div className="flex items-center gap-1">
+//                 <ShareIcon className="h-4 w-4 text-[#00F0FF]" />
+//                 <span className="text-xs text-gray-300">
+//                   {(index + 1) * 42}
+//                 </span>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 // export function CarouselPoster() {
 //   return (
 //     <Carousel
@@ -258,47 +502,105 @@ const channel = [
 // }
 export function OurClient() {
   return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 2000,
-        }),
-      ]}
-      className="w-full "
-    >
-      <CarouselContent className=" w-full">
-        {channel.map((img, index) => (
-          <CarouselItem
-            key={index}
-            className="w-full sm:basis-1/3 lg:basis-1/3"
-          >
-            <Card className="w-full p-0">
-              <CardContent className="flex p-0 w-full aspect-video items-center justify-center ">
-                <Image
-                  className=" w-full h-full  rounded-lg object-fill object-center "
-                  src={img}
-                  alt="ai thumbnail generator"
-                  loading="lazy"
-                />
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-    </Carousel>
+    <div className="relative overflow-hidden rounded-xl border border-[#333] bg-[#0a0a0a]/50 backdrop-blur-sm p-4">
+      {/* Gradient border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF]/10 to-[#FF2E9F]/10 rounded-xl blur-xl opacity-30 -z-10"></div>
+
+      <Carousel
+        plugins={[
+          Autoplay({
+            delay: 2000,
+          }),
+        ]}
+        className="w-full"
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+      >
+        <CarouselContent className="w-full">
+          {channel.map((img, index) => (
+            <CarouselItem
+              key={index}
+              className="sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+            >
+              <div className="group relative p-2">
+                {/* Gradient border on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#B026FF] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10"></div>
+
+                <div className="bg-[#1a1a1a]/80 backdrop-blur-sm border border-[#333] rounded-xl overflow-hidden transition-all group-hover:border-transparent h-full">
+                  <div className="flex aspect-video items-center justify-center p-2">
+                    <Image
+                      className="w-full h-full rounded-lg object-cover"
+                      src={img}
+                      alt="Our top client"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        {/* Navigation arrows */}
+        <CarouselPrevious className="left-2 bg-[#1a1a1a]/80 border border-[#333] text-white hover:bg-[#1a1a1a] hover:text-[#00F0FF]" />
+        <CarouselNext className="right-2 bg-[#1a1a1a]/80 border border-[#333] text-white hover:bg-[#1a1a1a] hover:text-[#00F0FF]" />
+      </Carousel>
+    </div>
   );
 }
 export function OurClient1() {
   return (
-    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
       {channel.map((img, index) => (
-        <div className="overflow-hidden" key={index}>
-          <Image
-            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
-            src={img}
-            alt="ai thumbnail generator"
-            loading="lazy"
-          />
+        <div
+          key={index}
+          className="relative group overflow-hidden rounded-xl border border-[#333] bg-[#0a0a0a]/50 backdrop-blur-sm p-2 transition-all duration-300 hover:border-[#B026FF]/50"
+        >
+          {/* Gradient shine effect on hover */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+          {/* Client badge */}
+          <div className="absolute top-2 right-2 bg-[#0a0a0a]/80 border border-[#333] rounded-full px-2 py-1 z-10">
+            <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+              #{index + 1}
+            </span>
+          </div>
+
+          {/* Client logo */}
+          <div className="relative aspect-video w-full">
+            <Image
+              className="w-full h-full object-cover p-1 transition-transform duration-300 group-hover:scale-105"
+              src={img}
+              alt="Our valued client"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Client info */}
+          <div className="mt-2 text-center">
+            <h4 className="text-sm font-bold text-white">
+              {index % 3 === 0
+                ? "Tech Innovators"
+                : index % 3 === 1
+                ? "Creative Studios"
+                : "Digital Leaders"}
+            </h4>
+            <div className="flex items-center justify-center mt-1">
+              <div className="flex">
+                {[...Array(5)].map((_, i) => (
+                  <StarIcon
+                    key={i}
+                    className={`h-3 w-3 ${
+                      i < 4 ? "text-yellow-400" : "text-gray-600"
+                    }`}
+                  />
+                ))}
+              </div>
+              <span className="text-xs text-gray-400 ml-1">4.8</span>
+            </div>
+          </div>
         </div>
       ))}
     </div>
@@ -318,13 +620,44 @@ const Youtuber = [
 ];
 export function TopYoutuber() {
   return (
-    <div className="grid  gap-1 md:gap-4 grid-cols-2 lg:grid-cols-3 ">
+    <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {Youtuber.map((img, index) => (
-        <div className="overflow-hidden" key={index}>
+        <div
+          key={index}
+          className="relative group overflow-hidden rounded-xl border border-[#333] transition-all duration-300 hover:scale-[1.03]"
+        >
+          {/* Gradient overlay on hover */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80 z-10"></div>
+
+          {/* Gradient border effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-30 transition-opacity -z-10"></div>
+
+          {/* Hover info */}
+          <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-20">
+            <div className="flex items-center gap-2">
+              <div className="bg-[#00F0FF] rounded-full p-1">
+                <UserIcon className="h-4 w-4 text-black" />
+              </div>
+              <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                {index % 3 === 0
+                  ? "Tech Guru"
+                  : index % 3 === 1
+                  ? "Gaming Pro"
+                  : "Lifestyle Vlogger"}
+              </span>
+            </div>
+            <div className="mt-1 flex items-center gap-1">
+              <RocketIcon className="h-3 w-3 text-[#FF2E9F]" />
+              <span className="text-xs text-gray-300">
+                +{(index + 1) * 23}% views
+              </span>
+            </div>
+          </div>
+
           <Image
-            className=" w-full h-full max-w-full rounded-lg object-cover object-center "
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             src={img}
-            alt="ai thumbnail generator"
+            alt="Top YouTuber using AI thumbnails"
             loading="lazy"
           />
         </div>

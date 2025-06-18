@@ -7,7 +7,6 @@ import {
   getUserByDbId,
   updateCredits,
 } from "@/lib/actions/user.actions";
-import Heading from "@/components/shared/Svgs/HEading";
 import { DownloadIcon, Trash2 } from "lucide-react";
 import { download } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -17,12 +16,10 @@ export default function ImageGalleryPage({
 }: {
   params: { userID: string };
 }) {
-  // State to store user data
   const router = useRouter();
   const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
-    // Fetch user data when component mounts
     async function fetchData() {
       try {
         const user = await getUserByDbId(userID);
@@ -47,6 +44,7 @@ export default function ImageGalleryPage({
       }
     });
   };
+
   const deleteHandler = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     item: string
@@ -55,62 +53,81 @@ export default function ImageGalleryPage({
     await deleteImageUrls(userID, item);
     router.refresh();
   };
-  return (
-    <div className="p-4 mt-5  ">
-      <Heading title="Image Gallery" />
-      {userData && userData.imageUrls && userData.imageUrls.length > 0 ? (
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
-          {userData.imageUrls.map((imageUrl: string, index: number) => (
-            <div
-              className={`rounded-md overflow-hidden relative w-[${1024}]
-        h-[${1024}]`}
-              key={index}
-            >
-              <div>
-                <button
-                  className="absolute top-1 right-15 rounded-md bg-white p-2 flex  items-center justify-center gap-1"
-                  onClick={(e) =>
-                    downloadHandler(
-                      e,
-                      imageUrl,
-                      "image" + (Math.floor(Math.random() * 100) + 1).toString()
-                    )
-                  }
-                >
-                  <span>
-                    <Image
-                      src="/assets/icons/coins.svg"
-                      alt="coins"
-                      width={1}
-                      height={1}
-                      className="size-4 md:size-6"
-                    />
-                  </span>{" "}
-                  <h1 className=" font-bold text-lg">1</h1>
-                  <DownloadIcon />
-                </button>
-                <button
-                  className="absolute top-1 right-1 rounded-md bg-white p-2.5 flex  items-center justify-center gap-1"
-                  onClick={(e) => deleteHandler(e, imageUrl)}
-                >
-                  <Trash2 />
-                </button>
-              </div>
 
-              <Image
-                alt="image removed"
-                className="flex-1 "
-                src={imageUrl}
-                width={1024}
-                height={1024}
-                priority
-              />
-            </div>
-          ))}
+  return (
+    <div className="min-h-screen  text-white p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <h1 className="font-bold text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+            Image Gallery
+          </h1>
+          <p className="text-gray-400 mt-2">Your generated images collection</p>
         </div>
-      ) : (
-        <Heading title="No images found." />
-      )}
+
+        {userData && userData.imageUrls && userData.imageUrls.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {userData.imageUrls.map((imageUrl: string, index: number) => (
+              <div
+                key={index}
+                className="relative group rounded-2xl  border border-[#333] overflow-hidden transition-all hover:border-[#B026FF]/50"
+              >
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+                {/* Action buttons */}
+                <div className="absolute top-3 right-3 flex gap-2 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <button
+                    className="flex items-center gap-1 bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-bold px-3 py-1.5 rounded-md text-sm"
+                    onClick={(e) =>
+                      downloadHandler(e, imageUrl, `image-${index + 1}`)
+                    }
+                  >
+                    <div className="flex items-center gap-1">
+                      <Image
+                        src="/assets/icons/coins.svg"
+                        alt="coins"
+                        width={16}
+                        height={16}
+                        className="size-4"
+                      />
+                      <span>1</span>
+                    </div>
+                    <DownloadIcon size={16} />
+                  </button>
+
+                  <button
+                    className="bg-gradient-to-r from-[#FF2E9F] to-[#FF0000] text-white p-1.5 rounded-md"
+                    onClick={(e) => deleteHandler(e, imageUrl)}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+
+                {/* Image */}
+                <div className="aspect-square w-full relative">
+                  <Image
+                    alt={`Generated image ${index + 1}`}
+                    src={imageUrl}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-20">
+            <h2 className="font-bold text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+              No images found
+            </h2>
+            <p className="text-gray-400 mt-4 max-w-md mx-auto">
+              Your generated images will appear here once you create some
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

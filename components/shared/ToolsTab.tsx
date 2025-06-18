@@ -1,5 +1,3 @@
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 import Arrow from "./Svgs/arrow";
@@ -16,242 +14,133 @@ export function TabsDemo() {
     benefits.find((item) => item.id === 3)?.contentwriterTypes || [];
   const socialmediaTypes =
     benefits.find((item) => item.id === 4)?.socialmediaTypes || [];
+
   return (
-    <Tabs defaultValue="longvidTypes" className="w-full mt-5  ">
-      <TabsList className="flex min-w-[50vw] w-full flex-wrap justify-evenly items-center h-auto pb-2 md:pb-5">
+    <Tabs defaultValue="longvidTypes" className="w-full mt-8">
+      <TabsList className="flex min-w-[50vw] w-full flex-wrap justify-evenly items-center h-auto pb-2 bg-transparent">
         <TabsTrigger
-          className="rounded-md  mt-3 max-h-min justify-center
-             active:text-white active:bg-green-800 
-              hover:bg-[#d7b5ed]
-            md:text-md md:font-bold h-[2.5rem] w-[10vw]  min-w-max "
+          className="rounded-full mt-3 justify-center text-sm md:text-md font-bold h-[2.5rem] px-6 min-w-max 
+                     bg-[#1a1a1a]/50 border border-[#333] text-gray-300
+                     data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00F0FF] data-[state=active]:to-[#B026FF] data-[state=active]:text-black
+                     hover:bg-[#1a1a1a] transition-all"
           value="longvidTypes"
         >
-          Longvid
+          Long Videos
         </TabsTrigger>
         <TabsTrigger
-          className="rounded-md  mt-3 max-h-min justify-center
-             active:text-white active:bg-green-800 
-              hover:bg-[#d7b5ed]
-            md:text-md md:font-bold h-[2.5rem] w-[10vw]  min-w-max "
+          className="rounded-full mt-3 justify-center text-sm md:text-md font-bold h-[2.5rem] px-6 min-w-max 
+                     bg-[#1a1a1a]/50 border border-[#333] text-gray-300
+                     data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00F0FF] data-[state=active]:to-[#B026FF] data-[state=active]:text-black
+                     hover:bg-[#1a1a1a] transition-all"
           value="contentwriterTypes"
         >
-          Contentwriter
+          Content Writer
         </TabsTrigger>
         <TabsTrigger
-          className="rounded-md  mt-3 max-h-min justify-center
-             active:text-white active:bg-green-800 
-              hover:bg-[#d7b5ed]
-            md:text-md md:font-bold h-[2.5rem] w-[10vw] min-w-max "
+          className="rounded-full mt-3 justify-center text-sm md:text-md font-bold h-[2.5rem] px-6 min-w-max 
+                     bg-[#1a1a1a]/50 border border-[#333] text-gray-300
+                     data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00F0FF] data-[state=active]:to-[#B026FF] data-[state=active]:text-black
+                     hover:bg-[#1a1a1a] transition-all"
           value="shortvidTypes"
         >
-          Shortvid
+          Short Videos
         </TabsTrigger>
         <TabsTrigger
-          className="rounded-md  mt-3 max-h-min justify-center
-             active:text-white active:bg-green-800 
-              hover:bg-[#d7b5ed]
-            md:text-md md:font-bold h-[2.5rem] w-[10vw]  min-w-max "
+          className="rounded-full mt-3 justify-center text-sm md:text-md font-bold h-[2.5rem] px-6 min-w-max 
+                     bg-[#1a1a1a]/50 border border-[#333] text-gray-300
+                     data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#00F0FF] data-[state=active]:to-[#B026FF] data-[state=active]:text-black
+                     hover:bg-[#1a1a1a] transition-all"
           value="socialmediaTypes"
         >
-          Socialmedia
+          Social Media
         </TabsTrigger>
       </TabsList>
-      <TabsContent className="mt-15" value="longvidTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
+
+      <TabsContent className="mt-10" value="longvidTypes">
+        <div className="grid p-0 md:p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {longvidTypes.map((item) => (
-            <div
-              className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
-              key={item.id}
-            >
-              <div
-                className="absolute inset-0.5 bg-n-8"
-                style={{ clipPath: "url(#benefits)" }}
-              >
-                <div className="absolute inset-0 opacity-0 transition-opacity hover:opacity-10">
-                  {item.imageUrl && (
-                    <Image
-                      src={item.imageUrl}
-                      width={380}
-                      height={362}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              </div>
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
-                <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
-                <p className="body-2 mb-6  text-white">{item.text}</p>
-                <Link
-                  className="flex  items-center mt-auto absolute bottom-5 w-[80%] justify-center"
-                  href={item.link}
-                >
-                  <Image
-                    src={item.iconUrl}
-                    width={48}
-                    height={48}
-                    alt={item.title}
-                  />
-                  <p className="ml-[2.3rem]  text-xs font-bold text-n-1 uppercase tracking-wider">
-                    Explore more
-                  </p>
-                  <Arrow />
-                </Link>
-              </div>
-
-              <ClipPath />
-            </div>
+            <CardItem key={item.id} item={item} />
           ))}
         </div>
       </TabsContent>
-      <TabsContent className="mt-15" value="contentwriterTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0 ">
+
+      <TabsContent className="mt-10" value="contentwriterTypes">
+        <div className="grid p-0 md:p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {contentwriterTypes.map((item) => (
-            <div
-              className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
-              key={item.id}
-            >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
-                <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
-                <p className="body-2 mb-6 text-white">{item.text}</p>
-                <Link
-                  className="flex items-center mt-auto absolute bottom-5 justify-center"
-                  href={item.link}
-                >
-                  <Image
-                    src={item.iconUrl}
-                    width={48}
-                    height={48}
-                    alt={item.title}
-                  />
-                  <p className="ml-[2.3rem]  text-xs font-bold text-n-1 uppercase tracking-wider">
-                    Explore more
-                  </p>
-                  <Arrow />
-                </Link>
-              </div>
-
-              <div
-                className="absolute inset-0.5 bg-n-8"
-                style={{ clipPath: "url(#benefits)" }}
-              >
-                <div className="absolute inset-0 opacity-0 transition-opacity hover:opacity-10">
-                  {item.imageUrl && (
-                    <Image
-                      src={item.imageUrl}
-                      width={380}
-                      height={362}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              </div>
-
-              <ClipPath />
-            </div>
+            <CardItem key={item.id} item={item} />
           ))}
         </div>
       </TabsContent>
-      <TabsContent className="mt-15" value="shortvidTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
+
+      <TabsContent className="mt-10" value="shortvidTypes">
+        <div className="grid p-0 md:p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {shortvidTypes.map((item) => (
-            <div
-              className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
-              key={item.id}
-            >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
-                <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
-                <p className="body-2 mb-6 text-white">{item.text}</p>
-                <Link
-                  className="flex items-center mt-auto absolute bottom-5 justify-center"
-                  href={item.link}
-                >
-                  <Image
-                    src={item.iconUrl}
-                    width={48}
-                    height={48}
-                    alt={item.title}
-                  />
-                  <p className="ml-[2.3rem]  text-xs font-bold text-n-1 uppercase tracking-wider">
-                    Explore more
-                  </p>
-                  <Arrow />
-                </Link>
-              </div>
-
-              <div
-                className="absolute inset-0.5 bg-n-8"
-                style={{ clipPath: "url(#benefits)" }}
-              >
-                <div className="absolute inset-0 opacity-0 transition-opacity hover:opacity-10">
-                  {item.imageUrl && (
-                    <Image
-                      src={item.imageUrl}
-                      width={380}
-                      height={362}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              </div>
-
-              <ClipPath />
-            </div>
+            <CardItem key={item.id} item={item} />
           ))}
         </div>
       </TabsContent>
-      <TabsContent className="mt-15" value="socialmediaTypes">
-        <div className="grid p-0 sm:p-[80px] md:p-0  md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-0">
+
+      <TabsContent className="mt-10" value="socialmediaTypes">
+        <div className="grid p-0 md:p-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
           {socialmediaTypes.map((item) => (
-            <div
-              className="relative p-0.5 m-auto md:m-0 w-11/12 md:w-full bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem]"
-              key={item.id}
-            >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[1.4rem]  ">
-                <h5 className="h5 text-[#f476ad] mb-5">{item.title}</h5>
-                <p className="body-2 mb-6 text-white">{item.text}</p>
-
-                <Link
-                  className="flex items-center mt-auto absolute bottom-5 justify-center"
-                  href={item.link}
-                >
-                  <Image
-                    src={item.iconUrl}
-                    width={48}
-                    height={48}
-                    alt={item.title}
-                  />
-                  <p className="ml-[2.3rem]  text-xs font-bold text-n-1 uppercase tracking-wider">
-                    Explore more
-                  </p>
-                  <Arrow />
-                </Link>
-              </div>
-
-              <div
-                className="absolute inset-0.5 bg-n-8"
-                style={{ clipPath: "url(#benefits)" }}
-              >
-                <div className="absolute inset-0 opacity-0 transition-opacity hover:opacity-10">
-                  {item.imageUrl && (
-                    <Image
-                      src={item.imageUrl}
-                      width={380}
-                      height={362}
-                      alt={item.title}
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              </div>
-
-              <ClipPath />
-            </div>
+            <CardItem key={item.id} item={item} />
           ))}
         </div>
       </TabsContent>
     </Tabs>
+  );
+}
+
+// Reusable Card Component
+function CardItem({ item }: { item: any }) {
+  return (
+    <div className="relative group bg-[#0a0a0a]/80 backdrop-blur-sm border border-[#333] rounded-xl overflow-hidden transition-all hover:border-[#B026FF]/50">
+      {/* Gradient Border Effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+      <div className="p-5 flex flex-col h-full">
+        <h5 className="text-lg font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+          {item.title}
+        </h5>
+
+        <p className="text-gray-300 mb-6 flex-grow">{item.text}</p>
+
+        <Link
+          className="flex items-center mt-auto pt-4 border-t border-[#333] group-hover:border-[#B026FF]/30 transition-colors"
+          href={item.link}
+        >
+          <div className="bg-[#1a1a1a]/50 border border-[#333] rounded-lg        group-hover:bg-gradient-to-r group-hover:from-[#00F0FF]/10 group-hover:to-[#FF2E9F]/10">
+            {item.iconUrl && (
+              <Image
+                src={item.iconUrl}
+                width={32}
+                height={32}
+                alt={item.title}
+                className="filter  text-black"
+              />
+            )}
+          </div>
+
+          <div className="ml-3 flex items-center">
+            <span className="text-xs font-bold text-[#00F0FF] uppercase tracking-wider group-hover:text-[#FF2E9F] transition-colors">
+              Explore more
+            </span>
+            <Arrow />
+          </div>
+        </Link>
+      </div>
+
+      {/* Background image with hover effect */}
+      {/* {item.imageUrl && (
+        <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity -z-20">
+          <Image
+            src={item.imageUrl}
+            fill
+            alt={item.title}
+            className="object-cover"
+          />
+        </div>
+      )} */}
+    </div>
   );
 }

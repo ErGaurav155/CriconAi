@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -35,7 +34,6 @@ import {
   noOfImage,
   voice,
 } from "@/constants";
-
 import { generateGptResponse } from "@/lib/actions/ai.actions";
 import { fetchContentWriterData } from "@/lib/actions/ai.actions";
 import {
@@ -384,18 +382,19 @@ export default function ContentWriterAiForm({
     return <InsufficientCreditsModal />;
   }
   return (
-    <div>
+    <div className="min-h-screen  text-white p-6">
       {(type === "coverimage" || type === "images") && (
-        <div className="flex items-center justify-center space-x-2 w-full mb-10">
-          <label className="text-n-8 font-semibold font-sans">
+        <div className="flex items-center justify-center space-x-2 w-full mb-10 backdrop-blur-sm bg-black/30 p-4 rounded-xl border border-[#B026FF]/30">
+          <label className="text-gray-300 font-semibold font-sans">
             Only Video Idea Based
           </label>
 
           <Switch
             onClick={() => setGenType((prev) => !prev)}
             id="airplane-mode"
+            className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#00F0FF] data-[state=checked]:to-[#FF2E9F]"
           />
-          <label className="text-n-8 font-semibold font-sans">
+          <label className="text-gray-300 font-semibold font-sans">
             Detailed Prompt Based
           </label>
         </div>
@@ -403,7 +402,7 @@ export default function ContentWriterAiForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 mb-10"
+          className="space-y-8 mb-10  p-6 rounded-xl border border-[#00F0FF]/30"
         >
           {type !== "translation" && type !== "TexttoAudio" && (
             <FormField
@@ -411,10 +410,10 @@ export default function ContentWriterAiForm({
               name="input"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-n-8">{topic}</FormLabel>
+                  <FormLabel className="text-gray-300">{topic}</FormLabel>
                   <FormControl>
                     <Input
-                      className="select-field "
+                      className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg p-4 placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-[#B026FF]"
                       placeholder={placeholderInputText}
                       {...field}
                     />
@@ -425,28 +424,28 @@ export default function ContentWriterAiForm({
               )}
             />
           )}
-          <div className="flex ">
+          <div className="flex gap-4">
             {type === "translation" && (
               <FormField
                 control={form.control}
                 name="inputlag"
                 render={({ field }) => (
                   <FormItem className="flex-auto">
-                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                    <FormLabel className="text-gray-300">{tone}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field">
-                          <SelectValue placeholder="" />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select language" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                         {languages.map((language, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white text-gray-700 text-lg font-xs py-2 px-4 mb-4 m-auto w-[10vw] text-center flex justify-center "
+                            className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={language}
                           >
                             {language}
@@ -466,21 +465,21 @@ export default function ContentWriterAiForm({
                 name="outputlag"
                 render={({ field }) => (
                   <FormItem className="flex-auto">
-                    <FormLabel className="text-n-8">{subtopic}</FormLabel>
+                    <FormLabel className="text-gray-300">{subtopic}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field">
-                          <SelectValue placeholder="" />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select language" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                         {languages.map((language, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white text-gray-700 text-lg font-xs py-2 px-4 mb-4  w-[10vw] m-auto text-center justify-center  flex"
+                            className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={language}
                           >
                             {language}
@@ -502,22 +501,22 @@ export default function ContentWriterAiForm({
               name="selectTone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
+                  <FormLabel className="text-gray-300">{tone}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="select-field ">
-                        <SelectValue placeholder="Select a verified email to display" />
+                      <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                        <SelectValue placeholder="Select tone" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                       {email.map((email, index) => (
                         <SelectItem
                           key={index}
-                          className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
-                          value={`${email}-${index}`}
+                          className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
+                          value={email}
                         >
                           {email}
                         </SelectItem>
@@ -530,35 +529,37 @@ export default function ContentWriterAiForm({
               )}
             />
           )}
-          <div className="flex">
+          <div className="flex gap-4">
             {(type === "coverimage" || type === "images" || type === "all") && (
               <FormField
                 control={form.control}
                 name="selectTone"
                 render={({ field }) => (
-                  <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                  <FormItem className="w-1/2">
+                    <FormLabel className="text-gray-300">{tone}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select style" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 max-h-60">
                         {aiImages.map((categoryObj: AiImages) => (
                           <div
                             key={categoryObj.category}
-                            className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8  text-center "
+                            className="py-2 px-4 my-2"
                           >
-                            {categoryObj.category}
+                            <div className="text-[#00F0FF] font-bold mb-2">
+                              {categoryObj.category}
+                            </div>
                             {categoryObj.values.map(
                               (value: string, index: number) => (
                                 <SelectItem
                                   key={`${categoryObj.category}-${index}`}
-                                  className="select-item min-w-max "
+                                  className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
                                   value={value}
                                 >
                                   {value}
@@ -580,29 +581,27 @@ export default function ContentWriterAiForm({
                 control={form.control}
                 name="imageQuality"
                 render={({ field }) => (
-                  <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">
-                      Thumbnail Quality:
+                  <FormItem className="w-1/2">
+                    <FormLabel className="text-gray-300">
+                      Image Quality:
                     </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
-
+                        field.onChange(value);
                         setSelectedImageQuality(value);
-                        // Update aspect ratio in state
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select quality" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                         {ImageQuality.map((ImageQuality, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={`${ImageQuality}`}
                           >
                             {ImageQuality}
@@ -617,31 +616,33 @@ export default function ContentWriterAiForm({
               />
             )}
           </div>
-          <div className="flex ">
+          <div className="flex gap-4">
             {(type === "coverimage" || type === "images" || type === "all") && (
               <FormField
                 control={form.control}
                 name="inputlag"
                 render={({ field }) => (
-                  <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">aspect ratio:</FormLabel>
+                  <FormItem className="w-1/2">
+                    <FormLabel className="text-gray-300">
+                      aspect ratio:
+                    </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
-                        setSelectedAspectRatio(value); // Update aspect ratio in state
+                        field.onChange(value);
+                        setSelectedAspectRatio(value);
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select ratio" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                         {aspectRatio.map((aspectRatio, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={`${aspectRatio}`}
                           >
                             {aspectRatioDisplayNames[aspectRatio]}
@@ -660,28 +661,27 @@ export default function ContentWriterAiForm({
                 control={form.control}
                 name="outputlag"
                 render={({ field }) => (
-                  <FormItem className=" w-[50%]">
-                    <FormLabel className="text-n-8">
+                  <FormItem className="w-1/2">
+                    <FormLabel className="text-gray-300">
                       Number of Images:
                     </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
+                        field.onChange(value);
                         setArImage(value);
-                        // Update aspect ratio in state
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                          <SelectValue placeholder="Select count" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                         {noOfImage.map((noOfImage, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF]  "
                             value={`${noOfImage}`}
                           >
                             {noOfImage}
@@ -702,22 +702,22 @@ export default function ContentWriterAiForm({
               name="selectTone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
+                  <FormLabel className="text-gray-300">{tone}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="select-field ">
-                        <SelectValue placeholder="Select a verified email to display" />
+                      <SelectTrigger className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg focus:border-[#B026FF]">
+                        <SelectValue placeholder="Select voice" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30">
                       {voice.map((voice, index) => (
                         <SelectItem
                           key={index}
-                          className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
-                          value={`${voice}-${index}`}
+                          className="hover:bg-[#1a1a1a] focus:bg-[#1a1a1a] hover:text-[#00F0FF] focus:text-[#00F0FF] "
+                          value={voice}
                         >
                           {voice}
                         </SelectItem>
@@ -739,7 +739,7 @@ export default function ContentWriterAiForm({
             }
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-n-8">
+                <FormLabel className="text-gray-300">
                   {type == "translation" || type == "TexttoAudio"
                     ? "Include Text Here (max : 500 word)"
                     : subtopic}
@@ -752,7 +752,7 @@ export default function ContentWriterAiForm({
                         : 500
                     }
                     placeholder={placeholderDescText}
-                    className="select-field  resize-none"
+                    className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg p-4 placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-[#B026FF]"
                     {...field}
                     onChange={(e) => {
                       field.onChange(e);
@@ -771,21 +771,21 @@ export default function ContentWriterAiForm({
             <Button
               type="submit"
               key="submitButton"
-              className="submit-button capitalize"
+              className="w-full py-6 rounded-xl font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90 transition-opacity"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 "Submitting..."
               ) : (
-                <div className="flex text-lg font-semibold gap-2 items-center justify-center">
+                <div className="flex gap-2 items-center justify-center">
                   Generate{" "}
                   <span>
                     <Image
                       src="/assets/icons/coins.svg"
                       alt="coins"
-                      width={1}
-                      height={1}
-                      className="size-6 md:size-8"
+                      width={24}
+                      height={24}
+                      className="size-6"
                     />
                   </span>{" "}
                   {credits}
@@ -795,12 +795,9 @@ export default function ContentWriterAiForm({
           ) : (
             <Link
               href={"/sign-in"}
-              className="text-white flex text-lg font-semibold gap-2 items-center justify-center"
+              className="w-full py-6 rounded-xl font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90 transition-opacity text-center block"
             >
-              <div className="submit-button capitalize text-center">
-                {" "}
-                LOGIN{" "}
-              </div>
+              LOGIN
             </Link>
           )}
         </form>
@@ -808,25 +805,27 @@ export default function ContentWriterAiForm({
       {!isResponse ? (
         <div>
           {response && (
-            <div className="bg-white rounded-md overflow-auto text-lg border-[#8133b4] border font-sans  text-black flex flex-col gap-3  p-5 mb-10 mt-10">
+            <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-6 mb-10">
               <Textarea
                 value={response}
                 placeholder="Enter Text To Edit"
-                className="w-full h-[35vh] md:h-[45vh]  p-2 bg-white rounded-md  text-lg border-[#8133b4] border font-sans  text-black   border-none outline-none overflow-auto resize-none flex-4"
+                className="w-full h-[35vh] md:h-[45vh] p-4 bg-transparent rounded-xl text-lg text-white border-none outline-none overflow-auto resize-none"
               />
               <div className="flex flex-row justify-between items-center w-full gap-2">
-                <p>Word Count: {countWords(response)}</p>
+                <p className="text-gray-400">
+                  Word Count: {countWords(response)}
+                </p>
 
                 <Button
                   type="submit"
                   onClick={(e) => handleCopyButtonClick(e, response, 0)}
-                  className={`rounded-md  mt-1 max-h-min  ${
+                  className={`rounded-lg mt-1 max-h-min ${
                     activeStates[0]
-                      ? "text-white bg-green-800 hover:bg-[#1c7429]"
-                      : "text-[#8133b4] bg-[#e4dee7] hover:bg-[#d7b5ed]"
-                  }  text-md font-bold h-[3.2rem]  min-w-max `}
+                      ? "bg-green-800 hover:bg-green-800"
+                      : "bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90"
+                  } text-black font-bold h-12 min-w-max px-4`}
                 >
-                  <Copy size={20} strokeWidth={2} />
+                  <Copy size={20} strokeWidth={2} className="mr-2" />
                   {activeStates[0] ? "Copied" : "Copy"}
                 </Button>
               </div>
@@ -836,84 +835,73 @@ export default function ContentWriterAiForm({
             allResponse.map((text, index) => (
               <div
                 key={index}
-                className=" bg-white rounded-md overflow-auto text-lg border-[#8133b4] border font-sans  text-black flex flex-col gap-3  p-5 mb-10 mt-10"
+                className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-6 mb-10"
               >
                 {index === 0 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Outline :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Outline :</label>
                 )}
                 {index === 1 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Title :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Title :</label>
                 )}
                 {index === 2 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Summary :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Summary :</label>
                 )}
                 {index === 3 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Expander :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Expander :</label>
                 )}
                 {index === 4 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Hashtags :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Hashtags :</label>
                 )}
                 {index === 5 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Slogans :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Slogans :</label>
                 )}
 
                 <Textarea
                   value={text}
                   placeholder="Enter Text To Edit"
-                  className="w-full h-[35vh] md:h-[45vh]  p-2 bg-white rounded-md  text-lg border-[#8133b4] border font-sans  text-black   border-none outline-none overflow-auto resize-none flex-4"
+                  className="w-full h-[35vh] md:h-[45vh] p-4 bg-transparent rounded-xl text-lg text-white border-none outline-none overflow-auto resize-none"
                 />
                 <div className="flex flex-row justify-between items-center w-full gap-2">
-                  <p>Word Count: {countWords(text)}</p>
+                  <p className="text-gray-400">
+                    Word Count: {countWords(text)}
+                  </p>
 
                   <Button
                     type="submit"
                     onClick={(e) => handleCopyButtonClick(e, text, index)}
-                    className={`rounded-md  mt-1 max-h-min  ${
+                    className={`rounded-lg mt-1 max-h-min ${
                       activeStates[index]
-                        ? "text-white bg-green-800 hover:bg-[#1c7429]"
-                        : "text-[#8133b4] bg-[#e4dee7] hover:bg-[#d7b5ed]"
-                    }  text-md font-bold h-[3.2rem]  min-w-max flex-2 `}
+                        ? "bg-green-800 hover:bg-green-800"
+                        : "bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90"
+                    } text-black font-bold h-12 min-w-max px-4`}
                   >
-                    <Copy size={20} strokeWidth={2} />
+                    <Copy size={20} strokeWidth={2} className="mr-2" />
                     {activeStates[index] ? "Copied" : "Copy"}
                   </Button>
                 </div>
               </div>
             ))}
           {audioUrl && (
-            <div className="min-h-max h-[30vh] md:h-[80vh]   p-5 m-auto flex flex-col w-full gap-2">
-              <audio controls>
+            <div className="min-h-max h-[30vh] md:h-[80vh] p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
+              <audio controls className="w-full">
                 <source src={audioUrl} type="audio/mpeg" />
               </audio>
             </div>
           )}
 
           {imageUrl && (
-            <div className="min-h-max p-5 m-auto grid grid-cols-2  gap-2 ">
+            <div className="min-h-max p-5 m-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
               {imageUrl.map((item, index) => (
-                <div key={index}>
-                  <label className=" font-sans font-bold text-n-8">
-                    Thumbnail
+                <div
+                  key={index}
+                  className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl border border-[#00F0FF]/30 p-4"
+                >
+                  <label className="font-bold text-[#00F0FF] block mb-2">
+                    Image {index + 1}
                   </label>
-
-                  <div
-                    className={`rounded-md overflow-hidden relative w-[${arwidth}]
-              h-[${arheight}]`}
-                  >
+                  <div className="rounded-xl overflow-hidden relative">
                     <button
-                      className="absolute top-2 right-2 rounded-md bg-white p-2"
+                      className="absolute top-3 right-3 rounded-full bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] p-2 z-10"
                       onClick={(e) =>
                         downloadHandler(
                           e,
@@ -923,12 +911,12 @@ export default function ContentWriterAiForm({
                         )
                       }
                     >
-                      <DownloadIcon />
+                      <DownloadIcon size={20} className="text-black" />
                     </button>
 
                     <Image
                       alt="image"
-                      className="flex-1 "
+                      className="w-full object-cover"
                       src={item}
                       width={arwidth}
                       height={arheight}
@@ -941,8 +929,8 @@ export default function ContentWriterAiForm({
           )}
         </div>
       ) : (
-        <div className="bg-white rounded-md overflow-auto text-lg  font-sans  text-black flex  gap-3 items-center justify-center mb-10 mt-10">
-          <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-300" />
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-10">
+          <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-800" />
         </div>
       )}
     </div>

@@ -117,7 +117,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
         title: "Plz Enter Text",
         description: "No text in textbox",
         duration: 5000,
-        className: "error-toast",
+        className: "bg-gradient-to-r from-[#B026FF] to-[#FF2E9F] text-white",
       });
     }
   };
@@ -181,7 +181,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
       description: `Note : Plz copy response in word or download images or audio if
         you want,once page refresh you will never see them back `,
       duration: 2000,
-      className: "success-toast",
+      className: "bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-white",
     });
     if (!userId) {
       return;
@@ -234,7 +234,8 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             description:
               "This prompt has been blocked. Our system automatically flagged this prompt because it may conflict with our content policy. More policy violations may lead to automatic suspension of your access.",
             duration: 2000,
-            className: "error-toast",
+            className:
+              "bg-gradient-to-r from-[#FF2E9F] to-[#B026FF] text-white",
           });
         }
       } else {
@@ -256,7 +257,8 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             description:
               "This prompt has been blocked. Our system automatically flagged this prompt because it may conflict with our content policy. More policy violations may lead to automatic suspension of your access.",
             duration: 2000,
-            className: "error-toast",
+            className:
+              "bg-gradient-to-r from-[#FF2E9F] to-[#B026FF] text-white",
           });
         }
       }
@@ -266,7 +268,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
         description:
           "This prompt has been blocked. Our system automatically flagged this prompt because it may conflict with our content policy. More policy violations may lead to automatic suspension of your access.",
         duration: 2000,
-        className: "error-toast",
+        className: "bg-gradient-to-r from-[#FF2E9F] to-[#B026FF] text-white",
       });
     } finally {
       setIsSubmitting(false);
@@ -352,39 +354,39 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
     return <InsufficientCreditsModal />;
   }
   return (
-    <div>
+    <div className=" rounded-xl p-6 border border-[#333]">
       {(type === "images" || type === "avatar") && (
-        <div className="flex items-center justify-center space-x-2 w-full mb-10">
-          <label className="text-n-8 font-semibold font-sans">
+        <div className="flex items-center justify-center space-x-2 w-full mb-6 p-4 bg-[#1a1a1a]/50 rounded-lg">
+          <label className="text-gray-300 font-semibold font-sans">
             Only Video Idea Based
           </label>
 
           <Switch
             onClick={() => setGenType((prev) => !prev)}
             id="airplane-mode"
+            className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-[#00F0FF] data-[state=checked]:to-[#B026FF]"
           />
-          <label className="text-n-8 font-semibold font-sans">
+          <label className="text-gray-300 font-semibold font-sans">
             Detailed Prompt Based
           </label>
         </div>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
             name="input"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-n-8">{topic}</FormLabel>
+                <FormLabel className="text-gray-300">{topic}</FormLabel>
                 <FormControl>
                   <Input
-                    className="select-field "
+                    className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 placeholder:text-gray-500 rounded-xl py-6 px-4"
                     placeholder={placeholderInputText}
                     {...field}
                   />
                 </FormControl>
-
-                <FormMessage />
+                <FormMessage className="text-red-400" />
               </FormItem>
             )}
           />
@@ -395,21 +397,21 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
               name="selectTone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-n-8">{tone}</FormLabel>
+                  <FormLabel className="text-gray-300">{tone}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="select-field ">
-                        <SelectValue />
+                      <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                        <SelectValue placeholder="Select tone" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
                       {email.map((email, index) => (
                         <SelectItem
                           key={index}
-                          className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                          className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] focus:text-[#00F0FF]  focus:bg-[#B026FF]/10"
                           value={email}
                         >
                           {email}
@@ -417,42 +419,40 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                       ))}
                     </SelectContent>
                   </Select>
-
-                  <FormMessage />
+                  <FormMessage className="text-red-400" />
                 </FormItem>
               )}
             />
           )}
-          <div className="flex">
+          <div className="flex gap-4">
             {(type === "images" || type === "avatar" || type === "all") && (
               <FormField
                 control={form.control}
                 name="selectTone"
                 render={({ field }) => (
                   <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">{tone}</FormLabel>
+                    <FormLabel className="text-gray-300">{tone}</FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                          <SelectValue placeholder="Select style" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl max-h-96 overflow-y-auto">
                         {aiImages.map((categoryObj: AiImages) => (
                           <div
                             key={categoryObj.category}
-                            className="bg-white text-gray-700 text-lg font-bold py-2 px-4 my-8 text-center "
+                            className="py-2 px-4 text-gray-400"
                           >
                             {categoryObj.category}
-
                             {categoryObj.values.map(
                               (value: string, index: number) => (
                                 <SelectItem
                                   key={`${categoryObj.category}-${index}`}
-                                  className="select-item min-w-max "
+                                  className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] focus:text-[#00F0FF] "
                                   value={value}
                                 >
                                   {value}
@@ -463,8 +463,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                         ))}
                       </SelectContent>
                     </Select>
-
-                    <FormMessage />
+                    <FormMessage className="text-red-400" />
                   </FormItem>
                 )}
               />
@@ -475,28 +474,26 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 name="imageQuality"
                 render={({ field }) => (
                   <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">
+                    <FormLabel className="text-gray-300">
                       Thumbnail Quality:
                     </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
-
+                        field.onChange(value);
                         setSelectedImageQuality(value);
-                        // Update aspect ratio in state
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                          <SelectValue placeholder="Select quality" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
                         {ImageQuality.map((ImageQuality, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={`${ImageQuality}`}
                           >
                             {ImageQuality}
@@ -504,38 +501,39 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                         ))}
                       </SelectContent>
                     </Select>
-
-                    <FormMessage />
+                    <FormMessage className="text-red-400" />
                   </FormItem>
                 )}
               />
             )}
           </div>
-          <div className="flex ">
+          <div className="flex gap-4">
             {(type === "images" || type === "avatar" || type === "all") && (
               <FormField
                 control={form.control}
                 name="inputlag"
                 render={({ field }) => (
                   <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">aspect ratio:</FormLabel>
+                    <FormLabel className="text-gray-300">
+                      Aspect Ratio:
+                    </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
-                        setSelectedAspectRatio(value); // Update aspect ratio in state
+                        field.onChange(value);
+                        setSelectedAspectRatio(value);
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
-                          <SelectValue />
+                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                          <SelectValue placeholder="Select ratio" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
                         {aspectRatio.map((aspectRatio, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={`${aspectRatio}`}
                           >
                             {aspectRatioDisplayNames[aspectRatio]}
@@ -543,8 +541,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                         ))}
                       </SelectContent>
                     </Select>
-
-                    <FormMessage />
+                    <FormMessage className="text-red-400" />
                   </FormItem>
                 )}
               />
@@ -555,31 +552,30 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 name="outputlag"
                 render={({ field }) => (
                   <FormItem className="w-[50%]">
-                    <FormLabel className="text-n-8">
+                    <FormLabel className="text-gray-300">
                       Number of Images:
                     </FormLabel>
                     <Select
                       onValueChange={(value) => {
-                        field.onChange(value); // Update form field value
+                        field.onChange(value);
                         setArImage(value);
-                        // Update aspect ratio in state
                       }}
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="select-field ">
+                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
                           <SelectValue
                             placeholder={
-                              type === "all" ? "No. Of Poster " : " "
+                              type === "all" ? "No. Of Poster" : "Select number"
                             }
                           />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
                         {noOfImage.map((noOfImage, index) => (
                           <SelectItem
                             key={index}
-                            className="bg-white hover:bg-gray-100 text-black text-lg  py-2 px- mb-4 m-auto text-center flex min-w-max"
+                            className="hover:bg-[#00F0FF]/10 hover:text-[#00F0FF] focus:text-[#00F0FF] "
                             value={`${noOfImage}`}
                           >
                             {noOfImage}
@@ -587,8 +583,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                         ))}
                       </SelectContent>
                     </Select>
-
-                    <FormMessage />
+                    <FormMessage className="text-red-400" />
                   </FormItem>
                 )}
               />
@@ -599,16 +594,16 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-n-8">{subtopic}</FormLabel>
+                <FormLabel className="text-gray-300">{subtopic}</FormLabel>
                 <FormControl>
                   <Textarea
                     placeholder={placeholderDescText}
                     maxLength={500}
-                    className=" select-field resize-none"
+                    className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 placeholder:text-gray-500 rounded-xl p-4 h-32"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="text-red-400" />
               </FormItem>
             )}
           />
@@ -617,23 +612,21 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             <Button
               type="submit"
               key="submitButton"
-              className="submit-button capitalize"
+              className="w-full py-6 rounded-full font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#B026FF] hover:from-[#00F0FF]/90 hover:to-[#B026FF]/90"
               disabled={isSubmitting}
             >
               {isSubmitting ? (
                 "Submitting..."
               ) : (
-                <div className="flex text-lg font-semibold gap-2 items-center justify-center">
-                  Generate{" "}
-                  <span>
-                    <Image
-                      src="/assets/icons/coins.svg"
-                      alt="coins"
-                      width={1}
-                      height={1}
-                      className="size-6 md:size-8"
-                    />
-                  </span>{" "}
+                <div className="flex gap-2 items-center justify-center">
+                  Generate
+                  <Image
+                    src="/assets/icons/coins.svg"
+                    alt="coins"
+                    width={24}
+                    height={24}
+                    className="invert"
+                  />
                   {credits}
                 </div>
               )}
@@ -641,9 +634,9 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           ) : (
             <Link
               href={"/sign-in"}
-              className="text-white flex text-lg font-semibold gap-2 items-center justify-center"
+              className="w-full py-6 rounded-full font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#B026FF] hover:from-[#00F0FF]/90 hover:to-[#B026FF]/90 text-center block"
             >
-              <div className="submit-button capitalize text-center">LOGIN </div>
+              LOGIN
             </Link>
           )}
         </form>
@@ -652,25 +645,23 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
       {!isResponse ? (
         <div>
           {response && (
-            <div className="bg-white rounded-md overflow-auto text-lg border-[#8133b4] border font-sans  text-black flex flex-col gap-3  p-5 mb-10 mt-10">
+            <div className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] text-gray-300 flex flex-col gap-4 p-6 my-8">
               <Textarea
                 value={response}
                 placeholder="Enter Text To Edit"
-                className="w-full h-[35vh] md:h-[45vh]  p-2 bg-white rounded-md  text-lg border-[#8133b4] border font-sans  text-black   border-none outline-none overflow-auto resize-none flex-4"
+                className="w-full h-[35vh] md:h-[45vh] bg-[#1a1a1a]/30 border border-[#333] text-gray-300 rounded-xl p-4"
               />
-              <div className="flex flex-row justify-between items-center w-full gap-2">
+              <div className="flex justify-between items-center">
                 <p>Word Count: {countWords(response)}</p>
-
                 <Button
-                  type="submit"
                   onClick={(e) => handleCopyButtonClick(e, response, 0)}
-                  className={`rounded-md  mt-1 max-h-min  ${
+                  className={`rounded-full px-6 py-5 font-medium ${
                     activeStates[0]
-                      ? "text-white bg-green-800 hover:bg-[#1c7429]"
-                      : "text-[#8133b4] bg-[#e4dee7] hover:bg-[#d7b5ed]"
-                  }  text-md font-bold h-[3.2rem]  min-w-max `}
+                      ? "bg-gradient-to-r from-green-500 to-green-700"
+                      : "bg-gradient-to-r from-[#B026FF] to-[#FF2E9F]"
+                  }`}
                 >
-                  <Copy size={20} strokeWidth={2} />
+                  <Copy size={20} className="mr-2" />
                   {activeStates[0] ? "Copied" : "Copy"}
                 </Button>
               </div>
@@ -680,42 +671,35 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             allResponse.map((text, index) => (
               <div
                 key={index}
-                className=" bg-white rounded-md overflow-auto text-lg border-[#8133b4] border font-sans  text-black flex flex-col gap-3  p-5 mb-10 mt-10"
+                className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] text-gray-300 flex flex-col gap-4 p-6 my-8"
               >
                 {index === 0 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Caption :
-                  </label>
+                  <label className="font-bold text-[#00F0FF]">Caption:</label>
                 )}
                 {index === 1 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Hashtags :
-                  </label>
+                  <label className="font-bold text-[#B026FF]">Hashtags:</label>
                 )}
                 {index === 2 && (
-                  <label className="flex-2 font-sans font-bold text-n-8">
-                    Description :
+                  <label className="font-bold text-[#FF2E9F]">
+                    Description:
                   </label>
                 )}
-
                 <Textarea
                   value={text}
                   placeholder="Enter Text To Edit"
-                  className="w-full h-[35vh] md:h-[45vh]  p-2 bg-white rounded-md  text-lg border-[#8133b4] border font-sans  text-black   border-none outline-none overflow-auto resize-none flex-4"
+                  className="w-full h-[35vh] md:h-[45vh] bg-[#1a1a1a]/30 border border-[#333] text-gray-300 rounded-xl p-4"
                 />
-                <div className="flex flex-row justify-between items-center w-full gap-2">
+                <div className="flex justify-between items-center">
                   <p>Word Count: {countWords(text)}</p>
-
                   <Button
-                    type="submit"
                     onClick={(e) => handleCopyButtonClick(e, text, index)}
-                    className={`rounded-md  mt-1 max-h-min  ${
+                    className={`rounded-full px-6 py-5 font-medium ${
                       activeStates[index]
-                        ? "text-white bg-green-800 hover:bg-[#1c7429]"
-                        : "text-[#8133b4] bg-[#e4dee7] hover:bg-[#d7b5ed]"
-                    }  text-md font-bold h-[3.2rem]  min-w-max flex-2 `}
+                        ? "bg-gradient-to-r from-green-500 to-green-700"
+                        : "bg-gradient-to-r from-[#B026FF] to-[#FF2E9F]"
+                    }`}
                   >
-                    <Copy size={20} strokeWidth={2} />
+                    <Copy size={20} className="mr-2" />
                     {activeStates[index] ? "Copied" : "Copy"}
                   </Button>
                 </div>
@@ -723,39 +707,34 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             ))}
 
           {imageUrl && (
-            <div className="min-h-max p-5 m-auto grid grid-cols-2  gap-2 ">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4">
               {imageUrl.map((item, index) => (
-                <div key={index}>
-                  <label className=" font-sans font-bold text-n-8">
-                    Thumbnail
-                  </label>
-
-                  <div
-                    className={`rounded-md overflow-hidden relative w-[${arwidth}]
-                   h-[${arheight}]`}
-                  >
-                    <button
-                      className="absolute top-2 right-2 rounded-md bg-white p-2"
-                      onClick={(e) =>
-                        downloadHandler(
-                          e,
-                          item,
-                          "image" +
-                            (Math.floor(Math.random() * 100) + 1).toString()
-                        )
-                      }
-                    >
-                      <DownloadIcon />
-                    </button>
-
-                    <Image
-                      alt="image"
-                      className="flex-1 "
-                      src={item}
-                      width={arwidth}
-                      height={arheight}
-                      priority
-                    />
+                <div key={index} className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#00F0FF]/10 to-[#FF2E9F]/10 rounded-xl"></div>
+                  <div className="relative z-10">
+                    <div className="bg-[#1a1a1a]/30 border border-[#333] rounded-xl overflow-hidden">
+                      <button
+                        className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30"
+                        onClick={(e) =>
+                          downloadHandler(
+                            e,
+                            item,
+                            "image" +
+                              (Math.floor(Math.random() * 100) + 1).toString()
+                          )
+                        }
+                      >
+                        <DownloadIcon className="text-white" size={20} />
+                      </button>
+                      <Image
+                        alt="generated-image"
+                        className="w-full object-contain"
+                        src={item}
+                        width={arwidth}
+                        height={arheight}
+                        priority
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -763,8 +742,8 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           )}
         </div>
       ) : (
-        <div className="bg-white rounded-md overflow-auto text-lg  font-sans  text-black flex  gap-3 items-center justify-center mb-10 mt-10">
-          <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-300" />
+        <div className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] overflow-hidden my-8">
+          <Skeleton className="h-96 w-full rounded-xl bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a]" />
         </div>
       )}
     </div>

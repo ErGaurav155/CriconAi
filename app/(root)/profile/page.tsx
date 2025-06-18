@@ -1,7 +1,6 @@
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-
 import Header from "@/components/shared/Header";
 import { getUserById } from "@/lib/actions/user.actions";
 import Link from "next/link";
@@ -17,50 +16,57 @@ const Profile = async () => {
   const userID = user._id;
 
   return (
-    <div className="wrapper">
-      <Header title="Profile" />
+    <div className="min-h-screen  text-white p-4 md:p-8">
+      <div className="max-w-7xl mx-auto">
+        <Header title="Profile" />
 
-      <section className="profile">
-        <div className="profile-balance">
-          <p className="p-14-medium md:p-16-medium">CREDITS AVAILABLE</p>
-          <div className="mt-4 flex items-center gap-4">
-            <Image
-              src="/assets/icons/coins.svg"
-              alt="coins"
-              width={50}
-              height={50}
-              className="size-9 md:size-12"
-            />
-            <h2 className="h2-bold text-dark-600">{user.creditBalance}</h2>
-            <div className="flex gap-1">
-              <InfoIcon />
-              <span>Reset in 24 Hr</span>
-            </div>
-          </div>
-        </div>
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
+          {/* Credits Card */}
+          <div className="relative p-6 rounded-2xl  border border-[#333] transition-all hover:border-[#B026FF]/50">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 hover:opacity-10 transition-opacity -z-10 rounded-2xl"></div>
 
-        <div className="profile-image-manipulation">
-          <Link href={`/profile/${userID}`}>
-            <p className="p-14-medium md:p-16-medium">
-              IMAGE MANIPULATION DONE
-            </p>
-            <div className="mt-4 flex items-center gap-4">
+            <p className="text-gray-400 font-medium mb-4">CREDITS AVAILABLE</p>
+            <div className="flex items-center gap-4">
               <Image
-                src="/assets/icons/photo.svg"
+                src="/assets/icons/coins.svg"
                 alt="coins"
                 width={50}
                 height={50}
                 className="size-9 md:size-12"
               />
-
-              <h2 className="h2-bold text-dark-600">{user.imageUrls.length}</h2>
-              <Button className=" rounded-md bg-purple-gradient bg-cover">
-                View Images
-              </Button>
+              <h2 className="text-3xl font-bold">{user.creditBalance}</h2>
+              <div className="flex gap-1 text-gray-400">
+                <InfoIcon size={18} />
+                <span>Reset in 24 Hr</span>
+              </div>
             </div>
-          </Link>
-        </div>
-      </section>
+          </div>
+
+          {/* Image Manipulation Card */}
+          <div className="relative p-6 rounded-2xl border border-[#333] transition-all hover:border-[#B026FF]/50">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 hover:opacity-10 transition-opacity -z-10 rounded-2xl"></div>
+
+            <Link href={`/profile/${userID}`}>
+              <p className="text-gray-400 font-medium mb-4">
+                IMAGE MANIPULATION DONE
+              </p>
+              <div className="flex items-center gap-4">
+                <Image
+                  src="/assets/icons/photo.svg"
+                  alt="coins"
+                  width={50}
+                  height={50}
+                  className="size-9 md:size-12"
+                />
+                <h2 className="text-3xl font-bold">{user.imageUrls.length}</h2>
+                <Button className="rounded-md bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-bold">
+                  View Images
+                </Button>
+              </div>
+            </Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

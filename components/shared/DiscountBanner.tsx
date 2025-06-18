@@ -77,64 +77,69 @@ const DiscountBanner = () => {
   }
 
   return (
-    <div className="relative rounded-md mt-5 top-0 left-0 flex flex-col gap-2 justify-center items-center w-full bg-gradient-to-r from-green-800 to-green-500 text-white font-sans py-4 px-4">
+    <div className="relative rounded-md mt-5 top-0 left-0 flex flex-col gap-2 justify-center items-center w-full border border-[#333] text-white font-sans py-4 px-4">
       <button
         onClick={handleClose}
-        className="absolute top-1 right-2 p-1 rounded-full bg-white bg-opacity-10 hover:bg-opacity-30 transition-all"
+        className="absolute top-2 right-2 p-1 rounded-full bg-[#1a1a1a]/50 border border-[#333] hover:bg-[#1a1a1a] transition-all"
       >
-        <XMarkIcon height={30} width={30} stroke="2" />
+        <XMarkIcon height={20} width={20} className="text-[#FF2E9F]" />
       </button>
-      <div className="flex gap-1 md:gap-6 justify-center items-center w-full text-white font-sans">
-        <div className="flex flex-col items-center bg-yellow-900 p-2 rounded-md">
-          <div className="text-md md:text-lg font-bold">Massive Sale</div>
-          <div className="text-md md:text-base">up to 75% off</div>
+
+      <div className="flex flex-col md:flex-row gap-3 md:gap-6 justify-center items-center w-full">
+        <div className="bg-gradient-to-r from-[#B026FF] to-[#FF2E9F] p-2 px-4 rounded-md">
+          <div className="text-lg font-bold">Massive Sale</div>
+          <div className="text-sm text-center">UP TO 75% OFF</div>
         </div>
+
         <div className="flex gap-2 md:gap-4">
           <div className="flex flex-col items-center">
-            <div className="bg-white text-black text-lg font-bold py-1 px-2 rounded">
+            <div className="bg-[#0a0a0a] border border-[#333] text-lg font-bold py-1 px-3 rounded">
               {days}
             </div>
-            <div className="text-sm">Days</div>
+            <div className="text-xs text-gray-400 mt-1">DAYS</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white text-black text-lg font-bold py-1 px-2 rounded">
+            <div className="bg-[#0a0a0a] border border-[#333] text-lg font-bold py-1 px-3 rounded">
               {hours}
             </div>
-            <div className="text-sm">Hrs</div>
+            <div className="text-xs text-gray-400 mt-1">HRS</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white text-black text-lg font-bold py-1 px-2 rounded">
+            <div className="bg-[#0a0a0a] border border-[#333] text-lg font-bold py-1 px-3 rounded">
               {minutes}
             </div>
-            <div className="text-sm">Min</div>
+            <div className="text-xs text-gray-400 mt-1">MIN</div>
           </div>
           <div className="flex flex-col items-center">
-            <div className="bg-white text-black text-lg font-bold py-1 px-2 rounded">
+            <div className="bg-[#0a0a0a] border border-[#333] text-lg font-bold py-1 px-3 rounded">
               {seconds}
             </div>
-            <div className="text-sm">Sec</div>
+            <div className="text-xs text-gray-400 mt-1">SEC</div>
           </div>
         </div>
-        <a
+
+        <Link
           href="/credits"
-          className="p-2 text-center bg-gradient-to-r from-teal-300 to-blue-300 text-black text-sm font-semibold md:font-bold rounded uppercase hover:scale-105 transition-transform"
+          className="p-2 px-4 text-center bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black text-sm font-bold rounded-md uppercase hover:opacity-90 transition-opacity"
         >
           Learn More
-        </a>
-      </div>
-      <Button className="text-black bg-white hover:bg-white rounded-md self-start w-full cursor-default max-h-min mt-2 overflow-hidden">
-        <Link
-          href={"/credits"}
-          className="flex animate-scroll-left whitespace-nowrap"
-        >
-          Get
-          <span className="text-green-800 font-extrabold">
-            &nbsp;250 Free &nbsp;
-          </span>
-          Credits For First 100 premium package purchase &nbsp;
-          <RocketIcon color="green" />
         </Link>
-      </Button>
+      </div>
+
+      <Link
+        href={"/credits"}
+        className="mt-3 w-full overflow-hidden bg-gradient-to-r from-[#0a0a0a] to-[#1a1a1a] border border-[#333] rounded-md"
+      >
+        <div className="flex animate-scroll-left whitespace-nowrap py-2">
+          <span className="text-[#00F0FF] font-bold">GET 250 FREE CREDITS</span>
+          <span className="mx-4 text-gray-300">|</span>
+          <span className="text-white">
+            For First 100 Premium Package Purchases
+          </span>
+          <span className="mx-4 text-gray-300">|</span>
+          <RocketIcon className="text-[#FF2E9F] mx-1" size={18} />
+        </div>
+      </Link>
     </div>
   );
 };

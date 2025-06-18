@@ -1,23 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import {
-  Card,
-  Typography,
-  List,
-  ListItem,
-  ListItemPrefix,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
-
+import logo from "@/public/assets/loading.png"; // Adjust the path as necessary
 import {
   ChevronRightIcon,
-  ChevronDownIcon,
   HomeIcon,
   UserIcon,
   CurrencyRupeeIcon,
@@ -25,803 +14,306 @@ import {
   CurrencyDollarIcon,
   QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import { InstagramIcon, SquarePenIcon, YoutubeIcon } from "lucide-react";
+import Image from "next/image";
 
-export function Sidebar() {
-  const [open, setOpen] = useState(0);
+export default function MainNavbar() {
+  const [openDropdown, setOpenDropdown] = useState<number | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleOpen = (value: number) => {
-    setOpen(open === value ? 0 : value);
+  const handleDropdown = (index: number) => {
+    setOpenDropdown(openDropdown === index ? null : index);
   };
 
+  const closeAllDropdowns = () => setOpenDropdown(null);
+
+  // Close dropdowns when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        closeAllDropdowns();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Star particles effect (same as original)
+  useEffect(() => {
+    const createStarParticles = () => {
+      const starsContainer = document.getElementById("stars-container");
+      if (!starsContainer) return;
+      starsContainer.innerHTML = "";
+      const numberOfStars = 150;
+      for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement("div");
+        star.className = "absolute rounded-full";
+        const size = Math.random() * 3;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        const colors = ["#00F0FF", "#B026FF", "#FF2E9F", "#FFFFFF"];
+        star.style.backgroundColor =
+          colors[Math.floor(Math.random() * colors.length)];
+        star.style.opacity = `${Math.random() * 0.8 + 0.2}`;
+        star.style.animation = `twinkle ${Math.random() * 5 + 3}s infinite`;
+        starsContainer.appendChild(star);
+      }
+    };
+
+    createStarParticles();
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes twinkle {
+        0% { opacity: 0.2; }
+        50% { opacity: 1; }
+        100% { opacity: 0.2; }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
+  // Navbar menu data
+  const menuItems = [
+    {
+      id: 1,
+      name: "Long Videos",
+      icon: <YoutubeIcon className="h-5 w-5 text-[#ff2e9f]" />,
+      subItems: [
+        { name: "Idea Generator", href: "/criconai/longvid/idea" },
+        { name: "All-in-One", href: "/criconai/longvid/all" },
+        { name: "Title", href: "/criconai/longvid/title" },
+        { name: "Desc", href: "/criconai/longvid/description" },
+        { name: "Tags", href: "/criconai/longvid/tags" },
+        { name: "Script", href: "/criconai/longvid/script" },
+        { name: "Poll Generation", href: "/criconai/longvid/poll" },
+        { name: "Thumbnail", href: "/criconai/longvid/thumbnail" },
+        { name: "AiImages", href: "/criconai/longvid/aiimages" },
+        { name: "Prompt Generation", href: "/criconai/longvid/prompt" },
+        { name: "script translator", href: "/criconai/longvid/translate" },
+        { name: "Text-to-Audio", href: "/criconai/longvid/TexttoAudio" },
+        { name: "Audio-to-Audio", href: "/criconai/longvid/audiotoAudio" },
+        { name: "Disclamer", href: "/criconai/longvid/disclamer" },
+        {
+          name: "Background MusicGen",
+          href: "/criconai/longvid/backgroundMusicGen",
+        },
+        { name: "Email", href: "/criconai/longvid/email" },
+      ],
+    },
+    {
+      id: 2,
+      name: "Short Videos",
+      icon: <DevicePhoneMobileIcon className="h-5 w-5 text-[#FF2E9F]" />,
+      subItems: [
+        { name: "Video Idea", href: "/criconai/shortvid/idea" },
+        { name: "All-in-One", href: "/criconai/shortvid/all" },
+        { name: "Title", href: "/criconai/shortvid/title" },
+        { name: "Description", href: "/criconai/shortvid/description" },
+        { name: "Tags", href: "/criconai/shortvid/tags" },
+        { name: "Script", href: "/criconai/shortvid/script" },
+        { name: "Poll Generation", href: "/criconai/shortvid/poll" },
+        { name: "Thumbnail", href: "/criconai/shortvid/thumbnail" },
+        { name: "AiImages", href: "/criconai/shortvid/aiimages" },
+        { name: "Prompt Generation", href: "/criconai/shortvid/prompt" },
+        { name: "script translator", href: "/criconai/shortvid/translate" },
+        { name: "Text-to-Audio", href: "/criconai/shortvid/TexttoAudio" },
+        { name: "Audio-to-Audio", href: "/criconai/shortvid/audiotoAudio" },
+        {
+          name: "Background MusicGen",
+          href: "/criconai/shortvid/backgroundMusicGen",
+        },
+        { name: "Slogan", href: "/criconai/shortvid/slogan" },
+        { name: "Facts", href: "/criconai/shortvid/facts" },
+        { name: "Quote", href: "/criconai/shortvid/quote" },
+        { name: "Riddle", href: "/criconai/shortvid/riddle" },
+      ],
+    },
+    {
+      id: 3,
+      name: "Content Writer",
+      icon: <SquarePenIcon className="h-5 w-5 text-[#FF2E9F]" />,
+      subItems: [
+        { name: "Idea", href: "/criconai/contentwriter/idea" },
+        { name: "All-in-One", href: "/criconai/contentwriter/all" },
+        { name: "Outline", href: "/criconai/contentwriter/outline" },
+        { name: "Article", href: "/criconai/contentwriter/article" },
+        { name: "Blog", href: "/criconai/contentwriter/blog" },
+        { name: "Book", href: "/criconai/contentwriter/book" },
+        { name: "Title", href: "/criconai/contentwriter/title" },
+        { name: "AiImages", href: "/criconai/contentwriter/images" },
+        { name: "Prompt Generation", href: "/criconai/contentwriter/prompt" },
+        { name: "Summary", href: "/criconai/contentwriter/summary" },
+        { name: "Expander", href: "/criconai/contentwriter/expander" },
+        { name: "Slogan", href: "/criconai/contentwriter/slogan" },
+        { name: "Translation", href: "/criconai/contentwriter/translation" },
+        { name: "Text-to-Audio", href: "/criconai/contentwriter/TexttoAudio" },
+        { name: "Book CoverImage", href: "/criconai/contentwriter/coverimage" },
+        { name: "Email", href: "/criconai/contentwriter/email" },
+        { name: "Tag", href: "/criconai/contentwriter/tag" },
+      ],
+    },
+    {
+      id: 4,
+      name: "Social Media",
+      icon: <InstagramIcon className="h-5 w-5 text-[#FF2E9F]" />,
+      subItems: [
+        { name: "Idea", href: "/criconai/socialmedia/idea" },
+        { name: "All-in-one", href: "/criconai/socialmedia/all" },
+        { name: "Images", href: "/criconai/socialmedia/images" },
+        { name: "Prompt Generation", href: "/criconai/socialmedia/prompt" },
+        { name: "Bio", href: "/criconai/socialmedia/bio" },
+        { name: "Caption", href: "/criconai/socialmedia/caption" },
+        { name: "Tags", href: "/criconai/socialmedia/tag" },
+        { name: "Description", href: "/criconai/socialmedia/description" },
+        { name: "Poll Generation", href: "/criconai/socialmedia/poll" },
+        { name: "Comment", href: "/criconai/socialmedia/comment" },
+        { name: "Tweet", href: "/criconai/socialmedia/tweet" },
+        { name: "Avatar", href: "/criconai/socialmedia/avatar" },
+        {
+          name: "Background MusicGen",
+          href: "/criconai/socialmedia/backgroundMusicGen",
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: "Marketing",
+      icon: <CurrencyDollarIcon className="h-5 w-5 text-[#FF2E9F]" />,
+      subItems: [
+        { name: "All", href: "/criconai/marketing/all" },
+        { name: "Promotion Price Cal", href: "/criconai/marketing/calculator" },
+        { name: "Promotion Email", href: "/criconai/marketing/email" },
+        { name: "Sponcership Finder", href: "/criconai/marketing/finder" },
+        { name: "Promotion Helper", href: "/criconai/marketing/promotion" },
+      ],
+    },
+    {
+      id: 6,
+      name: "Use",
+      icon: <QuestionMarkCircleIcon className="h-5 w-5 text-[#FF2E9F]" />,
+      subItems: [{ name: "How To Use Criconai?", href: "/HowToUse" }],
+    },
+  ];
+
   return (
-    <div>
-      <Card className="hidden min-h-screen h-screen bg-gray-50  text-gray-600 lg:flex  w-full max-w-[19rem] p-4 shadow-xl font-sans overflow-y-auto no-scrollbar  shadow-blue-100 ">
-        <div className=" flex items-center">
-          <Image
-            src="/assets/images/logo.png"
-            alt="logo"
-            width={400}
-            height={400}
-          />
-        </div>
+    <div className="relative">
+      <div
+        id="stars-container"
+        className="fixed inset-0 z-1 pointer-events-none"
+      ></div>
+      <div className="fixed  inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#0A0A0A] to-[#0A0A0A]  pointer-events-none"></div>
 
-        <List className="flex flex-col justify-between h-full ">
-          <div>
-            <Link href="/">
-              <ListItem className="font-medium hover:bg-sky-100 focus:bg-sky-100 active:bg-sky-100 text-sm">
-                <ListItemPrefix>
-                  <HomeIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                Home
-              </ListItem>
-            </Link>
+      <div className=" top-0 left-0 right-0 fixed z-10 bg-black backdrop-blur-lg border-b border-[#00F0FF]/30 p-4 shadow-md shadow-[#00F0FF]/20">
+        <div
+          ref={dropdownRef}
+          className="flex items-center justify-between w-full m-auto  px-5 max-w-7xl"
+        >
+          {/* Logo */}
+          <Link href={"/"} className="flex items-center z-10">
+            <div className="relative w-10 h-10 mr-3">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00F0FF] to-[#B026FF] animate-pulse"></div>
+              <div className="absolute inset-1 rounded-full bg-[#0A0A0A] flex items-center justify-center">
+                <Image
+                  src={logo}
+                  alt="Cosmic background"
+                  fill
+                  className="object-cover w-full p-[6px]"
+                  priority
+                />{" "}
+              </div>
+            </div>
+            <h1 className="text-lg xl:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+              Cricon<span className="text-[#B026FF]">ai</span>
+            </h1>
+          </Link>
 
-            <Accordion
-              open={open === 1}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform  ${
-                    open === 1 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0 " selected={open === 1}>
-                <AccordionHeader
-                  onClick={() => handleOpen(1)}
-                  className="border-b-0 p-3 focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 "
-                >
-                  <ListItemPrefix>
-                    <YoutubeIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="mr-auto text-sm font-medium"
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-2">
+            {menuItems.map((item) => (
+              <div
+                key={item.id}
+                className="relative group"
+                onMouseLeave={() => setOpenDropdown(null)}
+              >
+                <div className="relative">
+                  <button
+                    className={`flex items-center px-4 py-2 font-medium text-xs rounded-lg transition-all ${
+                      openDropdown === item.id
+                        ? "bg-gradient-to-r from-[#00F0FF]/20 to-[#FF2E9F]/20"
+                        : "group-hover:bg-gradient-to-r group-hover:from-[#00F0FF]/20 group-hover:to-[#FF2E9F]/20"
+                    }`}
                   >
-                    Long Videos
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1 ">
-                <List className="pl-4 ">
-                  <Link href="/criconai/longvid/idea">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Idea Generator
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/all">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      All-in-One
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/title">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Title
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/description">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Desc
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/tags">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Tags
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/keyword">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Keyword
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/script">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Script
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/poll">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Poll Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/thumbnail">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Thumbnail
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/aiimages">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      AiImages
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/prompt">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Prompt Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/translate">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      script translator
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/TexttoAudio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Text-to-Audio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/audiotoAudio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Audio-to-Audio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/disclamer">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Disclamer
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/backgroundMusicGen">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Background MusicGen
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/longvid/email">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Email
-                    </ListItem>
-                  </Link>
-                </List>
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 2}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 2 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0" selected={open === 2}>
-                <AccordionHeader
-                  onClick={() => handleOpen(2)}
-                  className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
-                >
-                  <ListItemPrefix>
-                    <DevicePhoneMobileIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="mr-auto font-medium text-sm"
+                    {item.icon}
+                    <span className="text-white ml-1">{item.name}</span>
+                  </button>
+                </div>
+
+                {item.subItems && (
+                  <div
+                    className={`absolute top-full left-0 mt-1 w-64 bg-black border border-[#00F0FF]/30 rounded-lg shadow-xl shadow-[#00F0FF]/20 z-50 max-h-96 overflow-y-auto no-scrollbar ${
+                      openDropdown === item.id
+                        ? "block"
+                        : "hidden group-hover:block"
+                    }`}
+                    onMouseEnter={() => setOpenDropdown(item.id)}
                   >
-                    Short Videos
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1">
-                <List className="pl-4">
-                  <Link href="/criconai/shortvid/idea">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Video Idea
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/all">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      All-in-One
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/title">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Title
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/description">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Description
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/tags">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Tags
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/script">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Script
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/poll">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Poll Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/thumbnail">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Thumbnail
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/aiimages">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      AiImages
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/prompt">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Prompt Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/translate">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      script translator
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/TexttoAudio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Text-to-Audio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/audiotoAudio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Audio-to-Audio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/backgroundMusicGen">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Background MusicGen
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/slogan">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Slogan
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/facts">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Facts
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/quote">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Quote
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/shortvid/riddle">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Riddle
-                    </ListItem>
-                  </Link>
-                </List>
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 3}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 3 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0" selected={open === 3}>
-                <AccordionHeader
-                  onClick={() => handleOpen(3)}
-                  className="border-b-0 p-3 focus:bg-sky-100  active:bg-sky-100 hover:bg-sky-100 "
-                >
-                  <ListItemPrefix>
-                    <SquarePenIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="mr-auto font-medium text-sm"
-                  >
-                    Content Writer
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1">
-                <List className="pl-4">
-                  <Link href="/criconai/contentwriter/idea">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Idea
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/all">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      All-in-One
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/outline">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Outline
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/article">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Article
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/blog">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Blog
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/book">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Book
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/title">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Title
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/images">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      AiImages
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/prompt">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Prompt Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/summary">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Summary
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/expander">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Expander
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/slogan">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Slogan
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/translation">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Translation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/TexttoAudio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Text-to-Audio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/coverimage">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Book CoverImage
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/email">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Email
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/contentwriter/tag">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Tag
-                    </ListItem>
-                  </Link>
-                </List>
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 4}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 4 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0" selected={open === 4}>
-                <AccordionHeader
-                  onClick={() => handleOpen(4)}
-                  className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
-                >
-                  <ListItemPrefix>
-                    <InstagramIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="mr-auto font-medium text-sm"
-                  >
-                    Social Media
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1">
-                <List className="pl-4">
-                  <Link href="/criconai/socialmedia/idea">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Idea
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/all">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      All-in-one
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/images">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Images
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/prompt">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Prompt Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/bio">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Bio
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/caption">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Caption
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/tag">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Tags
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/description">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Description
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/poll">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Poll Generation
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/comment">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Comment
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/tweet">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Tweet
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/avatar">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Avatar
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/socialmedia/backgroundMusicGen">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Background MusicGen
-                    </ListItem>
-                  </Link>
-                </List>
-              </AccordionBody>
-            </Accordion>
-            <Accordion
-              open={open === 5}
-              icon={
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 5 ? "rotate-180" : ""
-                  }`}
-                />
-              }
-            >
-              <ListItem className="p-0" selected={open === 5}>
-                <AccordionHeader
-                  onClick={() => handleOpen(5)}
-                  className="border-b-0 p-3 focus:bg-sky-100 active:bg-sky-100 hover:bg-sky-100 "
-                >
-                  <ListItemPrefix>
-                    <CurrencyDollarIcon strokeWidth={2} className="h-5 w-5" />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="mr-auto font-medium text-sm"
-                  >
-                    Marketing
-                  </Typography>
-                </AccordionHeader>
-              </ListItem>
-              <AccordionBody className="py-1">
-                <List className="pl-4">
-                  <Link href="/criconai/marketing/all">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      All
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/marketing/calculator">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Promotion Price Cal
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/marketing/email">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Promotion Email
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/marketing/finder">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Sponcership Finder
-                    </ListItem>
-                  </Link>
-                  <Link href="/criconai/marketing/promotion">
-                    <ListItem className="focus:bg-sky-100 p-2 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm ">
-                      <ListItemPrefix>
-                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                      </ListItemPrefix>
-                      Promotion Helper
-                    </ListItem>
-                  </Link>
-                </List>
-              </AccordionBody>
-            </Accordion>
-            <Link href="/HowToUse">
-              <ListItem className="font-medium hover:bg-sky-100 focus:bg-sky-100 active:bg-sky-100 text-sm">
-                <ListItemPrefix>
-                  <QuestionMarkCircleIcon className="h-5 w-5" />
-                </ListItemPrefix>
-                How To Use Criconai?
-              </ListItem>
-            </Link>
+                    <div className="py-2">
+                      {item.subItems.map((subItem, index) => (
+                        <Link
+                          key={index}
+                          href={subItem.href}
+                          className="flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gradient-to-r hover:from-[#00F0FF]/20 hover:to-[#FF2E9F]/20"
+                          onClick={() => setOpenDropdown(null)}
+                        >
+                          <ChevronRightIcon className="h-3 w-5 text-white mr-2" />
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
-          <SignedIn>
-            <div>
-              <hr className="my-2 border-blue-gray-50" />
 
+          {/* User Section */}
+          <div className="flex items-center space-x-4">
+            <SignedIn>
               <Link href="/profile">
-                <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                  <ListItemPrefix>
-                    <UserIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  Profile
-                </ListItem>
+                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF]/20 hover:to-[#FF2E9F]/20">
+                  <UserIcon className="h-5 w-5 text-white" />
+                </button>
               </Link>
               <Link href="/credits">
-                <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium text-sm">
-                  <ListItemPrefix>
-                    <CurrencyRupeeIcon className="h-5 w-5" />
-                  </ListItemPrefix>
-                  Buy Credits
-                </ListItem>
+                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF]/20 hover:to-[#FF2E9F]/20">
+                  <CurrencyRupeeIcon className="h-5 w-5 text-white" />
+                </button>
               </Link>
-              <ListItem className="focus:bg-sky-100 hover:bg-sky-100 active:bg-sky-100 font-medium ">
-                <UserButton afterSignOutUrl="/" showName />
-              </ListItem>
-            </div>
-          </SignedIn>
-          <SignedOut>
-            <Button
-              asChild
-              className="mb-10 button bg-purple-gradient bg-cover"
-            >
-              <Link href="/sign-in">Login</Link>
-            </Button>
-          </SignedOut>
-        </List>
-      </Card>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
+            <SignedOut>
+              <Button
+                asChild
+                className="bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] text-black font-bold hover:from-[#00F0FF]/90 hover:to-[#FF2E9F]/90 transition-all duration-300"
+              >
+                <span className="flex items-center w-full gap-2">
+                  <i className="fas fa-user-astronaut text-black text-sm p-2" />
+                  <Link href="/sign-in">Login</Link>
+                </span>
+              </Button>
+            </SignedOut>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

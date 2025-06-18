@@ -4,7 +4,9 @@ const Header = ({ title, subtitle }: { title: string; subtitle?: string }) => {
   return (
     <div className="flex items-center justify-center">
       <div>
-        <p className="h2-bold text-dark-600">{title}</p>
+        <p className="text-lg xl:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+          {title}
+        </p>
         {subtitle && <p className="p-16-regular mt-4">{subtitle}</p>}
       </div>
     </div>
