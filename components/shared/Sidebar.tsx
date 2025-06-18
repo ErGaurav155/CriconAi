@@ -217,7 +217,6 @@ export default function MainNavbar() {
           ref={dropdownRef}
           className="flex items-center justify-between w-full m-auto  px-5 max-w-7xl"
         >
-          {/* Logo */}
           <Link href={"/"} className="flex items-center z-10">
             <div className="relative w-10 h-10 mr-3">
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#00F0FF] to-[#B026FF] animate-pulse"></div>
