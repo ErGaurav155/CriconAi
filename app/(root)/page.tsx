@@ -62,7 +62,7 @@ const Home = async () => {
             <TopYoutuber />
           </div>
         </div>
-        <div className="flex w-screen flex-row gap-0 md:gap-1">
+        <div className="flex w-screen flex-wrap flex-row gap-0 md:gap-1">
           <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
