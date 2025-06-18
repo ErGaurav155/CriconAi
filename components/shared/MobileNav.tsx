@@ -67,8 +67,8 @@ export function MobileNav() {
   });
 
   return (
-    <header className="header absolute z-50 top-0 left-0 w-full  overflow-auto border-b border-[#333] bg-[#0a0a0a]">
-      <div className="flex items-center justify-between p-4 w-full">
+    <header className="header  absolute z-50 top-0 left-0 w-full  overflow-auto  bg-[#0a0a0a]">
+      <div className="flex items-center justify-between  bg-black w-screen">
         <IconButton
           variant="text"
           size="lg"

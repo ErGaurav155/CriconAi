@@ -62,8 +62,8 @@ const Home = async () => {
             <TopYoutuber />
           </div>
         </div>
-        <div className="flex flex-row gap-1">
-          <div className="px-1 mx-auto max-w-7xl  border-b border-[#333] py-16">
+        <div className="flex w-screen flex-row gap-0 md:gap-1">
+          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col m-auto items-center justify-between">
@@ -87,7 +87,7 @@ const Home = async () => {
             </div>
           </div>
 
-          <div className="px-1 mx-auto max-w-7xl  border-b border-[#333] py-16">
+          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col m-auto items-center justify-between">
@@ -108,7 +108,7 @@ const Home = async () => {
               <Aiimages />
             </div>
           </div>
-          <div className="px-1 mx-auto max-w-7xl  border-b border-[#333] py-16">
+          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
             <div className="flex flex-col gap-5 justify-start items-start">
               <div className="flex items-center justify-between w-full">
                 <div className="flex flex-col m-auto items-center justify-between">
@@ -145,12 +145,14 @@ const Home = async () => {
               Top 5 benefits By Criconai
             </p>
 
-            <div className="flex flex-wrap text-nowrap  gap-2 text-white">
+            <div className="flex flex-wrap md:text-nowrap  gap-2 text-white">
               <div className="flex items-center  gap-2">
                 <span>
                   <CheckBadgeIcon color="green" height={50} width={50} />
                 </span>
-                <h2>Improve Views and clicks using our ai thumbnails</h2>
+                <h2 className="font-medium text-lg">
+                  Improve Views and clicks using our ai thumbnails
+                </h2>
               </div>
               <div className="flex items-center gap-2">
                 <span>

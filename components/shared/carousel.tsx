@@ -114,7 +114,7 @@ export function Aiimages() {
             stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
           }),
         ]}
-        className="w-full h-[850px]"
+        className="w-full h-96"
         orientation="vertical"
         opts={{
           align: "start",
@@ -122,7 +122,7 @@ export function Aiimages() {
           axis: "y",
         }}
       >
-        <CarouselContent className="-mt-1 h-[850px]">
+        <CarouselContent className="-mt-1 h-96">
           {thumbnail1.map((img, index) => (
             <CarouselItem key={index} className="pt-1 basis-1/4">
               <div className="p-1 h-full">
@@ -219,7 +219,7 @@ export function AiThumb() {
             stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
           }),
         ]}
-        className="w-full h-[850px]"
+        className="w-full h-96"
         orientation="vertical"
         opts={{
           align: "start",
@@ -227,7 +227,7 @@ export function AiThumb() {
           axis: "y",
         }}
       >
-        <CarouselContent className="-mt-1 h-[850px]">
+        <CarouselContent className="-mt-1 h-96">
           {thumbnail.map((img, index) => (
             <CarouselItem key={index} className="pt-1 basis-1/4">
               <div className="p-1 h-full">
@@ -326,14 +326,14 @@ export function AiPoster() {
           }),
         ]}
         orientation="vertical"
-        className="w-full h-[850px]"
+        className="w-full h-96"
         opts={{
           align: "start",
           loop: true,
           axis: "y",
         }}
       >
-        <CarouselContent className="-mt-1 h-[850px]">
+        <CarouselContent className="-mt-1 h-96">
           {Poster.map((img, index) => (
             <CarouselItem key={index} className="pt-1 basis-1/4">
               <div className="p-1 h-full">
