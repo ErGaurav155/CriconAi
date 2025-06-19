@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Services = () => {
   return (
-    <div className="py-16    border-b border-[#333] ">
+    <div className="pb-16    border-b border-[#333] ">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col items-center justify-between">
           <div className="text-center">

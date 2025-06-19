@@ -20,7 +20,7 @@ export function Faq() {
   const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
-    <div className="w-full p-4">
+    <div className="w-full pb-16">
       <Header title="Frequently Asked Questions" />
 
       <div className="space-y-4 mt-8">

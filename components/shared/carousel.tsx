@@ -2,6 +2,8 @@
 
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
+import Autoscroll from "embla-carousel-auto-scroll";
+
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -60,6 +62,7 @@ import {
   StarIcon,
   UserIcon,
 } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
 
 const thumbnail1 = [
   thumbimg1,
@@ -102,76 +105,221 @@ const thumbnail1 = [
 //     </Carousel>
 //   );
 // }
-
+// Custom vertical carousel with better styling
 export function Aiimages() {
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      axis: "y",
+      align: "start",
+    },
+    [
+      Autoscroll({
+        speed: 0.8,
+        direction: "backward",
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+        startDelay: 0,
+        playOnInit: true,
+      }) as any,
+    ]
+  );
+
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
-      <Carousel
-        plugins={[
-          Autoplay({
-            delay: 2500,
-            stopOnInteraction: false, // continue autoplay after user interaction
-            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
-          }),
-        ]}
-        className="w-full h-96"
-        orientation="vertical"
-        opts={{
-          align: "start",
-          loop: true,
-          axis: "y",
-        }}
-      >
-        <CarouselContent className="-mt-1 h-96">
+    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex flex-col gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem]">
           {thumbnail1.map((img, index) => (
-            <CarouselItem key={index} className="pt-1 basis-1/4">
-              <div className="p-1 h-full">
-                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
-                  <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
-                    {/* Gradient shine effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+            <div
+              key={index}
+              className={`flex-0 ${index === 5 ? "mb-4" : "p-0"}`} // Adjusted height
+            >
+              <Card className="border border-[#333] bg-[#0a0a0a]/70 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+                  {/* Gradient shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
 
-                    {/* Image */}
-                    <div className="relative w-full h-full">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        src={img}
-                        alt="AI-generated image"
-                        width={400}
-                        height={300}
-                        loading="lazy"
-                      />
-                    </div>
+                  {/* Image */}
+                  <div className="relative aspect-video">
+                    <Image
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      src={img}
+                      alt="AI-generated image"
+                      fill
+                      loading="lazy"
+                    />
+                  </div>
 
-                    {/* Info overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
-                          Style:{" "}
-                          {index % 3 === 0
-                            ? "Abstract"
-                            : index % 3 === 1
-                            ? "Realistic"
-                            : "Digital Art"}
+                  {/* Info overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                        Style:{" "}
+                        {index % 3 === 0
+                          ? "Abstract"
+                          : index % 3 === 1
+                          ? "Realistic"
+                          : "Digital Art"}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <HeartIcon className="h-4 w-4 text-[#FF2E9F]" />
+                        <span className="text-xs text-gray-300">
+                          {(index + 1) * 24}
                         </span>
-                        <div className="flex items-center gap-1">
-                          <HeartIcon className="h-4 w-4 text-[#FF2E9F]" />
-                          <span className="text-xs text-gray-300">
-                            {(index + 1) * 24}
-                          </span>
-                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 }
+// export function Aiimages() {
+//   const [emblaRef] = useEmblaCarousel(
+//     {
+//       loop: true,
+//       axis: "y", // Set vertical scrolling
+
+//       // Enable infinite looping
+//     },
+
+//     [
+//       Autoscroll({
+//         speed: 0.5,
+//         direction: "backward", // Change direction to right-to-left
+//       }) as any,
+//     ]
+//   );
+
+//   return (
+//     <div
+//       ref={emblaRef}
+//       className="overflow-hidden w-full opacity-80 " // Embla's parent container
+//     >
+//       <div className="flex flex-col">
+//         {thumbnail1.map((img, index) => (
+//           <div
+//             key={index}
+//             className="flex-shrink-0 w-full sm:w-1/3 lg:w-1/3 p-2" // Slide width and padding
+//           >
+//             <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+//               <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+//                 {/* Gradient shine effect on hover */}
+//                 <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//                 {/* Image */}
+//                 <div className="relative w-full h-full">
+//                   <Image
+//                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+//                     src={img}
+//                     alt="AI-generated image"
+//                     width={400}
+//                     height={300}
+//                     loading="lazy"
+//                   />
+//                 </div>
+
+//                 {/* Info overlay */}
+//                 <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//                   <div className="flex items-center justify-between">
+//                     <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                       Style:{" "}
+//                       {index % 3 === 0
+//                         ? "Abstract"
+//                         : index % 3 === 1
+//                         ? "Realistic"
+//                         : "Digital Art"}
+//                     </span>
+//                     <div className="flex items-center gap-1">
+//                       <HeartIcon className="h-4 w-4 text-[#FF2E9F]" />
+//                       <span className="text-xs text-gray-300">
+//                         {(index + 1) * 24}
+//                       </span>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </CardContent>
+//             </Card>
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// }
+// export function Aiimages() {
+//   return (
+//     <div className="relative w-full max-w-4xl mx-auto">
+//       <Carousel
+//         plugins={[
+//           Autoscroll({
+//             speed: 0.5,
+//           }) as any,
+//         ]}
+//         className="w-full h-96"
+//         orientation="vertical"
+//         opts={{
+//           align: "start",
+//           loop: true,
+//           axis: "y",
+//         }}
+//       >
+//         <CarouselContent className="-mt-1 h-96">
+//           {thumbnail1.map((img, index) => (
+//             <CarouselItem
+//               key={index}
+//               className="flex-shrink-0 w-full sm:w-1/3 lg:w-1/3 p-2"
+//             >
+//               <div className="p-1 h-full">
+//                 <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+//                   <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+//                     {/* Gradient shine effect on hover */}
+//                     <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//                     {/* Image */}
+//                     <div className="relative w-full h-full">
+//                       <Image
+//                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+//                         src={img}
+//                         alt="AI-generated image"
+//                         width={400}
+//                         height={300}
+//                         loading="lazy"
+//                       />
+//                     </div>
+
+//                     {/* Info overlay */}
+//                     <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//                       <div className="flex items-center justify-between">
+//                         <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                           Style:{" "}
+//                           {index % 3 === 0
+//                             ? "Abstract"
+//                             : index % 3 === 1
+//                             ? "Realistic"
+//                             : "Digital Art"}
+//                         </span>
+//                         <div className="flex items-center gap-1">
+//                           <HeartIcon className="h-4 w-4 text-[#FF2E9F]" />
+//                           <span className="text-xs text-gray-300">
+//                             {(index + 1) * 24}
+//                           </span>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </div>
+//             </CarouselItem>
+//           ))}
+//         </CarouselContent>
+//       </Carousel>
+//     </div>
+//   );
+// }
 const thumbnail = [img1, img6, img7, img8, img2, img3, img4, img5];
 
 // export function CarouselThumbnail() {
@@ -209,69 +357,137 @@ const thumbnail = [img1, img6, img7, img8, img2, img3, img4, img5];
 //   );
 // }
 export function AiThumb() {
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      axis: "y",
+      align: "start",
+    },
+    [
+      Autoscroll({
+        speed: 0.8,
+        direction: "forward",
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+        startDelay: 0,
+        playOnInit: true,
+      }) as any,
+    ]
+  );
+
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
-      <Carousel
-        plugins={[
-          Autoplay({
-            delay: 2500, // 3 seconds between scrolls
-            stopOnInteraction: false, // continue autoplay after user interaction
-            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
-          }),
-        ]}
-        className="w-full h-96"
-        orientation="vertical"
-        opts={{
-          align: "start",
-          loop: true,
-          axis: "y",
-        }}
-      >
-        <CarouselContent className="-mt-1 h-96">
+    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+      <div ref={emblaRef} className="overflow-hidden ">
+        <div className="flex flex-col  justify-evenly gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem] ">
           {thumbnail.map((img, index) => (
-            <CarouselItem key={index} className="pt-1 basis-1/4">
-              <div className="p-1 h-full">
-                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
-                  <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
-                    {/* Gradient shine effect on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+            <div
+              key={index}
+              className={`flex-0 ${index === 7 ? "mb-4" : "p-0"}`} // Adjusted height
+            >
+              <Card className="border border-[#333] bg-[#0a0a0a]/70 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                <CardContent className="relative group p-0 overflow-hidden rounded-xl ">
+                  {/* Gradient shine effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
 
-                    {/* Image */}
-                    <div className="relative aspect-video">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        src={img}
-                        alt="AI-generated image"
-                        width={400}
-                        height={300}
-                        loading="lazy"
-                      />
-                    </div>
+                  {/* Image */}
+                  <div className="relative aspect-video">
+                    <Image
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      src={img}
+                      alt="AI-generated image"
+                      fill
+                      loading="lazy"
+                    />
+                  </div>
 
-                    {/* Info overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
-                          CTR: +{index * 7 + 25}%
+                  {/* Info overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                        CTR: +{index * 7 + 25}%
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <EyeIcon className="h-4 w-4 text-[#00F0FF]" />
+                        <span className="text-xs text-gray-300">
+                          {(index + 1) * 1.2}k
                         </span>
-                        <div className="flex items-center gap-1">
-                          <EyeIcon className="h-4 w-4 text-[#00F0FF]" />
-                          <span className="text-xs text-gray-300">
-                            {(index + 1) * 1.2}k
-                          </span>
-                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 }
+// export function AiThumb() {
+//   return (
+//     <div className="relative w-full max-w-4xl mx-auto">
+//       <Carousel
+//         plugins={[
+//           Autoscroll({
+//             speed: 0.5,
+//           }) as any,
+//         ]}
+//         className="w-full h-96"
+//         orientation="vertical"
+//         opts={{
+//           align: "start",
+//           loop: true,
+//           axis: "y",
+//         }}
+//       >
+//         <CarouselContent className="-mt-1 h-96">
+//           {thumbnail.map((img, index) => (
+//             <CarouselItem
+//               key={index}
+//               className="flex-shrink-0 w-full sm:w-1/3 lg:w-1/3 p-2"
+//             >
+//               <div className="p-1 h-full">
+//                 <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+//                   <CardContent className="relative group p-0 overflow-hidden rounded-xl h-full">
+//                     {/* Gradient shine effect on hover */}
+//                     <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//                     {/* Image */}
+//                     <div className="relative aspect-video">
+//                       <Image
+//                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+//                         src={img}
+//                         alt="AI-generated image"
+//                         width={400}
+//                         height={300}
+//                         loading="lazy"
+//                       />
+//                     </div>
+
+//                     {/* Info overlay */}
+//                     <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//                       <div className="flex items-center justify-between">
+//                         <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                           CTR: +{index * 7 + 25}%
+//                         </span>
+//                         <div className="flex items-center gap-1">
+//                           <EyeIcon className="h-4 w-4 text-[#00F0FF]" />
+//                           <span className="text-xs text-gray-300">
+//                             {(index + 1) * 1.2}k
+//                           </span>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </div>
+//             </CarouselItem>
+//           ))}
+//         </CarouselContent>
+//       </Carousel>
+//     </div>
+//   );
+// }
 // export function AiThumb() {
 //   return (
 //     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -312,75 +528,147 @@ export function AiThumb() {
 //     </div>
 //   );
 // }
-
 const Poster = [poster3, poster2, poster1, poster5, poster4, poster6];
+
 export function AiPoster() {
+  const [emblaRef] = useEmblaCarousel(
+    {
+      loop: true,
+      axis: "y",
+      align: "start",
+    },
+    [
+      Autoscroll({
+        speed: 0.8,
+        direction: "forward",
+        stopOnInteraction: false,
+        stopOnMouseEnter: true,
+        startDelay: 0,
+        playOnInit: true,
+      }) as any,
+    ]
+  );
+
   return (
-    <div className="relative w-full max-w-4xl mx-auto">
-      <Carousel
-        plugins={[
-          Autoplay({
-            delay: 2500,
-            stopOnInteraction: false, // continue autoplay after user interaction
-            stopOnMouseEnter: true, // continue autoplay when mouse is over carousel
-          }),
-        ]}
-        orientation="vertical"
-        className="w-full h-96"
-        opts={{
-          align: "start",
-          loop: true,
-          axis: "y",
-        }}
-      >
-        <CarouselContent className="-mt-1 h-96">
+    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+      <div ref={emblaRef} className="overflow-hidden ">
+        <div className="flex flex-col gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+          {/* Added vertical gap */}
           {Poster.map((img, index) => (
-            <CarouselItem key={index} className="pt-1 basis-1/4">
-              <div className="p-1 h-full">
-                <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
-                  <CardContent className="relative group p-0 h-full overflow-hidden rounded-xl">
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+            <div
+              key={index}
+              className={`flex-0 ${index === 5 ? "mb-4" : "p-0"}`} // Adjusted height
+            >
+              <Card className="border border-[#333] bg-[#0a0a0a]/70 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+                <CardContent className="relative group p-0 h-full overflow-hidden rounded-xl">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
 
-                    {/* Image */}
-                    <div className="relative  w-full h-full">
-                      <Image
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        src={img}
-                        alt="AI-generated image"
-                        width={400}
-                        height={300}
-                        loading="lazy"
-                      />
-                    </div>
+                  {/* Image */}
+                  <div className="relative  aspect-video">
+                    <Image
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      src={img}
+                      alt="AI-generated image"
+                      fill
+                      loading="lazy"
+                    />
+                  </div>
 
-                    {/* Info overlay */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
-                          {index % 3 === 0
-                            ? "Marketing"
-                            : index % 3 === 1
-                            ? "Event"
-                            : "Promotional"}
+                  {/* Info overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+                        {index % 3 === 0
+                          ? "Marketing"
+                          : index % 3 === 1
+                          ? "Event"
+                          : "Promotional"}
+                      </span>
+                      <div className="flex items-center gap-1">
+                        <ShareIcon className="h-4 w-4 text-[#00F0FF]" />
+                        <span className="text-xs text-gray-300">
+                          {(index + 1) * 42}
                         </span>
-                        <div className="flex items-center gap-1">
-                          <ShareIcon className="h-4 w-4 text-[#00F0FF]" />
-                          <span className="text-xs text-gray-300">
-                            {(index + 1) * 42}
-                          </span>
-                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </CarouselItem>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 }
+// export function AiPoster() {
+//   return (
+//     <div className="relative w-full max-w-4xl mx-auto">
+//       <Carousel
+//         plugins={[
+//           Autoscroll({
+//             speed: 0.5,
+//           }) as any,
+//         ]}
+//         orientation="vertical"
+//         className="w-full h-96"
+//         opts={{
+//           align: "start",
+//           loop: true,
+//           axis: "y",
+//         }}
+//       >
+//         <CarouselContent className="-mt-1 h-96">
+//           {Poster.map((img, index) => (
+//             <CarouselItem
+//               key={index}
+//               className="flex-shrink-0 w-full sm:w-1/3 lg:w-1/3 p-2"
+//             >
+//               <div className="p-1 h-full">
+//                 <Card className="border border-[#333] p-2 bg-[#0a0a0a]/50 backdrop-blur-sm overflow-hidden rounded-xl transition-all duration-300 hover:border-[#B026FF]/50 h-full">
+//                   <CardContent className="relative group p-0 h-full overflow-hidden rounded-xl">
+//                     <div className="absolute inset-0 bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] opacity-0 group-hover:opacity-10 transition-opacity -z-10"></div>
+
+//                     {/* Image */}
+//                     <div className="relative  w-full h-full">
+//                       <Image
+//                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+//                         src={img}
+//                         alt="AI-generated image"
+//                         width={400}
+//                         height={300}
+//                         loading="lazy"
+//                       />
+//                     </div>
+
+//                     {/* Info overlay */}
+//                     <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-[#0a0a0a] to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+//                       <div className="flex items-center justify-between">
+//                         <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
+//                           {index % 3 === 0
+//                             ? "Marketing"
+//                             : index % 3 === 1
+//                             ? "Event"
+//                             : "Promotional"}
+//                         </span>
+//                         <div className="flex items-center gap-1">
+//                           <ShareIcon className="h-4 w-4 text-[#00F0FF]" />
+//                           <span className="text-xs text-gray-300">
+//                             {(index + 1) * 42}
+//                           </span>
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </CardContent>
+//                 </Card>
+//               </div>
+//             </CarouselItem>
+//           ))}
+//         </CarouselContent>
+//       </Carousel>
+//     </div>
+//   );
+// }
 // export function AiPoster() {
 //   return (
 //     <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -508,9 +796,9 @@ export function OurClient() {
 
       <Carousel
         plugins={[
-          Autoplay({
-            delay: 2000,
-          }),
+          Autoscroll({
+            speed: 0.5,
+          }) as any,
         ]}
         className="w-full"
         opts={{

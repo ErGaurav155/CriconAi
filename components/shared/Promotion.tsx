@@ -3,7 +3,7 @@ import { SlidersIcon, ThermometerSunIcon } from "lucide-react";
 
 const Promo = () => {
   return (
-    <div className="w-full py-12   border-b border-[#333]">
+    <div className="w-full pb-12   border-b border-[#333]">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF]">
           Why Choose Cricon AI?

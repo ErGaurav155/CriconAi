@@ -29,7 +29,7 @@ const Home = async () => {
       <div className="flex  flex-col gap-10 items-center m-auto justify-center">
         <HeroSection />
 
-        <div className="px-1 sm:px-4 mx-auto max-w-7xl border-b border-[#333] py-16">
+        <div className="px-1 sm:px-4 mx-auto max-w-7xl border-b border-[#333] pb-16">
           <div className="flex flex-col items-center justify-center gap-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
               Our Top Clients
@@ -38,7 +38,7 @@ const Home = async () => {
             <OurClient1 />
           </div>
         </div>
-        <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8 border-b border-[#333] py-16">
+        <div className="mx-auto max-w-7xl px-1 sm:px-6 lg:px-8 border-b border-[#333] pb-16">
           <div className="grid items-center grid-cols-1 gap-8 md:gap-12 ">
             <div className="flex flex-col items-center justify-between">
               <div className="text-center">
@@ -62,75 +62,8 @@ const Home = async () => {
             <TopYoutuber />
           </div>
         </div>
-        <div className="flex w-screen flex-wrap flex-row gap-0 md:gap-1">
-          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
-            <div className="flex flex-col gap-5 justify-start items-start">
-              <div className="flex items-center justify-between w-full">
-                <div className="flex flex-col m-auto items-center justify-between">
-                  <div className="text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
-                      Thumbnails
-                    </h2>
-                  </div>
-                  <div className="flex items-center justify-center gap-2">
-                    <Link
-                      href="/credits"
-                      className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  text-nowrap"
-                      role="button"
-                    >
-                      Make Thumbnail
-                    </Link>
-                  </div>
-                </div>
-              </div>
-              <AiThumb />
-            </div>
-          </div>
 
-          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
-            <div className="flex flex-col gap-5 justify-start items-start">
-              <div className="flex items-center justify-between w-full">
-                <div className="flex flex-col m-auto items-center justify-between">
-                  <div className="text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
-                      Aiimages
-                    </h2>
-                  </div>
-                  <Link
-                    href="/credits"
-                    className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  px-1"
-                    role="button"
-                  >
-                    Make Aiimages
-                  </Link>
-                </div>
-              </div>
-              <Aiimages />
-            </div>
-          </div>
-          <div className=" basis-1/3 mx-auto max-w-7xl  border-b border-[#333] py-16">
-            <div className="flex flex-col gap-5 justify-start items-start">
-              <div className="flex items-center justify-between w-full">
-                <div className="flex flex-col m-auto items-center justify-between">
-                  <div className="text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
-                      Posters
-                    </h2>
-                  </div>
-                  <Link
-                    href="/credits"
-                    className=" items-center justify-center  p-2 mt-2 font-small lg:font-semibold text-white transition-all duration-200 bg-[#3a3ccf] rounded-md lg:mt-3 hover:bg-[#4c8eeb]  text-nowrap"
-                    role="button"
-                  >
-                    Make Poster
-                  </Link>
-                </div>
-              </div>
-              <AiPoster />
-            </div>
-          </div>
-        </div>
-        <div className=" border-b border-[#333] py-16">
+        <div className=" border-b border-[#333] pb-16">
           <p className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] text-center to-[#FF2E9F]">
             Our AI Tools
           </p>
@@ -139,7 +72,7 @@ const Home = async () => {
         <Promo />
         <Services />
         <Roadmap />
-        <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8 border-b border-[#333] py-16">
+        <div className="px-2 mx-auto max-w-7xl sm:px-6 lg:px-8 border-b border-[#333] pb-16">
           <div className="grid items-center grid-cols-1 gap-8 ">
             <p className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] text-center to-[#FF2E9F]">
               Top 5 benefits By Criconai

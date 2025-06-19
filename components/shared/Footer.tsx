@@ -15,7 +15,7 @@ const currentYear = new Date().getFullYear();
 
 export function Footer() {
   return (
-    <footer className="p-4 w-full   border-t border-[#333]">
+    <footer className="p-4 pt-10 w-full   border-t border-[#333]">
       <div className="flex flex-col md:flex-row flex-wrap items-center justify-between gap-6">
         <div className="flex flex-col items-center md:items-start">
           <Link href={"/"} className="flex items-center">

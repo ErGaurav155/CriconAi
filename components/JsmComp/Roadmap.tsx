@@ -3,7 +3,7 @@ import { roadmap } from "@/constants";
 import Image from "next/image";
 
 const Roadmap = () => (
-  <div className="py-16  border-b border-[#333] ">
+  <div className="pb-16  border-b border-[#333] ">
     <div className="max-w-7xl mx-auto px-4">
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
