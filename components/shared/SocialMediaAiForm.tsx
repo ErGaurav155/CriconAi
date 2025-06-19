@@ -354,9 +354,9 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
     return <InsufficientCreditsModal />;
   }
   return (
-    <div className=" rounded-xl p-6 border border-[#333]">
+    <div className=" rounded-xl md:p-6 ">
       {(type === "images" || type === "avatar") && (
-        <div className="flex items-center justify-center space-x-2 w-full mb-6 p-4 bg-[#1a1a1a]/50 rounded-lg">
+        <div className="flex items-center justify-center space-x-2 w-full mb-6 md:p-4 bg-[#1a1a1a]/50 rounded-lg">
           <label className="text-gray-300 font-semibold font-sans">
             Only Video Idea Based
           </label>
@@ -372,7 +372,10 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
         </div>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 mb-10 p-2  md:p-6 rounded-xl border border-[#00F0FF]/30"
+        >
           <FormField
             control={form.control}
             name="input"
@@ -381,7 +384,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 <FormLabel className="text-gray-300">{topic}</FormLabel>
                 <FormControl>
                   <Input
-                    className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 placeholder:text-gray-500 rounded-xl py-6 px-4"
+                    className="bg-[#1a1a1a]/50 bg-[#0a0a0a] text-white border border-[#00F0FF]/30 placeholder:text-gray-100 rounded-xl py-6 px-4"
                     placeholder={placeholderInputText}
                     {...field}
                   />
@@ -397,17 +400,17 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
               name="selectTone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-300">{tone}</FormLabel>
+                  <FormLabel className="text-gray-100">{tone}</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                      <SelectTrigger className=" bg-[#0a0a0a] text-white border border-[#00F0FF]/30  rounded-xl py-6 px-4">
                         <SelectValue placeholder="Select tone" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
+                    <SelectContent className=" bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl">
                       {email.map((email, index) => (
                         <SelectItem
                           key={index}
@@ -437,11 +440,11 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                        <SelectTrigger className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl py-6 px-4">
                           <SelectValue placeholder="Select style" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl max-h-96 overflow-y-auto">
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl max-h-96 overflow-y-auto">
                         {aiImages.map((categoryObj: AiImages) => (
                           <div
                             key={categoryObj.category}
@@ -485,11 +488,11 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                        <SelectTrigger className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl py-6 px-4">
                           <SelectValue placeholder="Select quality" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl">
                         {ImageQuality.map((ImageQuality, index) => (
                           <SelectItem
                             key={index}
@@ -514,7 +517,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 name="inputlag"
                 render={({ field }) => (
                   <FormItem className="w-[50%]">
-                    <FormLabel className="text-gray-300">
+                    <FormLabel className="text-gray-100">
                       Aspect Ratio:
                     </FormLabel>
                     <Select
@@ -525,11 +528,11 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                        <SelectTrigger className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl py-6 px-4">
                           <SelectValue placeholder="Select ratio" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl">
                         {aspectRatio.map((aspectRatio, index) => (
                           <SelectItem
                             key={index}
@@ -563,7 +566,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                       defaultValue={field.value}
                     >
                       <FormControl>
-                        <SelectTrigger className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 rounded-xl py-6 px-4">
+                        <SelectTrigger className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl py-6 px-4">
                           <SelectValue
                             placeholder={
                               type === "all" ? "No. Of Poster" : "Select number"
@@ -571,7 +574,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                           />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="bg-[#1a1a1a] border border-[#333] text-gray-300 rounded-xl">
+                      <SelectContent className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl">
                         {noOfImage.map((noOfImage, index) => (
                           <SelectItem
                             key={index}
@@ -599,7 +602,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                   <Textarea
                     placeholder={placeholderDescText}
                     maxLength={500}
-                    className="bg-[#1a1a1a]/50 border border-[#333] text-gray-300 placeholder:text-gray-500 rounded-xl p-4 h-32"
+                    className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 placeholder:text-gray-500 rounded-xl p-4 h-32"
                     {...field}
                   />
                 </FormControl>
@@ -634,7 +637,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           ) : (
             <Link
               href={"/sign-in"}
-              className="w-full py-6 rounded-full font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#B026FF] hover:from-[#00F0FF]/90 hover:to-[#B026FF]/90 text-center block"
+              className="w-full py-6 rounded-xl font-bold text-lg bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] hover:opacity-90 transition-opacity text-center block text-white"
             >
               LOGIN
             </Link>
@@ -645,7 +648,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
       {!isResponse ? (
         <div>
           {response && (
-            <div className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] text-gray-300 flex flex-col gap-4 p-6 my-8">
+            <div className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 flex flex-col gap-4 p-6 my-8">
               <Textarea
                 value={response}
                 placeholder="Enter Text To Edit"
@@ -671,7 +674,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
             allResponse.map((text, index) => (
               <div
                 key={index}
-                className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] text-gray-300 flex flex-col gap-4 p-6 my-8"
+                className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 flex flex-col gap-4 p-6 my-8"
               >
                 {index === 0 && (
                   <label className="font-bold text-[#00F0FF]">Caption:</label>
@@ -712,7 +715,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
                 <div key={index} className="relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#00F0FF]/10 to-[#FF2E9F]/10 rounded-xl"></div>
                   <div className="relative z-10">
-                    <div className="bg-[#1a1a1a]/30 border border-[#333] rounded-xl overflow-hidden">
+                    <div className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 rounded-xl overflow-hidden">
                       <button
                         className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm p-2 rounded-full hover:bg-white/30"
                         onClick={(e) =>
@@ -742,7 +745,7 @@ export default function SocialMediaAiForm({ type }: SocialMediaFormProps) {
           )}
         </div>
       ) : (
-        <div className="bg-[#1a1a1a]/50 backdrop-blur-sm rounded-xl border border-[#333] overflow-hidden my-8">
+        <div className="bg-[#0a0a0a] text-white border border-[#00F0FF]/30 overflow-hidden my-8">
           <Skeleton className="h-96 w-full rounded-xl bg-gradient-to-r from-[#1a1a1a] to-[#2a2a2a]" />
         </div>
       )}

@@ -152,12 +152,12 @@ export default function LongVidAudio({ type }: LongAiFormProps) {
     return <InsufficientCreditsModal />;
   }
   return (
-    <div className="min-h-screen  text-white p-6">
-      <div className="  p-6 rounded-xl border border-[#00F0FF]/30 mb-10">
+    <div className="min-h-screen  text-white p-1 md:p-6">
+      <div className=" p-2 md:p-6 rounded-xl border border-[#00F0FF]/30 mb-10">
         <div className="mb-6">
           <label className="text-gray-300 block mb-2">Upload File:</label>
           <Input
-            className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg p-4 placeholder:text-gray-500 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-[#B026FF]"
+            className="bg-[#0a0a0a]/80 text-white border border-[#00F0FF]/30 rounded-lg p-4 placeholder:text-gray-100 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-[#B026FF]"
             type="file"
             accept=".wav, .mp3"
             onChange={handleFileChange}
@@ -251,13 +251,13 @@ export default function LongVidAudio({ type }: LongAiFormProps) {
       </div>
 
       {audioUrl ? (
-        <div className="min-h-max h-[30vh] md:h-[80vh] p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
+        <div className="min-h-max h-[30vh] md:h-[80vh] p-1 md:p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
           <audio controls className="w-full">
             <source src={audioUrl} type="audio/mpeg" />
           </audio>
         </div>
       ) : (
-        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-10">
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-5 md:p-10">
           <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-800" />
         </div>
       )}

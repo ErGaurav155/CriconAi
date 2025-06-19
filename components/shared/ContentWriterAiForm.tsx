@@ -382,9 +382,9 @@ export default function ContentWriterAiForm({
     return <InsufficientCreditsModal />;
   }
   return (
-    <div className="min-h-screen  text-white p-6">
+    <div className="min-h-screen  text-white md:p-6">
       {(type === "coverimage" || type === "images") && (
-        <div className="flex items-center justify-center space-x-2 w-full mb-10 backdrop-blur-sm bg-black/30 p-4 rounded-xl border border-[#B026FF]/30">
+        <div className="flex items-center justify-center space-x-2 w-full mb-10 backdrop-blur-sm bg-black/30 md:p-4 rounded-xl border border-[#B026FF]/30">
           <label className="text-gray-300 font-semibold font-sans">
             Only Video Idea Based
           </label>
@@ -402,7 +402,7 @@ export default function ContentWriterAiForm({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 mb-10  p-6 rounded-xl border border-[#00F0FF]/30"
+          className="space-y-8 mb-10 p-2 md:p-6 rounded-xl border border-[#00F0FF]/30"
         >
           {type !== "translation" && type !== "TexttoAudio" && (
             <FormField
@@ -805,7 +805,7 @@ export default function ContentWriterAiForm({
       {!isResponse ? (
         <div>
           {response && (
-            <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-6 mb-10">
+            <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-2 md:p-6 mb-10">
               <Textarea
                 value={response}
                 placeholder="Enter Text To Edit"
@@ -835,7 +835,7 @@ export default function ContentWriterAiForm({
             allResponse.map((text, index) => (
               <div
                 key={index}
-                className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-6 mb-10"
+                className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex flex-col gap-3 p-2 md:p-6 mb-10"
               >
                 {index === 0 && (
                   <label className="font-bold text-[#00F0FF]">Outline :</label>
@@ -882,7 +882,7 @@ export default function ContentWriterAiForm({
               </div>
             ))}
           {audioUrl && (
-            <div className="min-h-max h-[30vh] md:h-[80vh] p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
+            <div className="min-h-max h-[30vh] md:h-[80vh] p-2 md:p-5 m-auto flex flex-col w-full gap-2 backdrop-blur-sm bg-black/30 rounded-xl border border-[#00F0FF]/30">
               <audio controls className="w-full">
                 <source src={audioUrl} type="audio/mpeg" />
               </audio>
@@ -890,7 +890,7 @@ export default function ContentWriterAiForm({
           )}
 
           {imageUrl && (
-            <div className="min-h-max p-5 m-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="min-h-max p-2 md:p-5 m-auto grid grid-cols-1 sm:grid-cols-2 gap-6">
               {imageUrl.map((item, index) => (
                 <div
                   key={index}
@@ -929,7 +929,7 @@ export default function ContentWriterAiForm({
           )}
         </div>
       ) : (
-        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-10">
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-sm rounded-xl overflow-auto text-lg border border-[#00F0FF]/30 text-white flex gap-3 items-center justify-center mb-10 p-5 md:p-10">
           <Skeleton className="h-[30vh] w-full rounded-xl bg-gray-800" />
         </div>
       )}

@@ -91,7 +91,7 @@ const AddTransformationTypePage = async ({
 
   return (
     <div className="flex items-center justify-center md:items-start md:justify-start flex-col md:flex-row wrapper2 gap-5 mt-24 ">
-      <div className="relative md:flex-auto w-[90vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll flex flex-col gap-5  md:px-7">
+      <div className="relative md:flex-auto w-[100vw] md:w-2/3 md:min-h-screen scroll-m-4 overflow-y-scroll flex flex-col gap-5  px-1">
         <Button className="absolute top-10 right-1 text-white bg-gray hover:bg-gray rounded-md self-start w-full  cursor-default  max-h-min   overflow-hidden">
           <p className="flex animate-scroll-left whitespace-nowrap ">
             Recommended - Fill All Inputs For Better Outcomes.
