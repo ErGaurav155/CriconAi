@@ -67,7 +67,7 @@ export function MobileNav() {
   });
 
   return (
-    <header className="header  absolute z-50 top-0 left-0 w-full  overflow-auto  bg-[#0a0a0a]">
+    <header className="header  absolute z-50 top-0 left-0 w-full  overflow-hidden  bg-[#0a0a0a]">
       <div className="flex items-center justify-between  bg-black w-screen">
         <IconButton
           variant="text"
@@ -102,7 +102,10 @@ export function MobileNav() {
             asChild
             className="bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-semibold hover:opacity-90 rounded-lg"
           >
-            <Link href="/sign-in">Login</Link>
+            <span className="flex items-center  gap-1">
+              <i className="fas fa-user-astronaut text-black text-sm p-1" />
+              <Link href="/sign-in">Login</Link>
+            </span>
           </Button>
         </SignedOut>
       </div>
@@ -163,7 +166,7 @@ export function MobileNav() {
                       <TvIcon className="h-5 w-5 text-[#00F0FF]" />
                     </ListItemPrefix>
                     <span className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white">
-                      Long Videos
+                      Videos
                     </span>
                   </AccordionHeader>
                 </ListItem>
@@ -392,7 +395,7 @@ export function MobileNav() {
                       color="blue-gray"
                       className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
-                      Short Videos
+                      Reels
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
@@ -637,7 +640,7 @@ export function MobileNav() {
                       color="blue-gray"
                       className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
-                      Content Writer
+                      Writer
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
@@ -890,7 +893,7 @@ export function MobileNav() {
                       color="blue-gray"
                       className="mr-auto font-medium text-sm text-gray-300 group-hover:text-white"
                     >
-                      Social Media
+                      Media
                     </Typography>
                   </AccordionHeader>
                 </ListItem>
@@ -1208,7 +1211,10 @@ export function MobileNav() {
                   asChild
                   className="w-full bg-gradient-to-r from-[#00F0FF] to-[#B026FF] text-black font-semibold hover:opacity-90 rounded-lg"
                 >
-                  <Link href="/sign-in">Login</Link>
+                  <span className="flex items-center w-full gap-2">
+                    <i className="fas fa-user-astronaut text-black text-sm p-2" />
+                    <Link href="/sign-in">Login</Link>
+                  </span>
                 </Button>
               </div>
             </SignedOut>

@@ -115,7 +115,7 @@ export function Aiimages() {
     },
     [
       Autoscroll({
-        speed: 0.8,
+        speed: 0.5,
         direction: "backward",
         stopOnInteraction: false,
         stopOnMouseEnter: true,
@@ -126,9 +126,12 @@ export function Aiimages() {
   );
 
   return (
-    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+    <div className="w-[40rem] m-auto h-[15rem]  md:h-[30rem]">
+      <span className="text-sm font-medium md:text-lg md:font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF] ">
+        AiImages
+      </span>
       <div ref={emblaRef} className="overflow-hidden">
-        <div className="flex flex-col gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+        <div className="flex flex-col gap-4 h-[15rem]  md:h-[30rem]">
           {thumbnail1.map((img, index) => (
             <div
               key={index}
@@ -365,7 +368,7 @@ export function AiThumb() {
     },
     [
       Autoscroll({
-        speed: 0.8,
+        speed: 0.5,
         direction: "forward",
         stopOnInteraction: false,
         stopOnMouseEnter: true,
@@ -376,9 +379,12 @@ export function AiThumb() {
   );
 
   return (
-    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+    <div className="w-[40rem] m-auto h-[15rem]  md:h-[30rem]">
+      <span className="text-sm font-medium md:text-lg md:font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF] ">
+        Thumbnails
+      </span>
       <div ref={emblaRef} className="overflow-hidden ">
-        <div className="flex flex-col  justify-evenly gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem] ">
+        <div className="flex flex-col  justify-evenly gap-4 h-[15rem]  md:h-[30rem] ">
           {thumbnail.map((img, index) => (
             <div
               key={index}
@@ -539,7 +545,7 @@ export function AiPoster() {
     },
     [
       Autoscroll({
-        speed: 0.8,
+        speed: 0.5,
         direction: "forward",
         stopOnInteraction: false,
         stopOnMouseEnter: true,
@@ -550,9 +556,12 @@ export function AiPoster() {
   );
 
   return (
-    <div className="w-[40rem] m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+    <div className="w-[40rem] m-auto h-[15rem]  md:h-[30rem]">
+      <span className="text-sm font-medium md:text-lg md:font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#B026FF] ">
+        Posters
+      </span>
       <div ref={emblaRef} className="overflow-hidden ">
-        <div className="flex flex-col gap-4 h-[10rem] sm:h-[20rem]  md:h-[30rem]">
+        <div className="flex flex-col gap-4 h-[15rem]  md:h-[30rem]">
           {/* Added vertical gap */}
           {Poster.map((img, index) => (
             <div
@@ -797,7 +806,7 @@ export function OurClient() {
       <Carousel
         plugins={[
           Autoscroll({
-            speed: 0.5,
+            speed: 1.3,
           }) as any,
         ]}
         className="w-full"

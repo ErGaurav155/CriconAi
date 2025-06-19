@@ -10,6 +10,7 @@ export default authMiddleware({
     "/criconai/:path*",
     "/HowToUse",
     "/credits",
+    "/Faq",
   ],
 });
 

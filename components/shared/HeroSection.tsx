@@ -8,7 +8,7 @@ import { Aiimages, AiPoster, AiThumb } from "./carousel";
 export default function HeroSection() {
   return (
     <section className="relative   h-auto py-10 flex items-center overflow-hidden border-b border-[#333]">
-      <div className="container mx-auto px-4  relative z-30 max-w-7xl">
+      <div className="container mx-auto md:px-4  relative z-30 max-w-7xl">
         <div className="grid items-center grid-cols-1 gap-1 lg:grid-cols-2 ">
           <div className="z-10 bg-transparent">
             <h1 className="text-4xl md:text-5xl  font-bold mb-6 leading-tight">
@@ -56,13 +56,13 @@ export default function HeroSection() {
                 </div>
               </div>
               <div>
-                <div className="text-[#00F0FF] font-bold">10,000+ Creators</div>
+                <div className="text-[#00F0FF] font-bold">1,000+ Creators</div>
                 <div className="text-gray-400">Across 500+ Channels</div>
               </div>
             </div>
           </div>
-          <div className="w-full ">
-            <div className="relative pt-5 md:pt-0   m-auto h-[10rem] sm:h-[20rem]  md:h-[30rem] flex  gap-2  z-10">
+          <div className="w-full p-0">
+            <div className="relative pt-5 md:pt-0   m-auto h-[15rem]  md:h-[30rem] flex  gap-2  z-10">
               <AiThumb />
               <Aiimages />
               <AiPoster />

@@ -85,7 +85,7 @@ export default function MainNavbar() {
   const menuItems = [
     {
       id: 1,
-      name: "Long Videos",
+      name: "Videos",
       icon: <YoutubeIcon className="h-5 w-5 text-[#ff2e9f]" />,
       subItems: [
         { name: "Idea Generator", href: "/criconai/longvid/idea" },
@@ -111,7 +111,7 @@ export default function MainNavbar() {
     },
     {
       id: 2,
-      name: "Short Videos",
+      name: "Reels",
       icon: <DevicePhoneMobileIcon className="h-5 w-5 text-[#FF2E9F]" />,
       subItems: [
         { name: "Video Idea", href: "/criconai/shortvid/idea" },
@@ -139,7 +139,7 @@ export default function MainNavbar() {
     },
     {
       id: 3,
-      name: "Content Writer",
+      name: "Writer",
       icon: <SquarePenIcon className="h-5 w-5 text-[#FF2E9F]" />,
       subItems: [
         { name: "Idea", href: "/criconai/contentwriter/idea" },
@@ -163,7 +163,7 @@ export default function MainNavbar() {
     },
     {
       id: 4,
-      name: "Social Media",
+      name: "Media",
       icon: <InstagramIcon className="h-5 w-5 text-[#FF2E9F]" />,
       subItems: [
         { name: "Idea", href: "/criconai/socialmedia/idea" },
@@ -230,13 +230,13 @@ export default function MainNavbar() {
                 />{" "}
               </div>
             </div>
-            <h1 className="text-lg xl:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+            <h1 className="text-lg  font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
               Cricon<span className="text-[#B026FF]">ai</span>
             </h1>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-2">
+          <div className="hidden lg:flex items-center xl:space-x-2">
             {menuItems.map((item) => (
               <div
                 key={item.id}
@@ -245,14 +245,14 @@ export default function MainNavbar() {
               >
                 <div className="relative">
                   <button
-                    className={`flex items-center px-4 py-2 font-medium text-xs rounded-lg transition-all ${
+                    className={`flex items-center px-2 xl:px-4 py-2 font-medium text-xs rounded-lg transition-all ${
                       openDropdown === item.id
                         ? "bg-gradient-to-r from-[#00F0FF]/20 to-[#FF2E9F]/20"
                         : "group-hover:bg-gradient-to-r group-hover:from-[#00F0FF]/20 group-hover:to-[#FF2E9F]/20"
                     }`}
                   >
                     {item.icon}
-                    <span className="text-white ml-1">{item.name}</span>
+                    <span className="text-white xl:ml-1">{item.name}</span>
                   </button>
                 </div>
 
@@ -285,16 +285,18 @@ export default function MainNavbar() {
           </div>
 
           {/* User Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center xl:space-x-4">
             <SignedIn>
               <Link href="/profile">
-                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF]/20 hover:to-[#FF2E9F]/20">
-                  <UserIcon className="h-5 w-5 text-white" />
+                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF] hover:to-[#00F0FF] bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F] pr-1">
+                  <UserIcon className="h-5 w-5  text-[#FF2E9F]" />
+                  Profile
                 </button>
               </Link>
               <Link href="/credits">
-                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF]/20 hover:to-[#FF2E9F]/20">
-                  <CurrencyRupeeIcon className="h-5 w-5 text-white" />
+                <button className="flex items-center px-3 py-2 text-sm rounded-lg hover:bg-gradient-to-r hover:from-[#00F0FF] hover:to-[#00F0FF] bg-clip-text text-transparent bg-gradient-to-r from-[#00F0FF] to-[#FF2E9F]">
+                  <CurrencyRupeeIcon className="h-5 w-5 text-[#FF2E9F] pr-1" />
+                  Pricing
                 </button>
               </Link>
               <UserButton afterSignOutUrl="/" />

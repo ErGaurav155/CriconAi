@@ -119,7 +119,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="/FAQ"
+                  href="/Faq"
                   className="text-gray-400 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#00F0FF] hover:to-[#FF2E9F] transition-all"
                 >
                   FAQ
