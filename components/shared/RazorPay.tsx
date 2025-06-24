@@ -15,11 +15,13 @@ const RazorPay = ({
   amount,
   credits,
   buyerId,
+  location,
 }: {
   plan: string;
   amount: number;
   credits: number;
   buyerId: string;
+  location: string;
 }) => {
   const { toast } = useToast();
   const router = useRouter();
@@ -47,7 +49,7 @@ const RazorPay = ({
     const paymentOptions = {
       key: process.env.key_id!,
       amount: amount * 100,
-      currency: "INR",
+      currency: location === "India" ? "INR" : "USD",
       name: "GK Services",
       description: "Thanks For Taking Our Services",
       order_id: orderCreate.id,

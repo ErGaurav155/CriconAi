@@ -96,7 +96,8 @@ export async function resetCredits() {
     // Reset users with less than 10 credits
     const result = await User.updateMany(
       { creditBalance: { $lt: 10 } },
-      { $set: { creditBalance: 10 } }
+      { $set: { creditBalance: 10 } },
+      { new: true }
     );
     if (!result) throw new Error("User credits reset update failed");
     return JSON.parse(JSON.stringify(result));

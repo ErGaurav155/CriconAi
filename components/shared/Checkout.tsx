@@ -1,8 +1,6 @@
 "use client";
 
 import RazorPay from "./RazorPay";
-import { useRouter } from "next/navigation";
-import PayPal from "./PayPal";
 
 const Checkout = ({
   plan,
@@ -19,21 +17,13 @@ const Checkout = ({
 }) => {
   return (
     <div>
-      {location === "India" ? (
-        <RazorPay
-          amount={amount}
-          plan={plan}
-          credits={credits}
-          buyerId={buyerId}
-        />
-      ) : (
-        <PayPal
-          amount={amount}
-          plan={plan}
-          credits={credits}
-          buyerId={buyerId}
-        />
-      )}
+      <RazorPay
+        amount={amount}
+        plan={plan}
+        credits={credits}
+        buyerId={buyerId}
+        location={location}
+      />
     </div>
   );
 };
