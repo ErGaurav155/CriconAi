@@ -13,11 +13,11 @@ const razorpay = new Razorpay({
 });
 
 export async function checkoutCredits(transaction: CheckoutTransactionParams) {
-  const { amount, plan, credits, buyerId } = transaction;
+  const { amount, plan, credits, buyerId, location } = transaction;
 
   const options = {
     amount: Number(amount) * 100, // Amount in smallest currency unit (e.g., paisa)
-    currency: "INR",
+    currency: location === "India" ? "INR" : "USD",
     receipt: "rcp1",
     notes: {
       plan: plan,

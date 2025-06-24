@@ -38,6 +38,7 @@ const RazorPay = ({
       amount,
       credits,
       buyerId,
+      location,
     };
 
     const orderCreate = await checkoutCredits(transaction);
