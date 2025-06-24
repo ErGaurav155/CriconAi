@@ -18,12 +18,13 @@ export default function HeroSection() {
               <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#B026FF] to-[#FF2E9F]">
                 YouTube Growth
               </span>
-              <span className="block text-white">With AI Technology</span>
+              <span className="block font-bold  bg-clip-text text-transparent bg-gradient-to-r from-[#FF2E9F] to-[#B026FF]">
+                with CriconAi
+              </span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl">
-              Cricon AI Platform transforms content creation with cosmic-level
-              intelligence. Experience quantum-powered tools for your
-              interstellar content strategy.
+              CriconAi is the AI platform that accelerates content creation
+              velocity with ai tools .
             </p>
 
             <div className="flex flex-wrap gap-4 mb-10">
