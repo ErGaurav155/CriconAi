@@ -6,8 +6,9 @@
   },
   "crons": [
     {
-      "path": "/api/resetCredits",
-      "schedule": "30 6 * * *"
+      "path": "/api/resetCredits?method=POST",
+      "schedule": "30 6 * * *",
+      "method": "POST"
     }
   ]
 }
